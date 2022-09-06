@@ -1,3 +1,5 @@
 .DS_Store
 ofiles
-cube3d
+cub3d
+*.a
+*.o
