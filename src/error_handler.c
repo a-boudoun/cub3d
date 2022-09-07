@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:17 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/07 12:08:05 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:37:00 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include"cub.h"
 
-void    error_handler(char *message)
+voiderror_handler(char *message)
 {
-    ft_putstr_fd(message, 2);
-    exit(EXIT_FAILURE);
+	ft_putstr_fd(message, 2);
+	exit(EXIT_FAILURE);
 }
