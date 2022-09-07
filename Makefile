@@ -17,7 +17,7 @@ GNL_LIB = $(GNL_DIR)/nextline.a
 OFILES = ofiles
 
 
-FILES =  $(addprefix src/, main)
+FILES =  $(addprefix src/, main error_handler)
 
 OBJ = $(addprefix $(OFILES)/, $(FILES:=.o))
 
