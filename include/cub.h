@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:40 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/07 15:47:17 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/07 17:09:51 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct s_game {
 	char			*west;
 	char			*east;
 	t_sprite		*sprite;
-	unsigned int	color_floor;
-	unsigned int	color_ceiling;
+	int				color_floor;
+	int				color_ceiling;
 }				t_game;
 
 void	error_handler(char *message);

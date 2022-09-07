@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:22 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/07 15:55:54 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:10:39 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,11 @@ int main(int ac, char **av)
 	fd = open_map(ac, av);
 	t_game *game = get_map(fd);
 	game += 0;
+	printf("WE == %s\n", game->west);
+	printf("NO == %s\n", game->north);
+	printf("SO == %s\n", game->south);
+	printf("EA == %s\n", game->east);
+	printf("C  == %d\n", game->color_ceiling);
+	printf("F  == %d\n", game->color_floor);
 	return (0);
 }
