@@ -1,6 +1,34 @@
 #include "cub.h"
 
 
+static void map_checker(char **map)
+{
+	map += 0;
+	return;
+}
+
+static void	map_fix(size_t len, char **map)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (map[i])
+	{
+		if (ft_strlen(map[i]) < len)
+		{
+			tmp = malloc(sizeof(char) * (len - ft_strlen(map[i])));
+			ft_memset(tmp, ' ', len - ft_strlen(map[i]));
+			tmp[len - ft_strlen(map[i])] = 0;
+			free(map[i]);
+			map[i] = ft_strjoin(map[i], tmp);
+			free(tmp);
+		}
+		i++;
+	}
+	map_checker(map);
+}
+
 char	**gen_map(int fd)
 {
 	t_list	*list;
@@ -10,6 +38,7 @@ char	**gen_map(int fd)
 	int		size;
 
 	list = NULL;
+	len = 0;
 	while (true)
 	{
 		line = get_next_line(fd);
@@ -27,7 +56,10 @@ char	**gen_map(int fd)
 	while (list)
 	{
 		map[size++] = ft_strdup(list->content);
+		free(list->content);
+		free(list);
 		list = list->next;
 	}
+	map_fix(len, map);
 	return (map);
 }

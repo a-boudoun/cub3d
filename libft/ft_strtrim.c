@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:21:25 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/07 18:57:36 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/07 19:54:27 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,5 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (trimed_s == NULL)
 		return (NULL);
 	ft_strlcpy(trimed_s, s1 + start, end - start + 1);
-	free((void *)s1);
 	return (trimed_s);
 }

@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:22 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/07 17:10:39 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/07 19:36:37 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,15 @@ int main(int ac, char **av)
 	printf("EA == %s\n", game->east);
 	printf("C  == %d\n", game->color_ceiling);
 	printf("F  == %d\n", game->color_floor);
+	free(game -> west);
+	free(game -> north);
+	free(game -> south);
+	free(game -> east);
+	int i = 0;
+	while (game -> map[i])
+		free(game -> map[i++]);
+	free(game -> map);
+	free(game -> sprite);
+	system("leaks cub3d");
 	return (0);
 }

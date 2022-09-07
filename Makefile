@@ -17,7 +17,7 @@ GNL_LIB = $(GNL_DIR)/nextline.a
 OFILES = ofiles
 
 
-FILES =  $(addprefix src/, main error_handler read_cub gen_map)
+FILES =  $(addprefix src/, main error_handler read_cub gen_map_table)
 
 OBJ = $(addprefix $(OFILES)/, $(FILES:=.o))
 

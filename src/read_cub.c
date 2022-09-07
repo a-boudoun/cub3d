@@ -28,6 +28,10 @@ int	get_RGB(char *num)
 
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		error_handler("invalid color");
+	free(tmp[0]);
+	free(tmp[1]);
+	free(tmp[2]);
+	free(tmp);
 	return ((r << 16) | (g << 8) | b);
 }
 
@@ -92,13 +96,20 @@ t_game	*get_map(int fd)
 	{
 		line = get_next_line(fd);
 		if (line && ft_strcmp(line, "\n"))
+			free(line);
+		if (line && ft_strcmp(line, "\n"))
 			continue ;
 		if (line == NULL || !ft_strchr("NSWEFC\t ", line[0]))
 			break;
 		tmp[0] = ft_strtrim(ft_substr(line, 0, 2), " ");
-		tmp[1] = ft_strdup(ft_strchr(line, ' '));
+		tmp[1] = ft_strdup(ft_strchr(line, ' ') + 1);
 		add_type(tmp, game);
+		free(tmp[0]);
+		free(tmp[1]);
+		free(line);
 	}
+	free(tmp);
+	free(line);
 	if (game -> north == NULL || game -> south == NULL || game -> east == NULL || game -> west == NULL)
 		error_handler("Error: missing TEXTURE");
 	if (game -> color_ceiling == -1 || game -> color_floor == -1)
