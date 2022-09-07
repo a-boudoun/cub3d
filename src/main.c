@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:22 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/07 12:15:32 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:31:45 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int open_map(int ac, char **av)
     if (ac != 2)
         error_handler("argument error");
     fd = open(av[1], O_RDONLY);
-    if (fd < 0 || ft_strncmp(".cub", av[1], ft_strlen(av[1] - 4)))
+    if (fd < 0 || ft_strncmp(".cub", &av[1][ft_strlen(av[1] - 5)], 4))
         error_handler("invalid file");
     return (fd);
 }
