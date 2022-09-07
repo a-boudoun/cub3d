@@ -21,6 +21,7 @@ int	get_RGB(char *num)
 	while (tmp[++len]);
 	if (len != 3)
 		error_handler("invalid color");
+
 	r = ft_atoi(tmp[0]);
 	g = ft_atoi(tmp[1]);
 	b = ft_atoi(tmp[2]);
@@ -80,10 +81,9 @@ t_game	*get_map(int fd)
 {
 	t_game	*game;
 	char	*line;
-	int		i;
 	char	**tmp;
 
-	i = 0;
+	tmp = malloc(sizeof(char *) * 2);
 	game = (t_game *) malloc(sizeof(t_game));
 	ft_bzero(game, sizeof(t_game));
 	game -> color_ceiling = -1;
@@ -91,13 +91,18 @@ t_game	*get_map(int fd)
 	while (true)
 	{
 		line = get_next_line(fd);
-		if (line == NULL)
-			break;
-		if (ft_strcmp(line, "\n"))
+		if (line && ft_strcmp(line, "\n"))
 			continue ;
-		tmp = ft_split(line, ' ');
+		if (line == NULL || !ft_strchr("NSWEFC\t ", line[0]))
+			break;
+		tmp[0] = ft_strtrim(ft_substr(line, 0, 2), " ");
+		tmp[1] = ft_strdup(ft_strchr(line, ' '));
 		add_type(tmp, game);
 	}
-	return (game);
+	if (game -> north == NULL || game -> south == NULL || game -> east == NULL || game -> west == NULL)
+		error_handler("Error: missing TEXTURE");
+	if (game -> color_ceiling == -1 || game -> color_floor == -1)
+		error_handler("Error: missing COLORS");
+	return (game -> map = gen_map(fd), game);
 }
 
