@@ -6,14 +6,14 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:17 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/07 14:37:00 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/07 15:48:21 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include"cub.h"
 
-voiderror_handler(char *message)
+void	error_handler(char *message)
 {
 	ft_putstr_fd(message, 2);
 	exit(EXIT_FAILURE);

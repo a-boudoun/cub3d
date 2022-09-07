@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:40 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/07 14:55:22 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/07 15:47:17 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdbool.h>
+#include <math.h>
 #include <fcntl.h>
 #include <mlx.h>
 
@@ -30,18 +32,21 @@ typedef struct s_sprite{
 }				t_sprite;
 
 typedef struct s_game {
-	char		**map;
-	int			map_height;
-	int			map_width;
-	char		*north;
-	char		*south;
-	char		*west;
-	char		*east;
-	t_sprite	*sprite;
-	uint		color_floor;
-	uint		color_ceiling;
+	char			**map;
+	int				map_height;
+	int				map_width;
+	char			*north;
+	char			*south;
+	char			*west;
+	char			*east;
+	t_sprite		*sprite;
+	unsigned int	color_floor;
+	unsigned int	color_ceiling;
 }				t_game;
 
 void	error_handler(char *message);
+t_game	*get_map(int fd);
+bool	ft_strcmp(char *s1, char *s2);
 
 #endif
+

@@ -17,7 +17,7 @@ GNL_LIB = $(GNL_DIR)/nextline.a
 OFILES = ofiles
 
 
-FILES =  $(addprefix src/, main error_handler)
+FILES =  $(addprefix src/, main error_handler read_cub)
 
 OBJ = $(addprefix $(OFILES)/, $(FILES:=.o))
 
@@ -37,7 +37,7 @@ $(LIBFT_LIB):
 
 $(GNL_LIB):
 	@$(MAKE) -C $(GNL_DIR)
-	
+
 clean:
 	@rm -rf $(OBJ)
 	@rm -rf ofiles
