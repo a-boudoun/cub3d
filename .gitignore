@@ -3,3 +3,4 @@ ofiles
 cub3d
 *.a
 *.o
+*.gch
