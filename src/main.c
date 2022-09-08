@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:22 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/08 15:43:02 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/08 15:56:41 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,23 @@ int open_map(int ac, char **av)
 	return (fd);
 }
 
-int get_next_frame(void * param)
+int get_next_frame(t_data *data)
 {
-	(void)param;
-	//mlx_string_put(mlx_ptr, win_ptr, 10, 10, 0xFFFFFF, "Hello World !");
+	mlx_string_put(data->mlx, data->win, 10, 10, 0xFFFFFF, "Hello World !");
+	data+=0;
 	return (0);
 }
 
 int main(int ac, char **av)
 {
 	int fd;
+	t_data data;
 	fd = open_map(ac, av);
-	t_game *game = get_map(fd);
-	game += 0;
-	void *ptr = mlx_init();
-	mlx_new_window(ptr, 1000, 1000, "cub3d");
-	mlx_loop_hook(ptr, &get_next_frame, NULL);
-	ft_clear(game);
-	mlx_loop(ptr);
+	data.game = get_map(fd);
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(&data.mlx, 1000, 1000, "cub3d");
+	mlx_loop_hook(&data.mlx, &get_next_frame, NULL);
+	ft_clear(data.game);
+	mlx_loop(&data.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:40 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/08 14:34:15 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/08 15:50:55 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ typedef struct s_game {
 	int				color_floor;
 	int				color_ceiling;
 }				t_game;
+
+typedef struct s_data
+{
+	void		*mlx;
+	void		*win;
+	t_game		*game;
+	t_sprite	*sprite;
+}				t_data;
+
 
 void	error_handler(char *message);
 t_game	*get_map(int fd);
