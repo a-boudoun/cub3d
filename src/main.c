@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:22 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/08 18:29:24 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:55:08 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ int open_map(int ac, char **av)
 
 	if (ac != 2)
 		error_handler("argument error");
-		fd = open(av[1], O_RDONLY);
-
-	if (fd < 0 || ft_strcmp(".cub", &av[1][ft_strlen(av[1] - 5)]))
+	fd = open(av[1], O_RDONLY);
+	if (fd < 0 || !ft_strcmp(".cub", &av[1][ft_strlen(av[1]) - 4]))
 		error_handler("invalid file");
 	return (fd);
 }
