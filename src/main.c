@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:22 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/08 18:55:08 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/08 19:41:09 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ int main(int ac, char **av)
 
 	fd = open_map(ac, av);
 	data.game = get_map(fd);
-	printf("WE == %s\n", data.game->west);
-	printf("NO == %s\n", data.game->north);
-	printf("SO == %s\n", data.game->south);
-	printf("EA == %s\n", data.game->east);
-	printf("C  == %d\n", data.game->color_ceiling);
-	printf("F  == %d\n", data.game->color_floor);
+	printf("WE == |%s|\n", data.game->west);
+	printf("NO == |%s|\n", data.game->north);
+	printf("SO == |%s|\n", data.game->south);
+	printf("EA == |%s|\n", data.game->east);
+	printf("C  == |%d|\n", data.game->color_ceiling);
+	printf("F  == |%d|\n", data.game->color_floor);
 	int i = 0;
 	while (data.game -> map[i])
-		puts(data.game -> map[i++]);
+		printf("|%s|\n", data.game -> map[i++]);
 	//data.mlx = mlx_init();
 	// data.win = mlx_new_window(&data.mlx, 1000, 800, "cub3d");
 	// mlx_loop_hook(&data.mlx, &get_next_frame, &data);

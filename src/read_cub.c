@@ -10,11 +10,11 @@ bool	ft_strcmp(char *s1, char *s2)
 
 int	get_RGB(char *num)
 {
-	char			**tmp;
-	int				len;
-	int	r;
-	int	g;
-	int	b;
+	char	**tmp;
+	int		len;
+	int		r;
+	int		g;
+	int		b;
 
 	tmp = ft_split(num, ',');
 	len = -1;
@@ -86,7 +86,7 @@ char	find_non_space(char *str)
 		str++;
 	if (*str == 'N')
 	{
-		if (*(str + 1) == 'O')
+		if (*(str + 1) == 'O' && *(str + 2) == ' ')
 			return *str;
 		return (-1);
 	}
@@ -121,7 +121,6 @@ t_game	*get_map(int fd)
 		free(tmp[1]);
 		free(line);
 	}	free(tmp);
-	puts("gdjjkklejkldj");
 	if (game -> north == NULL || game -> south == NULL || game -> east == NULL || game -> west == NULL)
 		error_handler("Error: missing TEXTURE");
 	if (game -> color_ceiling == -1 || game -> color_floor == -1)
