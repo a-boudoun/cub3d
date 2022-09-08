@@ -29,16 +29,17 @@ static void	map_fix(size_t len, char **map)
 	map_checker(map);
 }
 
-char	**gen_map(int fd)
+char	**gen_map(int fd, char *line)
 {
 	t_list	*list;
 	char	**map;
 	size_t	len;
-	char	*line;
 	int		size;
 
-	list = NULL;
-	len = 0;
+	* (ft_strchr(line, '\n')) = 0;
+	len = ft_strlen(line);
+	ft_lstadd_back(&list, ft_lstnew(line));
+	//free(line);
 	while (true)
 	{
 		line = get_next_line(fd);

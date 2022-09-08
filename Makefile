@@ -8,7 +8,7 @@ INCLUDE = include
 HEADER = $(INCLUDE)/cub.h
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 CFLAGS += -Imlx
 
 LIBFT_DIR = libft

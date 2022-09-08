@@ -80,6 +80,18 @@ static	void add_type(char **line, t_game *game)
 	}
 }
 
+char	find_non_space(char *str)
+{
+	while(ft_strchr(WHITE_SPACES , *str))
+		str++;
+	if (*str == 'N')
+	{
+		if (*(str + 1) == 'O')
+			return *str;
+		return (-1);
+	}
+	return (*(str));
+}
 
 t_game	*get_map(int fd)
 {
@@ -99,21 +111,22 @@ t_game	*get_map(int fd)
 			free(line);
 		if (line && ft_strcmp(line, "\n"))
 			continue ;
-		if (line == NULL || !ft_strchr("NSWEFC\t ", line[0]))
-			break;
-		tmp[0] = ft_strtrim(ft_substr(line, 0, 2), " ");
-		tmp[1] = ft_strdup(ft_strchr(line, ' ') + 1);
+		if (line == NULL || !ft_strchr("NSWEFC", find_non_space(line)))
+				break;
+		line = ft_strtrim(line, WHITE_SPACES);
+		tmp[0] = ft_strtrim(ft_substr(line, 0, 2), WHITE_SPACES);
+		tmp[1] = ft_strtrim((line + 2), WHITE_SPACES);
 		add_type(tmp, game);
 		free(tmp[0]);
 		free(tmp[1]);
 		free(line);
 	}
 	free(tmp);
-	free(line);
+	//puts(game->west);
 	if (game -> north == NULL || game -> south == NULL || game -> east == NULL || game -> west == NULL)
 		error_handler("Error: missing TEXTURE");
 	if (game -> color_ceiling == -1 || game -> color_floor == -1)
 		error_handler("Error: missing COLORS");
-	return (game -> map = gen_map(fd), game);
+	return (game -> map = gen_map(fd, line), game);
 }
 

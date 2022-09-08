@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:40 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/08 15:50:55 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/08 17:46:41 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 #define CUB_H
+
+#define WHITE_SPACES " \t\v\f"
 
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
@@ -22,6 +24,19 @@
 #include <math.h>
 #include <fcntl.h>
 #include "../mlx/mlx.h"
+
+
+// KEYS
+# define MOVE_LEFT 0
+# define MOVE_DOWN 1
+# define MOVE_RIGHT 2
+# define EXIT 69
+# define MOVE_UP 13
+# define EXIT_KEY 53
+# define PLAYER 'N'
+# define EMPTY '0'
+# define WALL '1'
+# define NAME "cub3d"
 
 
 typedef struct s_sprite{
@@ -56,7 +71,7 @@ typedef struct s_data
 void	error_handler(char *message);
 t_game	*get_map(int fd);
 bool	ft_strcmp(char *s1, char *s2);
-char	**gen_map(int fd);
+char	**gen_map(int fd, char *line);
 
 #endif
 
