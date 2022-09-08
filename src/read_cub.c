@@ -120,9 +120,8 @@ t_game	*get_map(int fd)
 		free(tmp[0]);
 		free(tmp[1]);
 		free(line);
-	}
-	free(tmp);
-	//puts(game->west);
+	}	free(tmp);
+	puts("gdjjkklejkldj");
 	if (game -> north == NULL || game -> south == NULL || game -> east == NULL || game -> west == NULL)
 		error_handler("Error: missing TEXTURE");
 	if (game -> color_ceiling == -1 || game -> color_floor == -1)

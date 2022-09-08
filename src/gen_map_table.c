@@ -36,10 +36,10 @@ char	**gen_map(int fd, char *line)
 	size_t	len;
 	int		size;
 
+	list = NULL;
 	* (ft_strchr(line, '\n')) = 0;
 	len = ft_strlen(line);
 	ft_lstadd_back(&list, ft_lstnew(line));
-	//free(line);
 	while (true)
 	{
 		line = get_next_line(fd);
