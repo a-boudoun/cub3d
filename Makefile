@@ -12,6 +12,8 @@ FLAGS = -Wall -Wextra -Werror
 
 LIBFT_DIR = libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
+MLX_DIR = mlx
+MLX_LIB = $(MLX_DIR)/libmlx.dylib
 GNL_DIR = gnl
 GNL_LIB = $(GNL_DIR)/nextline.a
 OFILES = ofiles
@@ -24,7 +26,7 @@ OBJ = $(addprefix $(OFILES)/, $(FILES:=.o))
 all : $(NAME)
 
 
-$(NAME): $(OBJ) $(LIBFT_LIB) $(GNL_LIB) $(HEADER)
+$(NAME): $(MLX_LIB) $(OBJ) $(LIBFT_LIB) $(GNL_LIB) $(HEADER)
 	@$(CC) $(FLAGS) $(LIBFT_LIB) $(GNL_LIB) $(OBJ) -o $(NAME)
 
 $(OFILES)/src/%.o: src/%.c $(HEADER)
@@ -37,18 +39,22 @@ $(LIBFT_LIB):
 
 $(GNL_LIB):
 	@$(MAKE) -C $(GNL_DIR)
+$(MLX_LIB):
+	-@$(MAKE) -C $(MLX_DIR)
 
 clean:
 	@rm -rf $(OBJ)
 	@rm -rf ofiles
 	@$(MAKE) clean -C $(LIBFT_DIR)
 	@$(MAKE) clean -C $(GNL_DIR)
+	@$(MAKE) clean -C $(MLX_DIR)
 	@echo "$(RED)" "cleaning ..."
 
 fclean : clean
 	@rm -rf $(NAME) *.gch
 	@$(MAKE) fclean -C $(LIBFT_DIR)
 	@$(MAKE) fclean -C $(GNL_DIR)
+	@$(MAKE) clean -C $(MLX_DIR)
 	@echo "$(RED)" "full cleaning..."
 
 re : fclean all

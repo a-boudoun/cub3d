@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:40 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/07 19:23:05 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/08 14:34:15 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include <fcntl.h>
-#include <mlx.h>
+#include "../mlx/mlx.h"
 
 
 typedef struct s_sprite{
