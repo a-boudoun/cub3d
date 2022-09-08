@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:22 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/08 15:56:41 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/08 16:00:48 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int main(int ac, char **av)
 	fd = open_map(ac, av);
 	data.game = get_map(fd);
 	data.mlx = mlx_init();
-	data.win = mlx_new_window(&data.mlx, 1000, 1000, "cub3d");
-	mlx_loop_hook(&data.mlx, &get_next_frame, NULL);
+	data.win = mlx_new_window(&data.mlx, 1000, 800, "cub3d");
+	mlx_loop_hook(&data.mlx, &get_next_frame, &data);
 	ft_clear(data.game);
 	mlx_loop(&data.mlx);
 	return (0);
