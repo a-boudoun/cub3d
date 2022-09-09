@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:43:22 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/06 20:45:52 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:58:30 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ char	*ft_line(char **s)
 		i++;
 	if ((*s)[i] == '\n')
 	{
-		line = ft_substr(*s, 0, i + 1);
-		*s = ft_strdup(*s + i + 1);
+		line = ft_gnl_substr(*s, 0, i + 1);
+		*s = ft_gnl_strdup(*s + i + 1);
 	}
 	else
 	{
-		line = ft_strdup(*s);
+		line = ft_gnl_strdup(*s);
 		*s = NULL;
 	}
 	free (to_free);
@@ -46,7 +46,7 @@ int	ft_str(int fd, char **s)
 	if (!bufer)
 		return (-1);
 	byte_read = 4;
-	while (!ft_strchr(*s, '\n') && byte_read)
+	while (!ft_gnl_strchr(*s, '\n') && byte_read)
 	{
 		byte_read = read(fd, bufer, BUFFER_SIZE);
 		if (byte_read < 0)
@@ -56,7 +56,7 @@ int	ft_str(int fd, char **s)
 		}
 		bufer[byte_read] = '\0';
 		to_free = *s;
-		*s = ft_strjoin(*s, bufer);
+		*s = ft_gnl_strjoin(*s, bufer);
 		free(to_free);
 	}
 	free (bufer);
@@ -65,7 +65,7 @@ int	ft_str(int fd, char **s)
 
 char	*get_next_line(int fd)
 {
-	static char	*s = NULL;	
+	static char	*s = NULL;
 	char		*line;
 	int			byte_read;
 
@@ -73,7 +73,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!s)
-		s = ft_strdup("");
+		s = ft_gnl_strdup("");
 	byte_read = ft_str(fd, &s);
 	line = ft_line(&s);
 	if (byte_read <= 0 && line[0] == '\0')

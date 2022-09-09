@@ -8,28 +8,32 @@ INCLUDE = include
 HEADER = $(INCLUDE)/cub.h
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS += -Imlx
 
 LIBFT_DIR = libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
+MLX_DIR = mlx
+MLX_LIB = $(MLX_DIR)/libmlx.a
 GNL_DIR = gnl
 GNL_LIB = $(GNL_DIR)/nextline.a
 OFILES = ofiles
+LIBFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 
-FILES =  $(addprefix src/, main error_handler)
+FILES =  $(addprefix src/, main error_handler read_cub gen_map_table)
 
 OBJ = $(addprefix $(OFILES)/, $(FILES:=.o))
 
 all : $(NAME)
 
 
-$(NAME): $(OBJ) $(LIBFT_LIB) $(GNL_LIB) $(HEADER)
-	@$(CC) $(FLAGS) $(LIBFT_LIB) $(GNL_LIB) $(OBJ) -o $(NAME)
+$(NAME): $(MLX_LIB) $(OBJ) $(LIBFT_LIB) $(GNL_LIB) $(HEADER)
+	@$(CC) $(CFLAGS) $(LIBFT_LIB) $(GNL_LIB) $(OBJ) $(LIBFLAGS) $(MLX_LIB) -o $(NAME)
 
 $(OFILES)/src/%.o: src/%.c $(HEADER)
 	@mkdir -p $(@D)
-	@$(CC) -I$(INCLUDE) $(FLAGS) -o $@ -c $<
+	@$(CC) -I$(INCLUDE) $(CFLAGS) -o $@ -c $<
 	@echo "$(GREEN)" "compiling $<"
 
 $(LIBFT_LIB):
@@ -37,18 +41,22 @@ $(LIBFT_LIB):
 
 $(GNL_LIB):
 	@$(MAKE) -C $(GNL_DIR)
-	
+$(MLX_LIB):
+	-@$(MAKE) -C $(MLX_DIR) 2> /dev/null
+
 clean:
 	@rm -rf $(OBJ)
 	@rm -rf ofiles
 	@$(MAKE) clean -C $(LIBFT_DIR)
 	@$(MAKE) clean -C $(GNL_DIR)
+	@$(MAKE) clean -C $(MLX_DIR)
 	@echo "$(RED)" "cleaning ..."
 
 fclean : clean
 	@rm -rf $(NAME) *.gch
 	@$(MAKE) fclean -C $(LIBFT_DIR)
 	@$(MAKE) fclean -C $(GNL_DIR)
+	@$(MAKE) clean -C $(MLX_DIR)
 	@echo "$(RED)" "full cleaning..."
 
 re : fclean all

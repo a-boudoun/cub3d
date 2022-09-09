@@ -4,3 +4,7 @@ cub3d
 *.a
 *.o
 *.gch
+cub3d
+test/
+.vscode
+mlx/libmlx.dylib
