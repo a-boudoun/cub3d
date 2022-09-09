@@ -8,6 +8,7 @@ bool	ft_strcmp(char *s1, char *s2)
 	return !ft_strncmp(s1, s2, ft_strlen(s1));
 }
 
+static int	is_
 int	get_RGB(char *num)
 {
 	char	**tmp;
@@ -18,10 +19,16 @@ int	get_RGB(char *num)
 
 	tmp = ft_split(num, ',');
 	len = -1;
-	while (tmp[++len]);
+	while (tmp[++len])
+	{
+		if (!ft_isnumber(tmp[len]))
+			error_handler("invalid color");
+	}
 	if (len != 3)
 		error_handler("invalid color");
-
+	puts(tmp[0]);
+	puts(tmp[1]);
+	puts(tmp[2]);
 	r = ft_atoi(tmp[0]);
 	g = ft_atoi(tmp[1]);
 	b = ft_atoi(tmp[2]);
