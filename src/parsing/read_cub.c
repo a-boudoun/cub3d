@@ -37,6 +37,7 @@ int	get_RGB(char *num)
 
 static void	add_to_game(t_game *game, int index, char **line)
 {
+	*(ft_strchr(line[1], '\n')) = 0;
 	if (index == 0 && game -> north)
 		error_handler("Error: multiple north sprites");
 	else if (index == 1 && game -> south)
