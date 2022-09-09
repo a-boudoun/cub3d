@@ -16,6 +16,8 @@ int	get_RGB(char *num)
 	int		g;
 	int		b;
 
+	if (count(num, ',') != 2)
+		error_handler("Error: Invalid color format");
 	tmp = ft_split(num, ',');
 	len = -1;
 	while (tmp[++len]);

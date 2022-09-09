@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:40 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/08 17:46:41 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/09 19:06:27 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	error_handler(char *message);
 t_game	*get_map(int fd);
 bool	ft_strcmp(char *s1, char *s2);
 char	**gen_map(int fd, char *line);
+int		count(char *str, char c);
 
 #endif
 
