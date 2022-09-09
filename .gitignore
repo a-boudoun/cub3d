@@ -8,3 +8,4 @@ cub3d
 test/
 .vscode
 mlx/libmlx.dylib
+file.cub

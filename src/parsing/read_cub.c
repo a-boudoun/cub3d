@@ -8,7 +8,17 @@ bool	ft_strcmp(char *s1, char *s2)
 	return !ft_strncmp(s1, s2, ft_strlen(s1));
 }
 
-static int	is_
+static int	ft_isnumber(char *str)
+{
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 int	get_RGB(char *num)
 {
 	char	**tmp;
@@ -17,6 +27,8 @@ int	get_RGB(char *num)
 	int		g;
 	int		b;
 
+	if (count(num, ',') != 2)
+		error_handler("Error: Invalid color format");
 	tmp = ft_split(num, ',');
 	len = -1;
 	while (tmp[++len])
