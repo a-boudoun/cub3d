@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:40 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/10 17:44:24 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/10 17:47:29 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,13 @@ typedef struct s_data
 }				t_data;
 
 
-void	error_handler(char *message);
-t_game	*get_map(int fd);
-bool	ft_strcmp(char *s1, char *s2);
-char	**gen_map(int fd, char *line);
+void		error_handler(char *message);
+t_game		*get_map(int fd);
+bool		ft_strcmp(char *s1, char *s2);
+char		**gen_map(int fd, char *line);
 t_sprite	*check_elements_path(t_data *data);
-int		count(char *str, char c);
+int			count(char *str, char c);
+void		rays(t_data *data, double angle);
 
 #endif
 

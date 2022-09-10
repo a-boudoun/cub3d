@@ -21,7 +21,7 @@ OFILES = ofiles
 LIBFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 PARSING = $(addprefix parsing/, error_handler gen_map_table read_cub check_path)
-UTILS = $(addprefix utils/, count ft_strcmp)
+UTILS = $(addprefix utils/, count ft_strcmp rays)
 FILES =  $(addprefix src/, main $(PARSING) $(UTILS))
 
 OBJ = $(addprefix $(OFILES)/, $(FILES:=.o))
