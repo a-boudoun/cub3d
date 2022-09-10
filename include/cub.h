@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 18:33:40 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/09 22:16:00 by aboudoun         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef CUB_H
 #define CUB_H
@@ -37,6 +26,9 @@
 # define EMPTY '0'
 # define WALL '1'
 # define NAME "cub3d"
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
+# define PI M_PI
 
 
 typedef struct s_sprite{
@@ -49,6 +41,14 @@ typedef struct s_sprite{
 	void	*west_tex;
 	void	*east_tex;
 }				t_sprite;
+
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	angle;
+}				t_player;
+
 
 typedef struct s_game {
 	char			**map;
@@ -69,15 +69,18 @@ typedef struct s_data
 	void		*win;
 	t_game		*game;
 	t_sprite	*sprite;
+	t_player	*player;
 }				t_data;
 
 
-void	error_handler(char *message);
-t_game	*get_map(int fd);
-bool	ft_strcmp(char *s1, char *s2);
-char	**gen_map(int fd, char *line);
+void		error_handler(char *message);
+t_game		*get_map(int fd);
+bool		ft_strcmp(char *s1, char *s2);
+char		**gen_map(int fd, char *line);
 t_sprite	*check_elements_path(t_data *data);
-int		count(char *str, char c);
+int			count(char *str, char c);
+void		rays(t_data *data, double angle);
+bool		is_empty(char *line);
 
 #endif
 
