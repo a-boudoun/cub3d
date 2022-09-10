@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:33:40 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/09 22:16:00 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/10 17:44:24 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@
 # define EMPTY '0'
 # define WALL '1'
 # define NAME "cub3d"
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
+# define PI M_PI
 
 
 typedef struct s_sprite{
@@ -49,6 +52,14 @@ typedef struct s_sprite{
 	void	*west_tex;
 	void	*east_tex;
 }				t_sprite;
+
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	angle;
+}				t_player;
+
 
 typedef struct s_game {
 	char			**map;
@@ -69,6 +80,7 @@ typedef struct s_data
 	void		*win;
 	t_game		*game;
 	t_sprite	*sprite;
+	t_player	*player;
 }				t_data;
 
 
