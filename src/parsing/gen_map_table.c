@@ -69,14 +69,16 @@ char	**gen_map(int fd, char *line)
 	int		size;
 
 	list = NULL;
-	* (ft_strchr(line, '\n')) = 0;
+	*(ft_strchr(line, '\n')) = 0;
 	len = ft_strlen(line);
 	ft_lstadd_back(&list, ft_lstnew(line));
 	while (true)
 	{
 		line = get_next_line(fd);
-		if (line == NULL)
+		if (line == NULL )
 			break ;
+		if (is_empty(line))
+			error_handler("Empty Row");
 		* (ft_strchr(line, '\n')) = 0;
 		if (len < ft_strlen(line))
 			len = ft_strlen(line);

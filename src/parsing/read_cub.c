@@ -6,21 +6,21 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 14:55:13 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/10 15:06:34 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/10 17:48:15 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static int	ft_isnumber(char *str)
+static bool	ft_isnumber(char *str)
 {
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
-			return (0);
+			return (false);
 		str++;
 	}
-	return (1);
+	return (true);
 }
 
 int	get_RGB(char *num)
@@ -131,9 +131,9 @@ t_game	*get_map(int fd)
 	while (true)
 	{
 		line = get_next_line(fd);
-		if (line && ft_strcmp(line, "\n"))
+		if (line && is_empty(line))
 			free(line);
-		if (line && ft_strcmp(line, "\n"))
+		if (line && is_empty(line))
 			continue ;
 		if (line == NULL || !ft_strchr("NSWEFC", find_non_space(line)))
 				break;
