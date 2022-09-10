@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 18:33:22 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/10 18:17:03 by aboudoun         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "cub.h"
 
@@ -65,6 +54,8 @@ int main(int ac, char **av)
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(&data.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	//data.sprite = check_elements_path(&data);
+	//data.win = mlx_new_window(&data.mlx, 1000, 800, "cub3d");
+	data.sprite = check_elements_path(&data);
 	printf("WE == |%s|\n", data.game->west);
 	printf("NO == |%s|\n", data.game->north);
 	printf("SO == |%s|\n", data.game->south);
@@ -74,7 +65,7 @@ int main(int ac, char **av)
 	int i = 0;
 	while (data.game -> map[i])
 		printf("|%s|\n", data.game -> map[i++]);
-	mlx_loop_hook(&data.mlx, &get_next_frame, &data);
+	mlx_loop_hook(data.mlx, &get_next_frame, &data);
 	mlx_key_hook(data.win, &key_press, &data);
 	ft_clear(data.game);
 	mlx_loop(&data.mlx);

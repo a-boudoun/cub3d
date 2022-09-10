@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 18:33:40 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/10 17:47:29 by majjig           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef CUB_H
 #define CUB_H
@@ -91,6 +80,7 @@ char		**gen_map(int fd, char *line);
 t_sprite	*check_elements_path(t_data *data);
 int			count(char *str, char c);
 void		rays(t_data *data, double angle);
+bool		is_empty(char *line);
 
 #endif
 

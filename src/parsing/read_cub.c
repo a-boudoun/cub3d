@@ -6,21 +6,21 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 14:55:13 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/10 15:06:34 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/10 19:20:19 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static int	ft_isnumber(char *str)
+static bool	ft_isnumber(char *str)
 {
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
-			return (0);
+			return (false);
 		str++;
 	}
-	return (1);
+	return (true);
 }
 
 int	get_RGB(char *num)
@@ -57,7 +57,6 @@ int	get_RGB(char *num)
 
 static void	add_to_game(t_game *game, int index, char **line)
 {
-	*(ft_strchr(line[1], '\n')) = 0;
 	if (index == 0 && game -> north)
 		error_handler("multiple north sprites");
 	else if (index == 1 && game -> south)
@@ -98,10 +97,13 @@ static	void add_type(char **line, t_game *game)
 		if (ft_strcmp(element, valid_types[i]))
 		{
 			add_to_game(game, i, line);
+			free(element);
+			return ;
 		}
 		i++;
 	}
 	free(element);
+	error_handler("Unknown type");
 }
 
 char	find_non_space(char *str)
@@ -131,15 +133,15 @@ t_game	*get_map(int fd)
 	while (true)
 	{
 		line = get_next_line(fd);
-		if (line && ft_strcmp(line, "\n"))
+		if (line && is_empty(line))
 			free(line);
-		if (line && ft_strcmp(line, "\n"))
+		if (line && is_empty(line))
 			continue ;
 		if (line == NULL || !ft_strchr("NSWEFC", find_non_space(line)))
 				break;
 		free(line);
 		line = ft_strtrim(line, WHITE_SPACES);
-		tmp[0] = ft_substr(line, 0, 2);
+		tmp[0] = ft_substr(line, 0, (bool)(ft_strchr("SWEN", *line)) + 2);
 		tmp[1] = ft_strtrim((line + 2), WHITE_SPACES);
 		add_type(tmp, game);
 		free(tmp[0]);
