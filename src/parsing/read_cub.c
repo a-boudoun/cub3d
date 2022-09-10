@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 14:55:13 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/10 17:48:15 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/10 18:48:22 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	get_RGB(char *num)
 
 static void	add_to_game(t_game *game, int index, char **line)
 {
-	*(ft_strchr(line[1], '\n')) = 0;
 	if (index == 0 && game -> north)
 		error_handler("multiple north sprites");
 	else if (index == 1 && game -> south)

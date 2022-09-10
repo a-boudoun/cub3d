@@ -32,7 +32,7 @@ all : $(NAME)
 $(NAME): $(MLX_LIB) $(OBJ) $(LIBFT_LIB) $(GNL_LIB) $(HEADER)
 	@$(CC) $(CFLAGS) $(LIBFT_LIB) $(GNL_LIB) $(OBJ) $(LIBFLAGS) $(MLX_LIB) -o $(NAME)
 
-$(OFILES)/src/%.o: src/%.c $(HEADER)
+$(OFILES)/src/%.o: src/%.c $(HEADER) 
 	@mkdir -p $(@D)
 	@$(CC) -I$(INCLUDE) $(CFLAGS) -o $@ -c $<
 	@echo "$(GREEN)" "compiling $<"
@@ -42,6 +42,7 @@ $(LIBFT_LIB):
 
 $(GNL_LIB):
 	@$(MAKE) -C $(GNL_DIR)
+
 $(MLX_LIB):
 	-@$(MAKE) -C $(MLX_DIR) 2> /dev/null
 

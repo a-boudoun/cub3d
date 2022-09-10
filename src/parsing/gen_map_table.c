@@ -69,20 +69,23 @@ char	**gen_map(int fd, char *line)
 	int		size;
 
 	list = NULL;
-	*(ft_strchr(line, '\n')) = 0;
 	len = ft_strlen(line);
 	ft_lstadd_back(&list, ft_lstnew(line));
 	while (true)
 	{
 		line = get_next_line(fd);
-		if (line == NULL )
+		if (line == NULL || is_empty(line))
 			break ;
-		if (is_empty(line))
-			error_handler("Empty Row");
-		* (ft_strchr(line, '\n')) = 0;
 		if (len < ft_strlen(line))
 			len = ft_strlen(line);
 		ft_lstadd_back(&list, ft_lstnew(line));
+	}
+	while(line)
+	{
+		if (is_empty(line))
+			line = get_next_line(fd);
+		else
+			error_handler("Empty rows");
 	}
 	size = ft_lstsize(list);
 	map = (char **) malloc(sizeof(char *) * (size + 1));
