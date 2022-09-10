@@ -8,6 +8,17 @@ bool	ft_strcmp(char *s1, char *s2)
 	return !ft_strncmp(s1, s2, ft_strlen(s1));
 }
 
+static int	ft_isnumber(char *str)
+{
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 int	get_RGB(char *num)
 {
 	char	**tmp;
@@ -16,12 +27,20 @@ int	get_RGB(char *num)
 	int		g;
 	int		b;
 
+	if (count(num, ',') != 2)
+		error_handler("Error: Invalid color format");
 	tmp = ft_split(num, ',');
 	len = -1;
-	while (tmp[++len]);
+	while (tmp[++len])
+	{
+		if (!ft_isnumber(tmp[len]))
+			error_handler("invalid color");
+	}
 	if (len != 3)
 		error_handler("invalid color");
-
+	puts(tmp[0]);
+	puts(tmp[1]);
+	puts(tmp[2]);
 	r = ft_atoi(tmp[0]);
 	g = ft_atoi(tmp[1]);
 	b = ft_atoi(tmp[2]);
@@ -37,6 +56,7 @@ int	get_RGB(char *num)
 
 static void	add_to_game(t_game *game, int index, char **line)
 {
+	*(ft_strchr(line[1], '\n')) = 0;
 	if (index == 0 && game -> north)
 		error_handler("Error: multiple north sprites");
 	else if (index == 1 && game -> south)
