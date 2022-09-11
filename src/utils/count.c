@@ -1,3 +1,5 @@
+#include"cub.h"
+
 int	count(char *str, char c)
 {
 	int count;

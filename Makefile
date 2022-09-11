@@ -20,9 +20,10 @@ GNL_LIB = $(GNL_DIR)/nextline.a
 OFILES = ofiles
 LIBFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
+DRAW = $(addprefix drawing/, drawing_map)
 PARSING = $(addprefix parsing/, error_handler gen_map_table read_cub check_path)
 UTILS = $(addprefix utils/, count ft_strcmp is_empty rays)
-FILES =  $(addprefix src/, main $(PARSING) $(UTILS))
+FILES =  $(addprefix src/, main $(PARSING) $(UTILS) $(DRAW))
 
 OBJ = $(addprefix $(OFILES)/, $(FILES:=.o))
 

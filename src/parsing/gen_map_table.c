@@ -24,10 +24,10 @@ static void map_loop(char **map, int x, int y)
 		x = 0;
 		while(map[y][x])
 		{
-			if (map[y][x] == 'N')
+			if (ft_strchr("NSWE", map[y][x]))
 				if (++player_count > 1)
 					error_handler("More than one player starting position");
-			if (!ft_strchr("01 N", map[y][x]))
+			if (!ft_strchr("01 NWSE", map[y][x]))
 				error_handler("Unknown item in map");
 			if (map[y][x] == '0' || map[y][x] == 'N')
 				map_checker(map, x, y);
