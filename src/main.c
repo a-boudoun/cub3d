@@ -29,34 +29,22 @@ int open_map(int ac, char **av)
 
 int	key_press(int key,t_data *data)
 {
-	int x;
-	int y;
-
-	y = 0;
-	while (data->game->map[y])
-	{
-		x = 0;
-		while (data->game->map[y][x])
-		{
-			if (data->game->map[y][x] == 'N')
-				break;
-			x++;
-		}
-		y++;
-	}
-	data->sprite->x = x;
-	data->sprite->y = y;
-
 	if (key == EXIT_KEY)
 	{
 		mlx_destroy_window(data -> mlx, data -> win);
 		exit(0);
 	}
-	presskey;
-	charngecord;
-	putpixel;
+	key_handler(key, data);
 	return 0;
 }
+
+int next_frame(t_data *data)
+{
+	draw_map(data);
+	mlx_clear_window(data -> mlx, data -> win);
+	return 0;
+}
+
 
 int main(int ac, char **av)
 {
@@ -69,6 +57,9 @@ int main(int ac, char **av)
 	data.win = mlx_new_window(&data.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	data.sprite = check_elements_path(&data);
 	data.sprite = check_elements_path(&data);
+	data.player = malloc(sizeof(t_player));
+	get_player_pos(&data);
+	mlx_loop_hook(data.mlx, next_frame, &data);
 	// printf("WE == |%s|\n", data.game->west);
 	// printf("NO == |%s|\n", data.game->north);
 	// printf("SO == |%s|\n", data.game->south);
@@ -78,7 +69,6 @@ int main(int ac, char **av)
 	// int i = 0;
 	//while (data.game -> map[i])
 	mlx_key_hook(data.win, &key_press, &data);
-	draw_map(&data);
 	mlx_loop(&data.mlx);
 	ft_clear(data.game);
 	return (0);
