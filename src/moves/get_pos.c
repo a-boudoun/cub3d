@@ -12,11 +12,14 @@ void	get_player_pos(t_data *data)
 		while (data->game->map[y][x])
 		{
 			if (data->game->map[y][x] == INIT_POS)
-				break;
+			{
+				data->player->x = x;
+				data->player->y = y;
+			}
 			x++;
 		}
 		y++;
 	}
-	data->player->x = x;
-	data->player->y = y;
+	data->game->map_height = y;
+	data->game->map_width = x;
 }

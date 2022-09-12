@@ -41,7 +41,7 @@ int	key_press(int key,t_data *data)
 int next_frame(t_data *data)
 {
 	draw_map(data);
-	mlx_clear_window(data -> mlx, data -> win);
+	// mlx_clear_window(data -> mlx, data -> win);
 	return 0;
 }
 
@@ -54,12 +54,14 @@ int main(int ac, char **av)
 	fd = open_map(ac, av);
 	data.game = get_map(fd);
 	data.mlx = mlx_init();
-	data.win = mlx_new_window(&data.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	data.sprite = check_elements_path(&data);
 	data.sprite = check_elements_path(&data);
 	data.player = malloc(sizeof(t_player));
 	get_player_pos(&data);
 	mlx_loop_hook(data.mlx, next_frame, &data);
+	// mlx_hook(data.mlx, 2, 1L<<0, key_press, &data);
+
 	// printf("WE == |%s|\n", data.game->west);
 	// printf("NO == |%s|\n", data.game->north);
 	// printf("SO == |%s|\n", data.game->south);
@@ -69,7 +71,7 @@ int main(int ac, char **av)
 	// int i = 0;
 	//while (data.game -> map[i])
 	mlx_key_hook(data.win, &key_press, &data);
-	mlx_loop(&data.mlx);
+	mlx_loop(data.mlx);
 	ft_clear(data.game);
 	return (0);
 }
