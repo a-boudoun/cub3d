@@ -27,6 +27,7 @@
 # define EXIT_KEY 53
 # define EMPTY '0'
 # define WALL '1'
+# define INIT_POS 'N'
 # define NAME "cub3d"
 # define WIN_WIDTH 2000
 # define WIN_HEIGHT 900
@@ -84,6 +85,8 @@ int			count(char *str, char c);
 void		rays(t_data *data, double angle);
 bool		is_empty(char *line);
 void		draw_map(t_data *data);
+void		key_handler(int key, t_data *data);
+void		get_player_pos(t_data *data);
 
 #endif
 
