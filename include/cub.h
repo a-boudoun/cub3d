@@ -17,8 +17,7 @@
 
 
 // KEYS
-# define BOX_X 10
-# define BOX_Y 10
+
 # define MOVE_LEFT 0
 # define MOVE_DOWN 1
 # define MOVE_RIGHT 2
@@ -29,10 +28,11 @@
 # define WALL '1'
 # define INIT_POS 'N'
 # define NAME "cub3d"
-# define WIN_WIDTH 2000
+# define WIN_WIDTH 1080
 # define WIN_HEIGHT 900
 # define PI M_PI
-
+# define BOX_X WIN_WIDTH / 100
+# define BOX_Y BOX_X
 
 typedef struct s_sprite{
 	int		x;
