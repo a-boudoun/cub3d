@@ -61,7 +61,6 @@ int main(int ac, char **av)
 	get_player_pos(&data);
 	mlx_loop_hook(data.mlx, next_frame, &data);
 	// mlx_hook(data.mlx, 2, 1L<<0, key_press, &data);
-
 	// printf("WE == |%s|\n", data.game->west);
 	// printf("NO == |%s|\n", data.game->north);
 	// printf("SO == |%s|\n", data.game->south);

@@ -32,6 +32,15 @@
 # define WIN_HEIGHT 700
 # define PI M_PI
 
+
+typedef struct	s_img{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_img;
+
 typedef struct s_sprite{
 	int		x;
 	int		y;
@@ -71,6 +80,7 @@ typedef struct s_data
 	t_game		*game;
 	t_sprite	*sprite;
 	t_player	*player;
+	t_img		*img;
 }				t_data;
 
 
