@@ -1,13 +1,37 @@
 #include "cub.h"
 
+void	move_up(t_data *data)
+{
+	if (data->game->map[(int)(data->player->y -  .2)][(int)data->player->x] != WALL)
+		data->player->y -= .2;
+}
+
+void	move_down(t_data *data)
+{
+	if (data->game->map[(int)(data->player->y + .2)][(int)data->player->x] != WALL)
+		data->player->y += .2;
+}
+
+void	move_left(t_data *data)
+{
+	if (data->game->map[(int)data->player->y][(int)(data->player->x - .2)] != WALL)
+		data->player->x -= .2;
+}
+
+void	move_right(t_data *data)
+{
+	if (data->game->map[(int)data->player->y][(int)(data->player->x + .2)] != WALL)
+		data->player->x += .2;
+}
+
 void	key_handler(int key, t_data *data)
 {
 	if (key == MOVE_UP)
-		data->player->y -= 0.4;
+		move_up(data);
 	else if (key == MOVE_DOWN)
-		data->player->y += 0.4;
+		move_down(data);
 	else if (key == MOVE_LEFT)
-		data->player->x -= 0.4;
+		move_left(data);
 	else if (key == MOVE_RIGHT)
-		data->player->x += 0.4;
+		move_right(data);
 }
