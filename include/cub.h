@@ -31,6 +31,7 @@
 # define WIN_WIDTH 900
 # define WIN_HEIGHT 700
 # define PI M_PI
+# define PLAYER_SPEED 0.3
 
 
 typedef struct	s_img{

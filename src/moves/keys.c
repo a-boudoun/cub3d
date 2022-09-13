@@ -2,26 +2,26 @@
 
 void	move_up(t_data *data)
 {
-	if (data->game->map[(int)(data->player->y -  .2)][(int)data->player->x] != WALL)
-		data->player->y -= .2;
+	if (data->game->map[(int)(data->player->y -  PLAYER_SPEED)][(int)data->player->x] != WALL)
+		data->player->y -= PLAYER_SPEED;
 }
 
 void	move_down(t_data *data)
 {
-	if (data->game->map[(int)(data->player->y + .2)][(int)data->player->x] != WALL)
-		data->player->y += .2;
+	if (data->game->map[(int)(data->player->y + PLAYER_SPEED)][(int)data->player->x] != WALL)
+		data->player->y += PLAYER_SPEED;
 }
 
 void	move_left(t_data *data)
 {
-	if (data->game->map[(int)data->player->y][(int)(data->player->x - .2)] != WALL)
-		data->player->x -= .2;
+	if (data->game->map[(int)data->player->y][(int)(data->player->x - PLAYER_SPEED)] != WALL)
+		data->player->x -= PLAYER_SPEED;
 }
 
 void	move_right(t_data *data)
 {
-	if (data->game->map[(int)data->player->y][(int)(data->player->x + .2)] != WALL)
-		data->player->x += .2;
+	if (data->game->map[(int)data->player->y][(int)(data->player->x + PLAYER_SPEED)] != WALL)
+		data->player->x += PLAYER_SPEED;
 }
 
 void	key_handler(int key, t_data *data)
