@@ -59,6 +59,7 @@ int main(int ac, char **av)
 	data.sprite = check_elements_path(&data);
 	data.sprite = check_elements_path(&data);
 	data.player = malloc(sizeof(t_player));
+	data.img = malloc(sizeof(t_img));
 	get_player_pos(&data);
 	mlx_loop_hook(data.mlx, next_frame, &data);
 	// mlx_hook(data.mlx, 2, 1L<<0, key_press, &data);
