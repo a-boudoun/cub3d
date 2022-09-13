@@ -52,13 +52,19 @@ typedef struct s_sprite{
 	void	*east_tex;
 }				t_sprite;
 
+typedef struct minimap{
+	int		p_box_height;
+	int		p_box_width;
+	int		box_height;
+	int		box_width;
+}				t_minimap;
+
 typedef struct s_player
 {
 	double	x;
 	double	y;
 	double	angle;
 }				t_player;
-
 
 typedef struct s_game {
 	char			**map;
@@ -81,6 +87,7 @@ typedef struct s_data
 	t_sprite	*sprite;
 	t_player	*player;
 	t_img		*img;
+	t_minimap	*minimap;
 }				t_data;
 
 
