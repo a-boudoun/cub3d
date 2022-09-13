@@ -8,36 +8,36 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void drw_box(t_data *data, t_img *img, int x_b, int y_b, int color)
+void drw_box(t_data *data, int x_b, int y_b, int color)
 {
 	int x;
 	int y;
 
 	y = 0;
-	while (y < WIN_HEIGHT / 4 / data->game->map_height)
+	while (y < data->minimap->box_height)
 	{
 		x = 0;
-		while (x < WIN_WIDTH / 4 / data->game->map_width)
+		while (x < data->minimap->box_width)
 		{
-			my_mlx_pixel_put(img, x + x_b, y + y_b, color);
+			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
 		}
 		y++;
 	}
 }
 
-void drw_player(t_data *data, t_img *img, int x_b, int y_b, int color)
+void drw_player(t_data *data, int x_b, int y_b, int color)
 {
 	int x;
 	int y;
 
 	y = 0;
-	while (y < WIN_HEIGHT / 6 / data->game->map_height)
+	while (y < data->minimap->p_box_height)
 	{
 		x = 0;
-		while (x < WIN_WIDTH / 6 / data->game->map_width)
+		while (x < data->minimap->p_box_width)
 		{
-			my_mlx_pixel_put(img, x + x_b, y + y_b, color);
+			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
 		}
 		y++;
@@ -48,8 +48,6 @@ void	draw_map(t_data *data)
 {
 	int x;
 	int y;
-	int box_x = WIN_WIDTH / 4 / data->game->map_width;
-	int box_y = WIN_HEIGHT / 4 / data->game->map_height;
 
 	data->img = malloc(sizeof(t_img));
 	ft_bzero(data->img, sizeof(t_img));
@@ -63,13 +61,13 @@ void	draw_map(t_data *data)
 		while (data->game->map[y][x])
 		{
 			if (data->game->map[y][x] == WALL)
-				drw_box(data, data->img, x * box_x, y * box_y, 0xFF0000);
+				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0xFF0000);
 			else if (data->game->map[y][x] == EMPTY || ft_strchr("NSWE", data->game->map[y][x]))
-				drw_box(data, data->img, x * box_x, y * box_y, 0xFFFFFF);
+				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0xFFFFFF);
 			x++;
 		}
 		y++;
 	}
-	drw_player(data, data->img, data->player->x * box_x, data->player->y * box_y, 0x000ED5);
+	drw_player(data, data->player->x * data->minimap->box_width, data->player->y * data->minimap->box_height, 0x000ED5);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 }
