@@ -51,7 +51,6 @@ void	draw_map(t_data *data)
 	int box_x = WIN_WIDTH / 4 / data->game->map_width;
 	int box_y = WIN_HEIGHT / 4 / data->game->map_height;
 
-	ft_bzero(data->img, sizeof(t_img));
 	data->img->img = mlx_new_image(data->mlx, (WIN_WIDTH), (WIN_HEIGHT));
 	data->img->addr = mlx_get_data_addr(data->img->img, &data->img->bits_per_pixel, \
 		&data->img->line_length, &data->img->endian);
