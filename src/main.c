@@ -32,7 +32,8 @@ int	key_press(int key,t_data *data)
 	if (key == EXIT_KEY)
 	{
 		mlx_destroy_window(data -> mlx, data -> win);
-		exit(0);
+		ft_clear(data -> game);
+		exit(EXIT_SUCCESS);
 	}
 	key_handler(key, data);
 	return 0;
@@ -58,6 +59,7 @@ int main(int ac, char **av)
 	data.sprite = check_elements_path(&data);
 	data.sprite = check_elements_path(&data);
 	data.player = malloc(sizeof(t_player));
+	data.img = malloc(sizeof(t_img));
 	get_player_pos(&data);
 	mlx_loop_hook(data.mlx, next_frame, &data);
 	// mlx_hook(data.mlx, 2, 1L<<0, key_press, &data);
@@ -70,6 +72,7 @@ int main(int ac, char **av)
 	// int i = 0;
 	//while (data.game -> map[i])
 	mlx_key_hook(data.win, &key_press, &data);
+	mlx_hook(data.win, 2, 1L<<0, &key_press, &data);
 	mlx_loop(data.mlx);
 	ft_clear(data.game);
 	return (0);

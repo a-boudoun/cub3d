@@ -32,10 +32,10 @@ void drw_player(t_data *data, int x_b, int y_b, int color)
 	int y;
 
 	y = 0;
-	while (y < data->minimap->p_box_height)
+	while (y < WIN_HEIGHT / 10 / data->game->map_height)
 	{
 		x = 0;
-		while (x < data->minimap->p_box_width)
+		while (x < WIN_WIDTH / 10 / data->game->map_width)
 		{
 			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
@@ -49,8 +49,6 @@ void	draw_map(t_data *data)
 	int x;
 	int y;
 
-	data->img = malloc(sizeof(t_img));
-	ft_bzero(data->img, sizeof(t_img));
 	data->img->img = mlx_new_image(data->mlx, (WIN_WIDTH), (WIN_HEIGHT));
 	data->img->addr = mlx_get_data_addr(data->img->img, &data->img->bits_per_pixel, \
 		&data->img->line_length, &data->img->endian);
