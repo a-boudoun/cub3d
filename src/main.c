@@ -32,7 +32,8 @@ int	key_press(int key,t_data *data)
 	if (key == EXIT_KEY)
 	{
 		mlx_destroy_window(data -> mlx, data -> win);
-		exit(0);
+		ft_clear(data -> game);
+		exit(EXIT_SUCCESS);
 	}
 	key_handler(key, data);
 	return 0;
