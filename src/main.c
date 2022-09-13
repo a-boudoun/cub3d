@@ -70,6 +70,7 @@ int main(int ac, char **av)
 	// int i = 0;
 	//while (data.game -> map[i])
 	mlx_key_hook(data.win, &key_press, &data);
+	mlx_hook(data.win, 2, 1L<<0, &key_press, &data);
 	mlx_loop(data.mlx);
 	ft_clear(data.game);
 	return (0);
