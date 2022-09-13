@@ -2,7 +2,7 @@
 #ifndef CUB_H
 #define CUB_H
 
-#define WHITE_SPACES " \t\v\f"
+#define WHITE_SPACES " \t\r\f\v"
 
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
@@ -12,24 +12,34 @@
 #include <stdbool.h>
 #include <math.h>
 #include <fcntl.h>
+#include <math.h>
 #include "../mlx/mlx.h"
 
 
 // KEYS
+
 # define MOVE_LEFT 0
 # define MOVE_DOWN 1
 # define MOVE_RIGHT 2
 # define EXIT 69
 # define MOVE_UP 13
 # define EXIT_KEY 53
-# define PLAYER 'N'
 # define EMPTY '0'
 # define WALL '1'
+# define INIT_POS 'N'
 # define NAME "cub3d"
-# define WIN_WIDTH 1000
-# define WIN_HEIGHT 800
+# define WIN_WIDTH 900
+# define WIN_HEIGHT 700
 # define PI M_PI
 
+
+typedef struct	s_img{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_img;
 
 typedef struct s_sprite{
 	int		x;
@@ -70,6 +80,7 @@ typedef struct s_data
 	t_game		*game;
 	t_sprite	*sprite;
 	t_player	*player;
+	t_img		*img;
 }				t_data;
 
 
@@ -81,6 +92,9 @@ t_sprite	*check_elements_path(t_data *data);
 int			count(char *str, char c);
 void		rays(t_data *data, double angle);
 bool		is_empty(char *line);
+void		draw_map(t_data *data);
+void		key_handler(int key, t_data *data);
+void		get_player_pos(t_data *data);
 
 #endif
 
