@@ -14,10 +14,10 @@ void drw_box(t_data *data, int x_b, int y_b, int color)
 	int y;
 
 	y = 0;
-	while (y < data->minimap->box_height)
+	while (y <  WIN_HEIGHT / data->game->map_height -1)
 	{
 		x = 0;
-		while (x < data->minimap->box_width)
+		while (x < WIN_WIDTH / data->game->map_width - 1)
 		{
 			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
@@ -32,10 +32,10 @@ void drw_player(t_data *data, int x_b, int y_b, int color)
 	int y;
 
 	y = 0;
-	while (y < data->minimap->p_box_height)
+	while (y < WIN_HEIGHT / 2 / data->game->map_height)
 	{
 		x = 0;
-		while (x < data->minimap->p_box_width)
+		while (x < WIN_WIDTH / 2 / data->game->map_width)
 		{
 			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
@@ -44,13 +44,32 @@ void drw_player(t_data *data, int x_b, int y_b, int color)
 	}
 }
 
+void draw_line(t_data *data)
+{
+	double	beginX = data->player->x * data->minimap->box_width;
+	double	beginY = data->player->y * data->minimap->box_height;
+	double endX = data->player->x * data->minimap->box_width + cos(data->player->angle) * 30;
+	double endY = data->player->y * data->minimap->box_height - sin(data->player->angle) * 30;
+	double deltaX = endX - beginX; // 10
+	double deltaY = endY - beginY; // 0
+	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+//  pixels = sqrt((10 * 10) + (0 * 0)) = sqrt(100) = 10
+	deltaX /= pixels; // 1
+	deltaY /= pixels; // 0
+	while (pixels)
+	{
+	    mlx_pixel_put(data->mlx, data->win, beginX, beginY, 0x00FF0000);
+	    beginX += deltaX;
+	    beginY += deltaY;
+	    --pixels;
+	}
+}
+
 void	draw_map(t_data *data)
 {
 	int x;
 	int y;
 
-	data->img = malloc(sizeof(t_img));
-	ft_bzero(data->img, sizeof(t_img));
 	data->img->img = mlx_new_image(data->mlx, (WIN_WIDTH), (WIN_HEIGHT));
 	data->img->addr = mlx_get_data_addr(data->img->img, &data->img->bits_per_pixel, \
 		&data->img->line_length, &data->img->endian);
@@ -61,7 +80,7 @@ void	draw_map(t_data *data)
 		while (data->game->map[y][x])
 		{
 			if (data->game->map[y][x] == WALL)
-				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0xFF0000);
+				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0xFCB000);
 			else if (data->game->map[y][x] == EMPTY || ft_strchr("NSWE", data->game->map[y][x]))
 				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0xFFFFFF);
 			x++;
@@ -70,4 +89,5 @@ void	draw_map(t_data *data)
 	}
 	drw_player(data, data->player->x * data->minimap->box_width, data->player->y * data->minimap->box_height, 0x000ED5);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+	draw_line(data);
 }
