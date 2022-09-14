@@ -14,10 +14,10 @@ void drw_box(t_data *data, int x_b, int y_b, int color)
 	int y;
 
 	y = 0;
-	while (y <  WIN_HEIGHT / data->game->map_height)
+	while (y <  WIN_HEIGHT / data->game->map_height -1)
 	{
 		x = 0;
-		while (x < WIN_WIDTH / data->game->map_width)
+		while (x < WIN_WIDTH / data->game->map_width - 1)
 		{
 			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
@@ -43,29 +43,23 @@ void drw_player(t_data *data, int x_b, int y_b, int color)
 		y++;
 	}
 }
-void draw_line(t_data *data)
-{
-	int x;
-	int y;
-	int i;
-	int j;
+// void draw_line(t_data *data)
+// {
+// 	int x;
+// 	int y;
+// 	int i;
 
-	x = data->player->x * data->minimap->box_width;
-	i = 0;
-	while (i < 100)
-	{
-		y = data->player->y * data->minimap->box_height;
-		j = 0;
-		while (j < 100)
-		{
-			mlx_pixel_put(data->mlx, data->win, x + data->player->dx, y + data->player->dy, 0xFF0000);
-			y++;
-			j++;
-		}
-		x++;
-		i++;
-	}
-}
+// 	x = data->player->x * data->minimap->box_width;
+// 	i = 0;
+// 	y = data->player->y * data->minimap->box_height;
+// 	while (i < 100)
+// 	{
+// 		mlx_pixel_put(data->mlx, data->win, x + data->player->dx, y + data->player->dy, 0xFF0000);
+// 		y++;
+// 		x++;
+// 		i++;
+// 	}
+// }
 void	draw_map(t_data *data)
 {
 	int x;
@@ -89,6 +83,6 @@ void	draw_map(t_data *data)
 		y++;
 	}
 	drw_player(data, data->player->x * data->minimap->box_width, data->player->y * data->minimap->box_height, 0x000ED5);
-	draw_line(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+	//draw_line(data);
 }

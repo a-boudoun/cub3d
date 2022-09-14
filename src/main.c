@@ -61,6 +61,9 @@ int main(int ac, char **av)
 	data.player = malloc(sizeof(t_player));
 	data.img = malloc(sizeof(t_img));
 	get_player_pos(&data);
+	data.player->angle = 60 * PI / 180;
+	data.player->dx = 5 * cos(data.player->angle);
+	data.player->dy = 5 * sin(data.player->angle);
 	mlx_loop_hook(data.mlx, next_frame, &data);
 	// mlx_hook(data.mlx, 2, 1L<<0, key_press, &data);
 	// printf("WE == |%s|\n", data.game->west);
