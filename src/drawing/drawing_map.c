@@ -43,23 +43,30 @@ void drw_player(t_data *data, int x_b, int y_b, int color)
 		y++;
 	}
 }
-// void draw_line(t_data *data)
-// {
-// 	int x;
-// 	int y;
-// 	int i;
 
-// 	x = data->player->x * data->minimap->box_width;
-// 	i = 0;
-// 	y = data->player->y * data->minimap->box_height;
-// 	while (i < 100)
-// 	{
-// 		mlx_pixel_put(data->mlx, data->win, x + data->player->dx, y + data->player->dy, 0xFF0000);
-// 		y++;
-// 		x++;
-// 		i++;
-// 	}
-// }
+void draw_line(t_data *data)
+{
+	double	beginX = data->player->x * data->minimap->box_width;
+	double	beginY = data->player->y * data->minimap->box_height;
+	double endX = data->player->x * data->minimap->box_width + cos(data->player->angle) * 30;
+	double endY = data->player->y * data->minimap->box_height + sin(data->player->angle) * 30;
+	double deltaX = endX - beginX; // 10
+	double deltaY = endY - beginY; // 0
+	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+//  pixels = sqrt((10 * 10) + (0 * 0)) = sqrt(100) = 10
+	deltaX /= pixels; // 1
+	deltaY /= pixels; // 0
+	double pixelX = beginX;
+	double pixelY = beginY;
+	while (pixels)
+	{
+	    mlx_pixel_put(data->mlx, data->win, pixelX, pixelY, 0x00FF0000);
+	    pixelX += deltaX;
+	    pixelY += deltaY;
+	    --pixels;
+	}
+}
+
 void	draw_map(t_data *data)
 {
 	int x;
@@ -84,5 +91,5 @@ void	draw_map(t_data *data)
 	}
 	drw_player(data, data->player->x * data->minimap->box_width, data->player->y * data->minimap->box_height, 0x000ED5);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
-	//draw_line(data);
+	draw_line(data);
 }

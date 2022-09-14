@@ -20,8 +20,8 @@
 
 # define W 13
 # define S 1
-# define A 2
-# define D 0
+# define A 0
+# define D 2
 # define ESC 53
 # define UP 126
 # define DOWN 125
