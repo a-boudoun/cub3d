@@ -18,12 +18,16 @@
 
 // KEYS
 
-# define MOVE_LEFT 0
-# define MOVE_DOWN 1
-# define MOVE_RIGHT 2
+# define W 13
+# define S 1
+# define A 2
+# define D 0
+# define ESC 53
+# define UP 126
+# define DOWN 125
+# define LEFT 123
+# define RIGHT 124
 # define EXIT 69
-# define MOVE_UP 13
-# define EXIT_KEY 53
 # define EMPTY '0'
 # define WALL '1'
 # define INIT_POS 'N'
@@ -31,7 +35,8 @@
 # define WIN_WIDTH 900
 # define WIN_HEIGHT 700
 # define PI M_PI
-# define PLAYER_SPEED 0.3
+# define ROTATE_SPEED 0.2
+# define PLAYER_SPEED 1
 
 
 typedef struct	s_img{
@@ -65,6 +70,9 @@ typedef struct s_player
 	double	x;
 	double	y;
 	double	angle;
+	double	dx;
+	double	dy;
+
 }				t_player;
 
 typedef struct s_game {

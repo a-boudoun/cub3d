@@ -29,7 +29,7 @@ int open_map(int ac, char **av)
 
 int	key_press(int key,t_data *data)
 {
-	if (key == EXIT_KEY)
+	if (key == ESC)
 	{
 		mlx_destroy_window(data -> mlx, data -> win);
 		ft_clear(data -> game);
@@ -72,7 +72,7 @@ int main(int ac, char **av)
 	// int i = 0;
 	//while (data.game -> map[i])
 	mlx_key_hook(data.win, &key_press, &data);
-	mlx_hook(data.win, 2, 1L<<0, &key_press, &data);
+	mlx_hook(data.win, 1, 1L<<0, &key_press, &data);
 	mlx_loop(data.mlx);
 	ft_clear(data.game);
 	return (0);
