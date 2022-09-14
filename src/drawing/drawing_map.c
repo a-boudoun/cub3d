@@ -49,20 +49,18 @@ void draw_line(t_data *data)
 	double	beginX = data->player->x * data->minimap->box_width;
 	double	beginY = data->player->y * data->minimap->box_height;
 	double endX = data->player->x * data->minimap->box_width + cos(data->player->angle) * 30;
-	double endY = data->player->y * data->minimap->box_height + sin(data->player->angle) * 30;
+	double endY = data->player->y * data->minimap->box_height - sin(data->player->angle) * 30;
 	double deltaX = endX - beginX; // 10
 	double deltaY = endY - beginY; // 0
 	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
 //  pixels = sqrt((10 * 10) + (0 * 0)) = sqrt(100) = 10
 	deltaX /= pixels; // 1
 	deltaY /= pixels; // 0
-	double pixelX = beginX;
-	double pixelY = beginY;
 	while (pixels)
 	{
-	    mlx_pixel_put(data->mlx, data->win, pixelX, pixelY, 0x00FF0000);
-	    pixelX += deltaX;
-	    pixelY += deltaY;
+	    mlx_pixel_put(data->mlx, data->win, beginX, beginY, 0x00FF0000);
+	    beginX += deltaX;
+	    beginY += deltaY;
 	    --pixels;
 	}
 }
