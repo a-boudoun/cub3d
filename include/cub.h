@@ -97,6 +97,7 @@ typedef struct s_data
 	t_player	*player;
 	t_img		*img;
 	t_minimap	*minimap;
+	int			*rays;
 }				t_data;
 
 
@@ -106,7 +107,7 @@ bool		ft_strcmp(char *s1, char *s2);
 char		**gen_map(int fd, char *line);
 t_sprite	*check_elements_path(t_data *data);
 int			count(char *str, char c);
-void		rays(t_data *data, double angle);
+void		set_rays(t_data *data, double dist);
 bool		is_empty(char *line);
 void		draw_map(t_data *data);
 void		key_handler(int key, t_data *data);
