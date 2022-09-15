@@ -97,7 +97,7 @@ typedef struct s_data
 	t_player	*player;
 	t_img		*img;
 	t_minimap	*minimap;
-	int			*rays;
+	double		*rays;
 }				t_data;
 
 

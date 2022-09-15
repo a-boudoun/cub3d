@@ -42,6 +42,13 @@ int	key_press(int key,t_data *data)
 int next_frame(t_data *data)
 {
 	draw_map(data);
+	int i = 104;
+	while (i >= 100)
+	{
+		printf("|%.2f| ", data -> rays[i]);
+		i--;
+	}
+	puts("");
 	// mlx_clear_window(data -> mlx, data -> win);
 	return 0;
 }
