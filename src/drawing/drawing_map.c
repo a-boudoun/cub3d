@@ -46,25 +46,33 @@ void drw_player(t_data *data, int x_b, int y_b, int color)
 	}
 }
 
-void draw_line(t_data *data)
+void draw_line(t_data *data, double angle)
 {
+	if (data->player->angle + (PI / 6) < angle)
+			return;
 	double	beginX = data->player->x * data->minimap->box_width;
 	double	beginY = data->player->y * data->minimap->box_height;
-	double endX = data->player->x * data->minimap->box_width + cos(data->player->angle) * 50;
-	double endY = data->player->y * data->minimap->box_height - sin(data->player->angle) * 50;
+	double endX = data->player->x * data->minimap->box_width + cos(angle) * hypot(data->game->map_width * data->minimap->box_width, data->game->map_height * data->minimap->box_height);
+	double endY = data->player->y * data->minimap->box_height - sin(angle) * hypot(data->game->map_width * data->minimap->box_width, data->game->map_height * data->minimap->box_height);
 	double deltaX = endX - beginX; // 10
 	double deltaY = endY - beginY; // 0
 	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
-//  pixels = sqrt((10 * 10) + (0 * 0)) = sqrt(100) = 10
 	deltaX /= pixels; // 1
 	deltaY /= pixels; // 0
 	while (pixels)
 	{
-	    mlx_pixel_put(data->mlx, data->win, beginX, beginY, 0x00FF0000);
-	    beginX += deltaX;
-	    beginY += deltaY;
-	    --pixels;
+		if (data->game->map[(int)(beginY / data->minimap->box_height)][(int)(beginX / data->minimap->box_width)] != WALL)
+			mlx_pixel_put(data->mlx, data->win, beginX, beginY, 0x33FF0000);
+		else {
+			//printf("%f\n", hypot((beginX / data->minimap->box_width) - data->player->x, (beginY / data->minimap->box_height) - data->player->y));
+			set_rays(data, hypot((beginX / data->minimap->box_width) - data->player->x, (beginY / data->minimap->box_height) - data->player->y));
+			break;
+		}
+		beginX += deltaX;
+		beginY += deltaY;
+		--pixels;
 	}
+	draw_line(data, angle + 0.01);
 }
 
 void	draw_map(t_data *data)
@@ -89,5 +97,5 @@ void	draw_map(t_data *data)
 	}
 	drw_player(data, data->player->x * data->minimap->box_width, data->player->y * data->minimap->box_height, 0x000ED5);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
-	draw_line(data);
+	draw_line(data, data->player->angle - (PI / 6));
 }
