@@ -20,7 +20,7 @@ void	move_down(t_data *data)
 
 void	move_left(t_data *data)
 {
-	if (data->game->map[(int)(data->player->y - data->player->dy * PLAYER_SPEED)][(int)(data->player->x - data->player->dx * PLAYER_SPEED)] != WALL)
+	if (data->game->map[(int)(data->player->y - data->player->dx * PLAYER_SPEED)][(int)(data->player->x - data->player->dy * PLAYER_SPEED)] != WALL)
 	{
 		data->player->y -= data->player->dx * PLAYER_SPEED;
 		data->player->x -= data->player->dy * PLAYER_SPEED;
@@ -29,7 +29,7 @@ void	move_left(t_data *data)
 
 void	move_right(t_data *data)
 {
-	if (data->game->map[(int)(data->player->y + data->player->dy * PLAYER_SPEED)][(int)(data->player->x + data->player->dx * PLAYER_SPEED)] != WALL)
+	if (data->game->map[(int)(data->player->y + data->player->dx * PLAYER_SPEED)][(int)(data->player->x + data->player->dy * PLAYER_SPEED)] != WALL)
 	{
 		data->player->x += data->player->dy * PLAYER_SPEED;
 		data->player->y += data->player->dx * PLAYER_SPEED;
