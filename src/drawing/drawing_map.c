@@ -5,7 +5,9 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+
+	if (*(int*)dst != color)
+		*(unsigned int*)dst = color;
 }
 
 void drw_box(t_data *data, int x_b, int y_b, int color)
@@ -14,10 +16,10 @@ void drw_box(t_data *data, int x_b, int y_b, int color)
 	int y;
 
 	y = 0;
-	while (y <  WIN_HEIGHT / data->game->map_height -1)
+	while (y <  data->minimap->box_height)
 	{
 		x = 0;
-		while (x < WIN_WIDTH / data->game->map_width - 1)
+		while (x < data->minimap->box_width)
 		{
 			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
@@ -32,10 +34,10 @@ void drw_player(t_data *data, int x_b, int y_b, int color)
 	int y;
 
 	y = 0;
-	while (y < WIN_HEIGHT / 2 / data->game->map_height)
+	while (y < data->minimap->p_box_height)
 	{
 		x = 0;
-		while (x < WIN_WIDTH / 2 / data->game->map_width)
+		while (x < data->minimap->p_box_width)
 		{
 			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
@@ -48,8 +50,8 @@ void draw_line(t_data *data)
 {
 	double	beginX = data->player->x * data->minimap->box_width;
 	double	beginY = data->player->y * data->minimap->box_height;
-	double endX = data->player->x * data->minimap->box_width + cos(data->player->angle) * 30;
-	double endY = data->player->y * data->minimap->box_height - sin(data->player->angle) * 30;
+	double endX = data->player->x * data->minimap->box_width + cos(data->player->angle) * 50;
+	double endY = data->player->y * data->minimap->box_height - sin(data->player->angle) * 50;
 	double deltaX = endX - beginX; // 10
 	double deltaY = endY - beginY; // 0
 	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
@@ -70,9 +72,7 @@ void	draw_map(t_data *data)
 	int x;
 	int y;
 
-	data->img->img = mlx_new_image(data->mlx, (WIN_WIDTH), (WIN_HEIGHT));
-	data->img->addr = mlx_get_data_addr(data->img->img, &data->img->bits_per_pixel, \
-		&data->img->line_length, &data->img->endian);
+
 	y = 0;
 	while (data->game->map[y])
 	{

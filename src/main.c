@@ -60,6 +60,9 @@ int main(int ac, char **av)
 	data.sprite = check_elements_path(&data);
 	data.player = malloc(sizeof(t_player));
 	data.img = malloc(sizeof(t_img));
+	data.img->img = mlx_new_image(data.mlx, (WIN_WIDTH), (WIN_HEIGHT));
+	data.img->addr = mlx_get_data_addr(data.img->img, &data.img->bits_per_pixel, \
+		&data.img->line_length, &data.img->endian);
 	get_player_pos(&data);
 	data.player->angle = 60 * PI / 180;
 	data.player->dx = cos(data.player->angle);
