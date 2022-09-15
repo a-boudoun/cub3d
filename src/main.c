@@ -42,13 +42,8 @@ int	key_press(int key,t_data *data)
 int next_frame(t_data *data)
 {
 	draw_map(data);
-	int i = 104;
-	while (i >= 100)
-	{
-		printf("|%.2f| ", data -> rays[i]);
-		i--;
-	}
-	puts("");
+	draw_game(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 	// mlx_clear_window(data -> mlx, data -> win);
 	return 0;
 }
@@ -67,7 +62,10 @@ int main(int ac, char **av)
 	data.sprite = check_elements_path(&data);
 	data.player = malloc(sizeof(t_player));
 	data.img = malloc(sizeof(t_img));
-	data.img->img = mlx_new_image(data.mlx, (WIN_WIDTH), (WIN_HEIGHT));
+	data.img_game = malloc(sizeof(t_img));
+	data.img_game->img = mlx_new_image(data.mlx, WIN_WIDTH, WIN_HEIGHT);
+	data.img_game->addr = mlx_get_data_addr(data.img_game->img, &data.img_game->bits_per_pixel, &data.img_game->line_length, &data.img_game->endian);
+	data.img->img = mlx_new_image(data.mlx, (WIN_WIDTH / 4), (WIN_HEIGHT / 4));
 	data.img->addr = mlx_get_data_addr(data.img->img, &data.img->bits_per_pixel, \
 		&data.img->line_length, &data.img->endian);
 	get_player_pos(&data);
