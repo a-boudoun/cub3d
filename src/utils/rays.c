@@ -9,7 +9,7 @@ void	set_rays(t_data *data, double dist)
 		data->rays = malloc(sizeof(double) * 105);
 		ft_bzero(data->rays, sizeof(double) * 105);
 	}
-	data->rays[index++] = dist * WIN_HEIGHT / data->game->map_height;
+	data->rays[index++] = (dist) * WIN_HEIGHT / data->game->map_height;
 	if (index == 105)
 		index = 0;
 }
