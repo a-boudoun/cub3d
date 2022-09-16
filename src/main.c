@@ -62,25 +62,17 @@ int main(int ac, char **av)
 	data.player = malloc(sizeof(t_player));
 	data.img = malloc(sizeof(t_img));
 	data.img_game = malloc(sizeof(t_img));
+	get_player_pos(&data);
 	data.img_game->img = mlx_new_image(data.mlx, WIN_WIDTH, WIN_HEIGHT);
 	data.img_game->addr = mlx_get_data_addr(data.img_game->img, &data.img_game->bits_per_pixel, &data.img_game->line_length, &data.img_game->endian);
-	data.img->img = mlx_new_image(data.mlx, (WIN_WIDTH / 4), (WIN_HEIGHT / 4));
+	data.img->img = mlx_new_image(data.mlx, (WIN_WIDTH / 4 - (WIN_WIDTH / 4-(data.minimap->box_width*(data.game->map_width)))),
+		(WIN_HEIGHT / 4 - (WIN_HEIGHT/4 - data.game->map_height * data.minimap->box_height)));
 	data.img->addr = mlx_get_data_addr(data.img->img, &data.img->bits_per_pixel, \
 		&data.img->line_length, &data.img->endian);
-	get_player_pos(&data);
 	data.player->angle = 60 * PI / 180;
 	data.player->dx = cos(data.player->angle);
 	data.player->dy = sin(data.player->angle);
 	mlx_loop_hook(data.mlx, next_frame, &data);
-	// mlx_hook(data.mlx, 2, 1L<<0, key_press, &data);
-	// printf("WE == |%s|\n", data.game->west);
-	// printf("NO == |%s|\n", data.game->north);
-	// printf("SO == |%s|\n", data.game->south);
-	// printf("EA == |%s|\n", data.game->east);
-	// printf("C  == |%d|\n", data.game->color_ceiling);
-	// printf("F  == |%d|\n", data.game->color_floor);
-	// int i = 0;
-	//while (data.game -> map[i])
 	mlx_key_hook(data.win, &key_press, &data);
 	mlx_hook(data.win, 2, 1L<<0, &key_press, &data);
 	mlx_loop(data.mlx);

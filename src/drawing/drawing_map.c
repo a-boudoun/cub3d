@@ -62,7 +62,7 @@ void draw_line(t_data *data, double angle)
 	while (pixels)
 	{
 		if (data->game->map[(int)(beginY / data->minimap->box_height)][(int)(beginX / data->minimap->box_width)] != WALL)
-			my_mlx_pixel_put(data->img, beginX, beginY, 0xDD00FF00);
+			my_mlx_pixel_put(data->img, beginX, beginY, 0xDDFF00);
 		else {
 			//printf("%f\n", hypot((beginX / data->minimap->box_width) - data->player->x, (beginY / data->minimap->box_height) - data->player->y));
 			set_rays(data, hypot((beginX / data->minimap->box_width) - data->player->x, (beginY / data->minimap->box_height) - data->player->y));
@@ -79,7 +79,6 @@ void	draw_map(t_data *data)
 {
 	int x;
 	int y;
-
 
 	y = 0;
 	while (data->game->map[y])
