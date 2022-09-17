@@ -72,7 +72,7 @@ void draw_line(t_data *data, double angle)
 		beginY += deltaY;
 		--pixels;
 	}
-	draw_line(data, angle + 0.01);
+	draw_line(data, angle + (FOV / WIN_WIDTH));
 }
 
 void	draw_map(t_data *data)
