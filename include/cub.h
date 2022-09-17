@@ -37,6 +37,7 @@
 # define PI M_PI
 # define ROTATE_SPEED 0.09
 # define PLAYER_SPEED 0.2
+# define FOV (PI / 3)
 
 
 typedef struct	s_img{
