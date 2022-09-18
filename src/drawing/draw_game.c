@@ -24,7 +24,7 @@ void	draw_game(t_data *data)
 	data->img_game->addr = mlx_get_data_addr(data->img_game->img, &data->img_game->bits_per_pixel, &data->img_game->line_length, &data->img_game->endian);
 	while(i >= 0)
 	{
-		drw_column(data, col++, 0x909090, data->rays[i]);
+		drw_column(data, col++, 0x909090, data->rays_dist[i]);
 		i--;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img_game->img, 0, 0);

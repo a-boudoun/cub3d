@@ -48,8 +48,6 @@ void drw_player(t_data *data, int x_b, int y_b, int color)
 
 void draw_line(t_data *data, double angle)
 {
-	if (data->player->angle + (PI / 6) < angle)
-			return;
 	double	beginX = data->player->x * data->minimap->box_width;
 	double	beginY = data->player->y * data->minimap->box_height;
 	double endX = data->player->x * data->minimap->box_width + cos(angle) * hypot(data->game->map_width * data->minimap->box_width, data->game->map_height * data->minimap->box_height);
@@ -62,17 +60,33 @@ void draw_line(t_data *data, double angle)
 	while (pixels)
 	{
 		if (data->game->map[(int)(beginY / data->minimap->box_height)][(int)(beginX / data->minimap->box_width)] != WALL)
-			my_mlx_pixel_put(data->img, beginX, beginY, 0xDDFF00);
-		else {
-			//printf("%f\n", hypot((beginX / data->minimap->box_width) - data->player->x, (beginY / data->minimap->box_height) - data->player->y));
-			set_rays(data, hypot((beginX / data->minimap->box_width) - data->player->x, (beginY / data->minimap->box_height) - data->player->y));
+			my_mlx_pixel_put(data->img, beginX, beginY, 0xFF0000);
+		else
 			break;
-		}
 		beginX += deltaX;
 		beginY += deltaY;
 		--pixels;
 	}
-	draw_line(data, angle + (FOV / WIN_WIDTH));
+}
+
+static void	get_distance(t_data *data)
+{
+	double dx;
+	double dy;
+	int x;
+	int y;
+
+	data->rays_x = malloc(sizeof(double) * 900);
+	data->rays_y = malloc(sizeof(double) * 900);
+	ft_bzero(data->rays_x, sizeof(double) * 900);
+	ft_bzero(data->rays_y, sizeof(double) * 900);
+	x = (int)(data->player->x + 1);
+	y =    ;
+	while (data->game->map[(int)data->player->y][x] != WALL)
+		x++;
+		y += dy
+
+
 }
 
 void	draw_map(t_data *data)
@@ -97,5 +111,6 @@ void	draw_map(t_data *data)
 		y++;
 	}
 	drw_player(data, data->player->x * data->minimap->box_width, data->player->y * data->minimap->box_height, 0x000ED5);
+	get_distance(data);
 	draw_line(data, data->player->angle - (PI / 6));
 }
