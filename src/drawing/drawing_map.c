@@ -69,24 +69,49 @@ void draw_line(t_data *data, double angle)
 	}
 }
 
+
+double	get_horizontal(t_data *data, double angle)
+{
+	data+=0;
+	angle+=0;
+	return (100); // testing purpose
+}
+
+double	get_vertical(t_data *data, double angle)
+{
+	double x;
+	double y;
+	double y_move;
+
+	x = (int) data->player->x;
+	y = data->player->y;
+	y_move = tan(angle);
+	while (x < data->game->map_width && x >= 0 && y < data->game->map_height && y >= 0)
+	{
+		if (data->game->map[(int)y][(int)x] == WALL)
+			return (hypot(x - data->player->x, y - data->player->y));
+		x += 1 / tan(angle);
+		y += y_move;
+	}
+	return (0);
+}
+
 static void	get_distance(t_data *data)
 {
-	double dx;
-	double dy;
-	int x;
-	int y;
+	double	hr_hit;
+	double	vr_hit;
+	double	angle = data->player->angle - (FOV / 2);
 
-	data->rays_x = malloc(sizeof(double) * 900);
-	data->rays_y = malloc(sizeof(double) * 900);
-	ft_bzero(data->rays_x, sizeof(double) * 900);
-	ft_bzero(data->rays_y, sizeof(double) * 900);
-	x = (int)(data->player->x + 1);
-	y =    ;
-	while (data->game->map[(int)data->player->y][x] != WALL)
-		x++;
-		y += dy
-
-
+	while (angle < data->player->angle + (FOV / 2))
+	{
+		hr_hit = get_horizontal(data, angle); // returns horizontal wall hit distance
+		vr_hit = get_vertical(data, angle); // returns vertical wall hit distance
+		if (hr_hit < vr_hit)		//
+			set_rays(data, hr_hit);	// setrays() adds the lowest distance to data->rays
+		else						//
+			set_rays(data, vr_hit); //
+		angle += FOV / WIN_WIDTH; // The angle increment for each ray
+	}
 }
 
 void	draw_map(t_data *data)
@@ -112,5 +137,5 @@ void	draw_map(t_data *data)
 	}
 	drw_player(data, data->player->x * data->minimap->box_width, data->player->y * data->minimap->box_height, 0x000ED5);
 	get_distance(data);
-	draw_line(data, data->player->angle - (PI / 6));
+	draw_line(data, data->player->angle);
 }
