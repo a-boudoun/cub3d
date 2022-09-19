@@ -59,16 +59,12 @@ void draw_line(t_data *data, double angle)
 	deltaY /= pixels; // 0
 	while (pixels)
 	{
-		if (data->game->map[(int)(beginY / data->minimap->box_height)][(int)(beginX / data->minimap->box_width)] != WALL)
-			my_mlx_pixel_put(data->img, beginX, beginY, 0xFF0000);
-		else
-			break;
+		my_mlx_pixel_put(data->img, beginX, beginY, 0xFF0000);
 		beginX += deltaX;
 		beginY += deltaY;
 		--pixels;
 	}
 }
-
 
 double	get_vertical(t_data *data, double angle)
 {
@@ -91,12 +87,14 @@ static void	get_distance(t_data *data)
 
 	while (count--)
 	{
-		hr_hit = get_horizontal(data, angle); // returns horizontal wall hit distance
-		vr_hit = get_vertical(data, angle); // returns vertical wall hit distance
+		vr_hit = get_vertical_y(data, angle); // returns vertical wall hit distance
+		hr_hit = get_horizontal_x(data, angle); // returns horizontal wall hit distance
+		//printf("%f\n", (vr_hit > hr_hit) ? vr_hit : hr_hit);
 		if (hr_hit < vr_hit)		//
 			set_rays(data, hr_hit);	// setrays() adds the lowest distance to data->rays
 		else						//
 			set_rays(data, vr_hit); //
+		printf("angle%f\n", angle * (180/PI));
 		angle += FOV / WIN_WIDTH; // The angle increment for each ray
 	}
 }
