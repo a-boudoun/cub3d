@@ -70,39 +70,26 @@ void draw_line(t_data *data, double angle)
 }
 
 
-double	get_horizontal(t_data *data, double angle)
-{
-	data+=0;
-	angle+=0;
-	return (100); // testing purpose
-}
-
 double	get_vertical(t_data *data, double angle)
 {
-	double x;
-	double y;
-	double y_move;
 
-	x = (int) data->player->x;
-	y = data->player->y;
-	y_move = tan(angle);
-	while (x < data->game->map_width && x >= 0 && y < data->game->map_height && y >= 0)
-	{
-		if (data->game->map[(int)y][(int)x] == WALL)
-			return (hypot(x - data->player->x, y - data->player->y));
-		x += 1 / tan(angle);
-		y += y_move;
-	}
-	return (0);
+	return (INFINITY);
+}
+
+double	get_horizontal(t_data *data, double angle)
+{
+
+	return (INFINITY);
 }
 
 static void	get_distance(t_data *data)
 {
 	double	hr_hit;
 	double	vr_hit;
+	int		count = 900;
 	double	angle = data->player->angle - (FOV / 2);
 
-	while (angle < data->player->angle + (FOV / 2))
+	while (count--)
 	{
 		hr_hit = get_horizontal(data, angle); // returns horizontal wall hit distance
 		vr_hit = get_vertical(data, angle); // returns vertical wall hit distance
