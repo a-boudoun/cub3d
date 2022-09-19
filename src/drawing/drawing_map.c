@@ -87,8 +87,8 @@ static void	get_distance(t_data *data)
 
 	while (count--)
 	{
-		vr_hit = get_vertical_y(data, angle); // returns vertical wall hit distance
-		hr_hit = get_horizontal_x(data, angle); // returns horizontal wall hit distance
+		vr_hit = get_vertical(data, angle); // returns vertical wall hit distance
+		hr_hit = get_horizontal(data, angle); // returns horizontal wall hit distance
 		//printf("%f\n", (vr_hit > hr_hit) ? vr_hit : hr_hit);
 		if (hr_hit < vr_hit)		//
 			set_rays(data, hr_hit);	// setrays() adds the lowest distance to data->rays
