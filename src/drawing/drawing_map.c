@@ -69,8 +69,8 @@ double	get_vertical(t_data *data, double angle, int count)
 	int	dof, mx, my;
 	double rx,ry,x_move,y_move;
 	double aTan;
-	double px = data->player->x * data->minimap->box_width;
-	double py = data->player->y * data->minimap->box_height;
+	int px = data->player->x * data->minimap->box_width;
+	int py = data->player->y * data->minimap->box_height;
 	dof = 0;
 	aTan= tan(angle);
 	if (cos(angle) > 0.001)
@@ -106,7 +106,7 @@ double	get_vertical(t_data *data, double angle, int count)
 	}
 	data->rays_x[count] = rx;
 	data->rays_y[count] = ry;
-	return(hypot((rx-px), (ry-py)) * cos(-data->player->angle + angle));
+	return(hypot(((rx-px) / data->minimap->box_width), ((ry-py) / data->minimap->box_height)));
 }
 
 void	get_horizontal(t_data *data, double angle, int count)
@@ -114,8 +114,8 @@ void	get_horizontal(t_data *data, double angle, int count)
 	int	dof, mx, my;
 	double rx,ry,x_move,y_move;
 	double aTan;
-	double px = data->player->x * data->minimap->box_width;
-	double py = data->player->y * data->minimap->box_height;
+	int px = data->player->x * data->minimap->box_width;
+	int py = data->player->y * data->minimap->box_height;
 
 	dof = 0;
 	aTan= 1.0/tan(angle);
@@ -150,21 +150,21 @@ void	get_horizontal(t_data *data, double angle, int count)
 			dof++;
 		}
 	}
-	if (data->rays_dist[count] > hypot((rx-px), (ry-py)) * cos(-data->player->angle + angle))
+	if (data->rays_dist[count] > hypot(((rx-px) / data->minimap->box_width), ((ry-py) / data->minimap->box_height)))
 	{
 		data->rays_x[count] = rx;
 		data->rays_y[count] = ry;
-		data->rays_dist[count] = hypot((rx-px), (ry-py)) * cos(-data->player->angle + angle);
+		data->rays_dist[count] = hypot(((rx-px) / data->minimap->box_width), ((ry-py) / data->minimap->box_height));
 	}
 }
 
 static void	get_distance(t_data *data)
 {
 	double	vr_hit;
-	int		count = 0;
+	int		count = -1;
 	double	angle = data->player->angle - (FOV / 2);
 
-	while (count++ < 900)
+	while (++count < 900)
 	{
 		vr_hit = get_vertical(data, angle, count); // returns vertical wall hit distance
 		set_rays(data, vr_hit, count);	// setrays() adds the lowest distance to data->rays

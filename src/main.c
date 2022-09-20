@@ -41,15 +41,9 @@ int	key_press(int key,t_data *data)
 
 int next_frame(t_data *data)
 {
-	char x[40];
-	char y[40];
 	draw_map(data);
 	draw_game(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
-	sprintf(x, "x = %f", data -> player -> x);
-	sprintf(y, "y = %f", data -> player -> y);
-	mlx_string_put(data->mlx, data->win, 10, 10, 0x00FF0000, ft_strjoin("px = ", x));
-	mlx_string_put(data->mlx, data->win, 10, 30, 0x00FF0000, ft_strjoin("py = ", y));
 	return 0;
 }
 
