@@ -41,9 +41,15 @@ int	key_press(int key,t_data *data)
 
 int next_frame(t_data *data)
 {
+	char x[40];
+	char y[40];
 	draw_map(data);
 	draw_game(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+	sprintf(x, "x = %f", data -> player -> x);
+	sprintf(y, "y = %f", data -> player -> y);
+	mlx_string_put(data->mlx, data->win, 10, 10, 0x00FF0000, ft_strjoin("px = ", x));
+	mlx_string_put(data->mlx, data->win, 10, 30, 0x00FF0000, ft_strjoin("py = ", y));
 	return 0;
 }
 
@@ -69,6 +75,10 @@ int main(int ac, char **av)
 	data.img->addr = mlx_get_data_addr(data.img->img, &data.img->bits_per_pixel, \
 		&data.img->line_length, &data.img->endian);
 	data.player->angle = 60 * PI / 180;
+	data.rays_x = malloc(sizeof(double) * WIN_WIDTH);
+	data.rays_y = malloc(sizeof(double) * WIN_WIDTH);
+	ft_bzero(data.rays_x, sizeof(double) * WIN_WIDTH);
+	ft_bzero(data.rays_y, sizeof(double) * WIN_WIDTH);
 	data.player->dx = cos(data.player->angle);
 	data.player->dy = sin(data.player->angle);
 	mlx_loop_hook(data.mlx, next_frame, &data);

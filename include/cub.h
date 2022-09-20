@@ -35,8 +35,8 @@
 # define WIN_WIDTH 900
 # define WIN_HEIGHT 700
 # define PI M_PI
-# define ROTATE_SPEED 0.09
-# define PLAYER_SPEED 0.2
+# define ROTATE_SPEED 0.07
+# define PLAYER_SPEED 0.1
 # define FOV (PI / 3)
 
 
@@ -100,8 +100,8 @@ typedef struct s_data
 	t_img		*img_game;
 	t_minimap	*minimap;
 	double		*rays_dist;
-	double			*rays_x;
-	double			*rays_y;
+	double		*rays_x;
+	double		*rays_y;
 }				t_data;
 
 
@@ -111,7 +111,7 @@ bool		ft_strcmp(char *s1, char *s2);
 char		**gen_map(int fd, char *line);
 t_sprite	*check_elements_path(t_data *data);
 int			count(char *str, char c);
-void		set_rays(t_data *data, double dist);
+void		set_rays(t_data *data, double dist, int index);
 bool		is_empty(char *line);
 void		draw_map(t_data *data);
 void		key_handler(int key, t_data *data);
