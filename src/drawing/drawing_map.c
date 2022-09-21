@@ -1,6 +1,6 @@
 #include"cub.h"
 
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *data, int x, int y, unsigned int color)
 {
 	char	*dst;
 
@@ -14,10 +14,10 @@ void drw_box(t_data *data, int x_b, int y_b, int color)
 	int y;
 
 	y = 0;
-	while (y <  data->minimap->box_height - 1)
+	while (y <  data->minimap->box_height)
 	{
 		x = 0;
-		while (x < data->minimap->box_width - 1)
+		while (x < data->minimap->box_width)
 		{
 			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
@@ -57,7 +57,7 @@ void draw_line(t_data *data, int count)
 	deltaY /= pixels; // 0
 	while (pixels)
 	{
-		my_mlx_pixel_put(data->img, beginX, beginY, 0xFF0000);
+		my_mlx_pixel_put(data->img, beginX, beginY, 0xA10000);
 		beginX += deltaX;
 		beginY += deltaY;
 		--pixels;
@@ -188,9 +188,9 @@ void	draw_map(t_data *data)
 		while (data->game->map[y][x])
 		{
 			if (data->game->map[y][x] == WALL)
-				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0xFCB000);
+				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0x8758FF);
 			else if (data->game->map[y][x] == EMPTY || ft_strchr("NSWE", data->game->map[y][x]))
-				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0xFFFFFF);
+				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0xD2DAFF);
 			else
 				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0xFF000000);
 			x++;

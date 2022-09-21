@@ -118,7 +118,7 @@ void		draw_map(t_data *data);
 void		key_handler(int key, t_data *data);
 void		get_player_pos(t_data *data);
 void		draw_game(t_data *data);
-void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void		my_mlx_pixel_put(t_img *data, int x, int y, unsigned int color);
 
 #endif
 
