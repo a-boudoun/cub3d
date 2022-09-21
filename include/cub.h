@@ -38,6 +38,7 @@
 # define ROTATE_SPEED 0.07
 # define PLAYER_SPEED 0.1
 # define FOV (PI / 3)
+# define BOX_SIZE 8
 
 
 typedef struct	s_img{
