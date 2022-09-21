@@ -49,7 +49,7 @@ static void	map_fix(size_t len, char **map)
 	{
 		if (ft_strlen(map[i]) < len)
 		{
-			tmp = malloc(sizeof(char) * (len - ft_strlen(map[i])));
+			tmp = malloc(sizeof(char) * (1 + len - ft_strlen(map[i])));
 			ft_memset(tmp, ' ', len - ft_strlen(map[i]));
 			tmp[len - ft_strlen(map[i])] = 0;
 			free(map[i]);
