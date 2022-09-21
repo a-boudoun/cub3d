@@ -5,7 +5,7 @@ static void	init_minimap(t_data *data)
 	data->minimap = malloc(sizeof(t_minimap));
 	ft_bzero(data->minimap, sizeof(t_minimap));
 	data->minimap->p_box_height = WIN_HEIGHT / 12 / data->game->map_height;
-	data->minimap->p_box_width = WIN_WIDTH / 10 / data->game->map_width;
+	data->minimap->p_box_width = WIN_WIDTH / 12 / data->game->map_width;
 	data->minimap->box_height = WIN_HEIGHT / 4 / data->game->map_height;
 	data->minimap->box_width = WIN_WIDTH / 4 / data->game->map_width;
 }

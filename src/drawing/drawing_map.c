@@ -53,6 +53,7 @@ void draw_line(t_data *data, int count)
 	double deltaX = endX - beginX; // 10
 	double deltaY = endY - beginY; // 0
 	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+	//printf("pixels = %d\n", pixels);
 	deltaX /= pixels; // 1
 	deltaY /= pixels; // 0
 	while (pixels)
@@ -104,9 +105,10 @@ double	get_vertical(t_data *data, double angle, int count)
 			dof++;
 		}
 	}
+	//printf("distance vertical[%f] = %f\n", (angle * 180) / PI, hypot((rx-px), (ry-py)));
 	data->rays_x[count] = rx;
 	data->rays_y[count] = ry;
-	return(hypot(((rx-px) / data->minimap->box_width), ((ry-py) / data->minimap->box_height)));
+	return(hypot((rx-px), (ry-py)));
 }
 
 void	get_horizontal(t_data *data, double angle, int count)
@@ -150,11 +152,12 @@ void	get_horizontal(t_data *data, double angle, int count)
 			dof++;
 		}
 	}
-	if (data->rays_dist[count] > hypot(((rx-px) / data->minimap->box_width), ((ry-py) / data->minimap->box_height)))
+	//printf("distance horizontal[%f] = %f\n",((angle * 180) / PI), hypot((rx-px), (ry-py)));
+	if (data->rays_dist[count] > hypot((rx-px), (ry-py)))
 	{
 		data->rays_x[count] = rx;
 		data->rays_y[count] = ry;
-		data->rays_dist[count] = hypot(((rx-px) / data->minimap->box_width), ((ry-py) / data->minimap->box_height));
+		data->rays_dist[count] = hypot((rx-px), (ry-py));
 	}
 }
 

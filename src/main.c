@@ -42,7 +42,7 @@ int	key_press(int key,t_data *data)
 int next_frame(t_data *data)
 {
 	draw_map(data);
-	draw_game(data);
+	//draw_game(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 	return 0;
 }

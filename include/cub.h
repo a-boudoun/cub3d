@@ -99,7 +99,7 @@ typedef struct s_data
 	t_img		*img;
 	t_img		*img_game;
 	t_minimap	*minimap;
-	double		*rays_dist;
+	int		*rays_dist;
 	double		*rays_x;
 	double		*rays_y;
 }				t_data;
