@@ -53,7 +53,7 @@ void draw_line(t_data *data, int count)
 	double deltaX = endX - beginX; // 10
 	double deltaY = endY - beginY; // 0
 	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
-	printf("pixels = %d\n", pixels);
+	//printf("pixels = %d\n", pixels);
 	deltaX /= pixels; // 1
 	deltaY /= pixels; // 0
 	while (pixels)
@@ -105,7 +105,7 @@ double	get_vertical(t_data *data, double angle, int count)
 			dof++;
 		}
 	}
-	printf("distance vertical = %f\n", hypot((rx-px), (ry-py)));
+	//printf("distance vertical[%f] = %f\n", (angle * 180) / PI, hypot((rx-px), (ry-py)));
 	data->rays_x[count] = rx;
 	data->rays_y[count] = ry;
 	return(hypot((rx-px), (ry-py)));
@@ -152,7 +152,7 @@ void	get_horizontal(t_data *data, double angle, int count)
 			dof++;
 		}
 	}
-	printf("distance horisontal = %f\n", hypot((rx-px), (ry-py)));
+	//printf("distance horizontal[%f] = %f\n",((angle * 180) / PI), hypot((rx-px), (ry-py)));
 	if (data->rays_dist[count] > hypot((rx-px), (ry-py)))
 	{
 		data->rays_x[count] = rx;
@@ -164,17 +164,17 @@ void	get_horizontal(t_data *data, double angle, int count)
 static void	get_distance(t_data *data)
 {
 	double	vr_hit;
-	int		count = 0;
+	int		count = -1;
 	double	angle = data->player->angle - (FOV / 2);
 
-	//while (++count < 900)
-	//{
+	while (++count < 900)
+	{
 		vr_hit = get_vertical(data, angle, count); // returns vertical wall hit distance
 		set_rays(data, vr_hit, count);	// setrays() adds the lowest distance to data->rays
 		get_horizontal(data, angle, count); // returns horizontal wall hit distance
 		draw_line(data, count);
-		//angle += FOV / WIN_WIDTH; // The angle increment for each ray
-	//}
+		angle += FOV / WIN_WIDTH; // The angle increment for each ray
+	}
 }
 
 void	draw_map(t_data *data)
