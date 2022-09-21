@@ -36,7 +36,7 @@
 # define WIN_HEIGHT 700
 # define PI M_PI
 # define ROTATE_SPEED 0.07
-# define PLAYER_SPEED 0.1
+# define PLAYER_SPEED 0.3
 # define FOV (PI / 3)
 # define BOX_SIZE 8
 
@@ -100,7 +100,7 @@ typedef struct s_data
 	t_img		*img;
 	t_img		*img_game;
 	t_minimap	*minimap;
-	int		*rays_dist;
+	double		*rays_dist;
 	double		*rays_x;
 	double		*rays_y;
 }				t_data;

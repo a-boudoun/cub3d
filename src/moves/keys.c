@@ -2,37 +2,45 @@
 
 void	move_up(t_data *data)
 {
-	if (data->game->map[(int)(data->player->y - data->player->dy * PLAYER_SPEED)][(int)(data->player->x + data->player->dx * PLAYER_SPEED)] != WALL)
+	int px = (int)((data->player->x + data->player->dx * PLAYER_SPEED) / BOX_SIZE);
+	int py = (int)((data->player->y - data->player->dy * PLAYER_SPEED) / BOX_SIZE);
+	if (data->game->map[py][px] != WALL)
 	{
-		data->player->y -= data->player->dy * PLAYER_SPEED;
-		data->player->x += data->player->dx * PLAYER_SPEED;
+		data->player->y -= (data->player->dy * PLAYER_SPEED) * BOX_SIZE;
+		data->player->x += (data->player->dx * PLAYER_SPEED) * BOX_SIZE;
 	}
 }
 
 void	move_down(t_data *data)
 {
-	if (data->game->map[(int)(data->player->y + data->player->dy * PLAYER_SPEED)][(int)(data->player->x - data->player->dx * PLAYER_SPEED)] != WALL)
+	int px = (int)((data->player->x - data->player->dx * PLAYER_SPEED) / BOX_SIZE);
+	int py = (int)((data->player->y + data->player->dy * PLAYER_SPEED) / BOX_SIZE);
+	if (data->game->map[py][px] != WALL)
 	{
-		data->player->y += data->player->dy * PLAYER_SPEED;
-		data->player->x -= data->player->dx * PLAYER_SPEED;
+		data->player->y += (data->player->dy * PLAYER_SPEED) * BOX_SIZE;
+		data->player->x -= (data->player->dx * PLAYER_SPEED) * BOX_SIZE;
 	}
 }
 
 void	move_left(t_data *data)
 {
-	if (data->game->map[(int)(data->player->y - data->player->dx * PLAYER_SPEED)][(int)(data->player->x - data->player->dy * PLAYER_SPEED)] != WALL)
+	int px = (int)((data->player->x - data->player->dy * PLAYER_SPEED) / BOX_SIZE);
+	int py = (int)(((data->player->y - data->player->dx * PLAYER_SPEED)) / BOX_SIZE);
+	if (data->game->map[py][px] != WALL)
 	{
-		data->player->y -= data->player->dx * PLAYER_SPEED;
-		data->player->x -= data->player->dy * PLAYER_SPEED;
+		data->player->y -= (data->player->dx * PLAYER_SPEED) * BOX_SIZE;
+		data->player->x -= (data->player->dy * PLAYER_SPEED) * BOX_SIZE;
 	}
 }
 
 void	move_right(t_data *data)
 {
-	if (data->game->map[(int)(data->player->y + data->player->dx * PLAYER_SPEED)][(int)(data->player->x + data->player->dy * PLAYER_SPEED)] != WALL)
+	int px = (int)((data->player->x + data->player->dy * PLAYER_SPEED) / BOX_SIZE);
+	int py = (int)(((data->player->y + data->player->dx * PLAYER_SPEED)) / BOX_SIZE);
+	if (data->game->map[py][px] != WALL)
 	{
-		data->player->x += data->player->dy * PLAYER_SPEED;
-		data->player->y += data->player->dx * PLAYER_SPEED;
+		data->player->x += (data->player->dy * PLAYER_SPEED) * BOX_SIZE;
+		data->player->y += (data->player->dx * PLAYER_SPEED) * BOX_SIZE;
 	}
 
 }

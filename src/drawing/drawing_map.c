@@ -14,10 +14,10 @@ void drw_box(t_data *data, int x_b, int y_b, int color)
 	int y;
 
 	y = 0;
-	while (y <  data->minimap->box_height)
+	while (y <  data->minimap->box_height - 1)
 	{
 		x = 0;
-		while (x < data->minimap->box_width)
+		while (x < data->minimap->box_width - 1)
 		{
 			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
@@ -46,14 +46,13 @@ void drw_player(t_data *data, int x_b, int y_b, int color)
 
 void draw_line(t_data *data, int count)
 {
-	double	beginX = data->player->x * data->minimap->box_width;
-	double	beginY = data->player->y * data->minimap->box_height;
+	double	beginX = data->player->x;
+	double	beginY = data->player->y;
 	double endX = data->rays_x[count];
 	double endY = data->rays_y[count];
 	double deltaX = endX - beginX; // 10
 	double deltaY = endY - beginY; // 0
 	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
-	//printf("pixels = %d\n", pixels);
 	deltaX /= pixels; // 1
 	deltaY /= pixels; // 0
 	while (pixels)
@@ -70,8 +69,8 @@ double	get_vertical(t_data *data, double angle, int count)
 	int	dof, mx, my;
 	double rx,ry,x_move,y_move;
 	double aTan;
-	int px = data->player->x * data->minimap->box_width;
-	int py = data->player->y * data->minimap->box_height;
+	int px = data->player->x;
+	int py = data->player->y;
 	dof = 0;
 	aTan= tan(angle);
 	if (cos(angle) > 0.001)
@@ -108,7 +107,7 @@ double	get_vertical(t_data *data, double angle, int count)
 	//printf("distance vertical[%f] = %f\n", (angle * 180) / PI, hypot((rx-px), (ry-py)));
 	data->rays_x[count] = rx;
 	data->rays_y[count] = ry;
-	return(hypot((rx-px), (ry-py)));
+	return(hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)));
 }
 
 void	get_horizontal(t_data *data, double angle, int count)
@@ -116,8 +115,8 @@ void	get_horizontal(t_data *data, double angle, int count)
 	int	dof, mx, my;
 	double rx,ry,x_move,y_move;
 	double aTan;
-	int px = data->player->x * data->minimap->box_width;
-	int py = data->player->y * data->minimap->box_height;
+	int px = data->player->x;
+	int py = data->player->y;
 
 	dof = 0;
 	aTan= 1.0/tan(angle);
@@ -153,11 +152,11 @@ void	get_horizontal(t_data *data, double angle, int count)
 		}
 	}
 	//printf("distance horizontal[%f] = %f\n",((angle * 180) / PI), hypot((rx-px), (ry-py)));
-	if (data->rays_dist[count] > hypot((rx-px), (ry-py)))
+	if (data->rays_dist[count] > hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)))
 	{
 		data->rays_x[count] = rx;
 		data->rays_y[count] = ry;
-		data->rays_dist[count] = hypot((rx-px), (ry-py));
+		data->rays_dist[count] = hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle));
 	}
 }
 
