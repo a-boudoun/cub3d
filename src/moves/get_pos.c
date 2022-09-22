@@ -6,12 +6,7 @@ static void	init_minimap(t_data *data)
 	ft_bzero(data->minimap, sizeof(t_minimap));
 	data->minimap->p_box_height = BOX_SIZE / 6;
 	data->minimap->p_box_width = BOX_SIZE / 6;
-	data->minimap->box_height = BOX_SIZE / (1 + (bool) (data->game->map_height * BOX_SIZE > WIN_HEIGHT));
-	data->minimap->box_width = BOX_SIZE / (1 + (bool) (data->game->map_width * BOX_SIZE > WIN_WIDTH));
-	if (data->minimap->box_height > data->minimap->box_width)
-		data->minimap->box_height = data->minimap->box_width;
-	else
-		data->minimap->box_width = data->minimap->box_height;
+	data->minimap->box = BOX_SIZE / (1 + (bool) (data->game->map_height * BOX_SIZE > WIN_HEIGHT));
 }
 
 void	get_player_pos(t_data *data)

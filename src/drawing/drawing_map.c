@@ -14,10 +14,10 @@ void drw_box(t_data *data, int x_b, int y_b, int color)
 	int y;
 
 	y = 0;
-	while (y <  data->minimap->box_height)
+	while (y <  data->minimap->box)
 	{
 		x = 0;
-		while (x < data->minimap->box_width)
+		while (x < data->minimap->box)
 		{
 			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
@@ -75,16 +75,16 @@ double	get_vertical(t_data *data, double angle, int count)
 	aTan= tan(angle);
 	if (cos(angle) > 0.001)
 	{
-		rx = ((px / data->minimap->box_width)* data->minimap->box_width)  + data->minimap->box_width;
+		rx = ((px / data->minimap->box)* data->minimap->box)  + data->minimap->box;
 		ry = (px - rx)*aTan + py;
-		x_move = data->minimap->box_width;
+		x_move = data->minimap->box;
 		y_move = -x_move*aTan;
 	}
 	else if (cos(angle) < -0.001)
 	{
-		rx = ((px / data->minimap->box_width)* data->minimap->box_width) - 0.0001;
+		rx = ((px / data->minimap->box)* data->minimap->box) - 0.0001;
 		ry = (px - rx)*aTan + py;
-		x_move = -data->minimap->box_width;
+		x_move = -data->minimap->box;
 		y_move = -x_move*aTan;
 	}
 	else
@@ -93,8 +93,8 @@ double	get_vertical(t_data *data, double angle, int count)
 	}
 	while (dof < data->game->map_width)
 	{
-		mx = (int)(rx) / data->minimap->box_width;
-		my = (int)(ry) / data->minimap->box_height;
+		mx = (int)(rx) / data->minimap->box;
+		my = (int)(ry) / data->minimap->box;
 		if (mx >= 0 && mx < data->game->map_width && my < data->game->map_height && my >= 0 && data->game->map[my][mx] == '1')
 			dof = data->game->map_width;
 		else
@@ -122,16 +122,16 @@ void	get_horizontal(t_data *data, double angle, int count)
 	aTan= 1.0/tan(angle);
 	if (sin(angle) > 0.001)
 	{
-		ry = ((py / data->minimap->box_height)* data->minimap->box_height)  - 0.0001;
+		ry = ((py / data->minimap->box)* data->minimap->box)  - 0.0001;
 		rx = (py - ry)*aTan + px;
-		y_move = -data->minimap->box_height;
+		y_move = -data->minimap->box;
 		x_move = -y_move*aTan;
 	}
 	else if (sin(angle) < -0.001)
 	{
-		ry = ((py / data->minimap->box_height)* data->minimap->box_height) + data->minimap->box_height;
+		ry = ((py / data->minimap->box)* data->minimap->box) + data->minimap->box;
 		rx = (py - ry)*aTan + px;
-		y_move = data->minimap->box_height;
+		y_move = data->minimap->box;
 		x_move = -y_move*aTan;
 	}
 	else
@@ -140,8 +140,8 @@ void	get_horizontal(t_data *data, double angle, int count)
 	}
 	while (dof < data->game->map_height)
 	{
-		mx = (int)(rx) / data->minimap->box_width;
-		my = (int)(ry) / data->minimap->box_height;
+		mx = (int)(rx) / data->minimap->box;
+		my = (int)(ry) / data->minimap->box;
 		if (mx >= 0 && mx < data->game->map_width && my < data->game->map_height && my >= 0 && data->game->map[my][mx] == '1')
 			dof = data->game->map_height;
 		else
@@ -188,15 +188,15 @@ void	draw_map(t_data *data)
 		while (data->game->map[y][x])
 		{
 			if (data->game->map[y][x] == WALL)
-				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0x8758FF);
+				drw_box(data, x * data->minimap->box, y * data->minimap->box, 0x8758FF);
 			else if (data->game->map[y][x] == EMPTY || ft_strchr("NSWE", data->game->map[y][x]))
-				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0xD2DAFF);
+				drw_box(data, x * data->minimap->box, y * data->minimap->box, 0xD2DAFF);
 			else
-				drw_box(data, x * data->minimap->box_width, y * data->minimap->box_height, 0xFF000000);
+				drw_box(data, x * data->minimap->box, y * data->minimap->box, 0xFF000000);
 			x++;
 		}
 		y++;
 	}
-	drw_player(data, data->player->x * data->minimap->box_width, data->player->y * data->minimap->box_height, 0x000ED5);
+	drw_player(data, data->player->x * data->minimap->box, data->player->y * data->minimap->box, 0x000ED5);
 	get_distance(data);
 }

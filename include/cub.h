@@ -63,8 +63,7 @@ typedef struct s_sprite{
 typedef struct minimap{
 	int		p_box_height;
 	int		p_box_width;
-	int		box_height;
-	int		box_width;
+	int		box;
 }				t_minimap;
 
 typedef struct s_player
