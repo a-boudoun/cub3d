@@ -2,45 +2,49 @@
 
 void	move_up(t_data *data)
 {
-	int px = (int)((data->player->x + data->player->dx * PLAYER_SPEED) / BOX_SIZE);
-	int py = (int)((data->player->y - data->player->dy * PLAYER_SPEED) / BOX_SIZE);
-	if (data->game->map[py][px] != WALL)
+	double px = ((data->player->x + data->player->dx * PLAYER_SPEED));
+	double py = ((data->player->y - data->player->dy * PLAYER_SPEED));
+	printf("WALL %f\nP %f\n", move_dist(data, data->player->angle), hypot(px - data->player->x, py - data->player->y));
+	if (move_dist(data, data->player->angle) - 1 > hypot(px - data->player->x, py - data->player->y))
 	{
-		data->player->y -= (data->player->dy * PLAYER_SPEED) * BOX_SIZE;
-		data->player->x += (data->player->dx * PLAYER_SPEED) * BOX_SIZE;
+		data->player->y -= (data->player->dy * PLAYER_SPEED);
+		data->player->x += (data->player->dx * PLAYER_SPEED);
 	}
 }
 
 void	move_down(t_data *data)
 {
-	int px = (int)((data->player->x - data->player->dx * PLAYER_SPEED) / BOX_SIZE);
-	int py = (int)((data->player->y + data->player->dy * PLAYER_SPEED) / BOX_SIZE);
-	if (data->game->map[py][px] != WALL)
+	double px = ((data->player->x - data->player->dx * PLAYER_SPEED));
+	double py = ((data->player->y + data->player->dy * PLAYER_SPEED));
+	printf("WALL %f\nP %f\n", move_dist(data, data->player->angle + PI), hypot(px - data->player->x, py - data->player->y));
+	if ((move_dist(data, data->player->angle + PI) - 1 >  hypot(px - data->player->x, py - data->player->y)))
 	{
-		data->player->y += (data->player->dy * PLAYER_SPEED) * BOX_SIZE;
-		data->player->x -= (data->player->dx * PLAYER_SPEED) * BOX_SIZE;
+		data->player->y += (data->player->dy * PLAYER_SPEED);
+		data->player->x -= (data->player->dx * PLAYER_SPEED);
 	}
 }
 
 void	move_left(t_data *data)
 {
-	int px = (int)((data->player->x - data->player->dy * PLAYER_SPEED) / BOX_SIZE);
-	int py = (int)(((data->player->y - data->player->dx * PLAYER_SPEED)) / BOX_SIZE);
-	if (data->game->map[py][px] != WALL)
+	double px = ((data->player->x - data->player->dy * PLAYER_SPEED));
+	double py = (((data->player->y - data->player->dx * PLAYER_SPEED)));
+	printf("WALL %f\nP %f\n", move_dist(data, data->player->angle + PI / 2), hypot(px - data->player->x, py - data->player->y));
+	if ((move_dist(data, data->player->angle + (PI / 2)) - 1 >  hypot(px - data->player->x, py - data->player->y)))
 	{
-		data->player->y -= (data->player->dx * PLAYER_SPEED) * BOX_SIZE;
-		data->player->x -= (data->player->dy * PLAYER_SPEED) * BOX_SIZE;
+		data->player->y -= (data->player->dx * PLAYER_SPEED);
+		data->player->x -= (data->player->dy * PLAYER_SPEED);
 	}
 }
 
 void	move_right(t_data *data)
 {
-	int px = (int)((data->player->x + data->player->dy * PLAYER_SPEED) / BOX_SIZE);
-	int py = (int)(((data->player->y + data->player->dx * PLAYER_SPEED)) / BOX_SIZE);
-	if (data->game->map[py][px] != WALL)
+	double px = ((data->player->x + data->player->dy * PLAYER_SPEED));
+	double py = (((data->player->y + data->player->dx * PLAYER_SPEED)));
+	printf("WALL %f\nP %f\n", move_dist(data, data->player->angle + (3 * PI) / 2), hypot(px - data->player->x, py - data->player->y));
+	if ((move_dist(data, data->player->angle + (3 * PI) / 2) - 1 >  hypot(px - data->player->x, py - data->player->y)))
 	{
-		data->player->x += (data->player->dy * PLAYER_SPEED) * BOX_SIZE;
-		data->player->y += (data->player->dx * PLAYER_SPEED) * BOX_SIZE;
+		data->player->x += (data->player->dy * PLAYER_SPEED);
+		data->player->y += (data->player->dx * PLAYER_SPEED);
 	}
 
 }

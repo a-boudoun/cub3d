@@ -36,7 +36,7 @@
 # define WIN_HEIGHT 700
 # define PI M_PI
 # define ROTATE_SPEED 0.07
-# define PLAYER_SPEED 0.3
+# define PLAYER_SPEED 2
 # define FOV (PI / 3)
 # define BOX_SIZE 6
 
@@ -117,6 +117,7 @@ void		draw_map(t_data *data);
 void		key_handler(int key, t_data *data);
 void		get_player_pos(t_data *data);
 void		draw_game(t_data *data);
+double		move_dist(t_data *data, double angle);
 void		my_mlx_pixel_put(t_img *data, int x, int y, unsigned int color);
 
 #endif

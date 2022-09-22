@@ -68,7 +68,7 @@ int main(int ac, char **av)
 	data.img->img = mlx_new_image(data.mlx, (data.minimap->box*(data.game->map_width)), data.game->map_height * data.minimap->box);
 	data.img->addr = mlx_get_data_addr(data.img->img, &data.img->bits_per_pixel, \
 		&data.img->line_length, &data.img->endian);
-	data.player->angle = 90 * PI / 180;
+	data.player->angle = 60 * PI / 180;
 	data.rays_x = malloc(sizeof(double) * WIN_WIDTH);
 	data.rays_y = malloc(sizeof(double) * WIN_WIDTH);
 	ft_bzero(data.rays_x, sizeof(double) * WIN_WIDTH);

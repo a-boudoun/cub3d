@@ -104,13 +104,15 @@ double	get_vertical(t_data *data, double angle, int count)
 			dof++;
 		}
 	}
-	//printf("distance vertical[%f] = %f\n", (angle * 180) / PI, hypot((rx-px), (ry-py)));
-	data->rays_x[count] = rx;
-	data->rays_y[count] = ry;
+	if (count != -1)
+	{
+		data->rays_x[count] = rx;
+		data->rays_y[count] = ry;
+	}
 	return(hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)));
 }
 
-void	get_horizontal(t_data *data, double angle, int count)
+double	get_horizontal(t_data *data, double angle, int count)
 {
 	int	dof, mx, my;
 	double rx,ry,x_move,y_move;
@@ -151,13 +153,13 @@ void	get_horizontal(t_data *data, double angle, int count)
 			dof++;
 		}
 	}
-	//printf("distance horizontal[%f] = %f\n",((angle * 180) / PI), hypot((rx-px), (ry-py)));
-	if (data->rays_dist[count] > hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)))
+	if (count != -1 && data->rays_dist[count] > hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)))
 	{
 		data->rays_x[count] = rx;
 		data->rays_y[count] = ry;
 		data->rays_dist[count] = hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle));
 	}
+	return (hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)));
 }
 
 static void	get_distance(t_data *data)
@@ -171,7 +173,6 @@ static void	get_distance(t_data *data)
 		vr_hit = get_vertical(data, angle, count); // returns vertical wall hit distance
 		set_rays(data, vr_hit, count);	// setrays() adds the lowest distance to data->rays
 		get_horizontal(data, angle, count); // returns horizontal wall hit distance
-		draw_line(data, count);
 		angle += FOV / WIN_WIDTH; // The angle increment for each ray
 	}
 }
@@ -199,4 +200,8 @@ void	draw_map(t_data *data)
 	}
 	drw_player(data, data->player->x ,data->player->y, 0x000ED5);
 	get_distance(data);
+	draw_line(data, 0);
+	draw_line(data, 899);
+
+
 }

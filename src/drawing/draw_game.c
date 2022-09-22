@@ -37,6 +37,8 @@ void	draw_game(t_data *data)
 	while(i >= 0)
 	{
 		int dist = WIN_HEIGHT *  BOX_SIZE / (data->rays_dist[i] + 0.0001);
+		if (dist >= WIN_HEIGHT)
+			dist = WIN_HEIGHT - 1;
 		//unsigned transparency = (dist * 0xFF / (WIN_HEIGHT));
 		drw_column(data, col++, 0x878787, dist);
 		i--;
