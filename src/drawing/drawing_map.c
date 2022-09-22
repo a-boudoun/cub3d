@@ -57,7 +57,7 @@ void draw_line(t_data *data, int count)
 	deltaY /= pixels; // 0
 	while (pixels)
 	{
-		my_mlx_pixel_put(data->img, beginX, beginY, 0xA10000);
+		my_mlx_pixel_put(data->img, beginX, beginY, 0xF7ECDE);
 		beginX += deltaX;
 		beginY += deltaY;
 		--pixels;
@@ -197,6 +197,6 @@ void	draw_map(t_data *data)
 		}
 		y++;
 	}
-	drw_player(data, data->player->x * data->minimap->box_width, data->player->y * data->minimap->box_height, 0x000ED5);
+	drw_player(data, data->player->x ,data->player->y, 0x000ED5);
 	get_distance(data);
 }
