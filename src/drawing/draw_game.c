@@ -22,7 +22,7 @@ void	drw_column(t_data *data, int y, double dist)
 	x = ((WIN_HEIGHT - dist) / 2);
 	while (x <  (WIN_HEIGHT + ((int)(dist + .5))) / 2)
 	{
-		my_mlx_pixel_put(data->img_game, y, x, 0x878787);
+		my_mlx_pixel_put(data->img_game, y, x, get_pixel(data->sprite->north, x, y, dist));
 		x++;
 	}
 }
