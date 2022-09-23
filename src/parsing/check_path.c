@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:21:02 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/09 22:16:56 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/23 17:22:35 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,41 @@ static int	is_valid(char *path)
 
 t_sprite	*check_elements_path(t_data *data)
 {
-	int img_width = 40;
-	int img_height = 40;
 	t_sprite	*sprite;
+	t_img		*north;
+	t_img		*south;
+	t_img		*west;
+	t_img		*east;
 
 	sprite = (t_sprite *) malloc(sizeof(t_sprite));
+	north = (t_img *) malloc(sizeof(t_img));
+	south = (t_img *) malloc(sizeof(t_img));
+	west = (t_img *) malloc(sizeof(t_img));
+	east = (t_img *) malloc(sizeof(t_img));
 	ft_bzero(sprite, sizeof(t_sprite));
 	if (is_valid(data->game->north))
-		sprite->north_tex = mlx_xpm_file_to_image(data->mlx, data->game->north, &img_width, &img_height);
+	{
+		north->img = mlx_xpm_file_to_image(data->mlx, data->game->north, &(north->width), &(north->height));
+		north->addr = mlx_get_data_addr(north->img, &(north->bits_per_pixel), &(north->line_length), &(north->endian));
+	}
 	if (is_valid(data->game->south))
-		sprite->south_tex = mlx_xpm_file_to_image(data->mlx, data->game->south, &img_width, &img_height);
+	{
+		south->img = mlx_xpm_file_to_image(data->mlx, data->game->south, &(south->width), &(south->height));
+		south->addr = mlx_get_data_addr(south->img, &(south->bits_per_pixel), &(south->line_length), &(south->endian));
+	}
 	if (is_valid(data->game->west))
-		sprite->west_tex = mlx_xpm_file_to_image(data->mlx, data->game->west, &img_width, &img_height);
+	{
+		west->img = mlx_xpm_file_to_image(data->mlx, data->game->west, &(west->width), &(west->height));
+		west->addr = mlx_get_data_addr(west->img, &(west->bits_per_pixel), &(west->line_length), &(west->endian));
+	}
 	if (is_valid(data->game->east))
-		sprite->east_tex = mlx_xpm_file_to_image(data->mlx, data->game->east, &img_width, &img_height);
+	{
+		east->img = mlx_xpm_file_to_image(data->mlx, data->game->east, &(east->width), &(east->height));
+		east->addr = mlx_get_data_addr(east->img, &(east->bits_per_pixel), &(east->line_length), &(east->endian));
+	}
+	sprite->north = north;
+	sprite->south = south;
+	sprite->west = west;
+	sprite->east = east;
 	return (sprite);
 }
