@@ -20,7 +20,7 @@ void	change_position(t_data *data)
 		data->player->x += move_x;
 		data->player->y -= move_y;
 	}
-	if (move_dist(data, (data->player->angle + ((PI / 2) * (data->player->rotation_direction))) - 1 > hypot(turn_x , turn_y) && data->player->turn_direction))
+	if (move_dist(data, (data->player->angle + (PI / 2) * (data->player->turn_direction))) - 1 > hypot(turn_x , turn_y) && data->player->turn_direction)
 	{
 		printf("turn_x: %d, turn_y: %d\n", turn_x, turn_y);
 		printf("turn_dist: %f\n", move_dist(data, data->player->angle + ((PI / 2) * (-data->player->rotation_direction))));
