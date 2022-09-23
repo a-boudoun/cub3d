@@ -58,7 +58,6 @@ int main(int ac, char **av)
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	data.sprite = check_elements_path(&data);
-	data.sprite = check_elements_path(&data);
 	data.player = malloc(sizeof(t_player));
 	data.img = malloc(sizeof(t_img));
 	data.img_game = malloc(sizeof(t_img));
