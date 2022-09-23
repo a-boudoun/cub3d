@@ -42,22 +42,23 @@
 
 
 typedef struct	s_img{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	unsigned int	*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				height;
+	int				width;
+	int				endian;
 }				t_img;
 
 typedef struct s_sprite{
 	int		x;
 	int		y;
-	int		texture;
 	int		distance;
-	void	*north_tex;
-	void	*south_tex;
-	void	*west_tex;
-	void	*east_tex;
+	t_img	*north;
+	t_img	*south;
+	t_img	*west;
+	t_img	*east;
 }				t_sprite;
 
 typedef struct minimap{
@@ -105,20 +106,21 @@ typedef struct s_data
 }				t_data;
 
 
-void		error_handler(char *message);
-t_game		*get_map(int fd);
-bool		ft_strcmp(char *s1, char *s2);
-char		**gen_map(int fd, char *line);
-t_sprite	*check_elements_path(t_data *data);
-int			count(char *str, char c);
-void		set_rays(t_data *data, double dist, int index);
-bool		is_empty(char *line);
-void		draw_map(t_data *data);
-void		key_handler(int key, t_data *data);
-void		get_player_pos(t_data *data);
-void		draw_game(t_data *data);
-double		move_dist(t_data *data, double angle);
-void		my_mlx_pixel_put(t_img *data, int x, int y, unsigned int color);
+void			error_handler(char *message);
+t_game			*get_map(int fd);
+bool			ft_strcmp(char *s1, char *s2);
+char			**gen_map(int fd, char *line);
+t_sprite		*check_elements_path(t_data *data);
+int				count(char *str, char c);
+void			set_rays(t_data *data, double dist, int index);
+bool			is_empty(char *line);
+void			draw_map(t_data *data);
+void			key_handler(int key, t_data *data);
+void			get_player_pos(t_data *data);
+void			draw_game(t_data *data);
+double			move_dist(t_data *data, double angle);
+void			my_mlx_pixel_put(t_img *data, int x, int y, unsigned int color);
+unsigned int	get_pixel(t_img *img, int x, int y);
 
 #endif
 
