@@ -52,7 +52,7 @@ void draw_line(t_data *data, int count)
 	double endY = data->rays_y[count];
 	double deltaX = endX - beginX; // 10
 	double deltaY = endY - beginY; // 0
-	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+	int pixels = data->rays_dist[count];
 	deltaX /= pixels; // 1
 	deltaY /= pixels; // 0
 	while (pixels)
