@@ -1,29 +1,29 @@
-#include"cub.h"
+#include "cub.h"
 
 
 
-void	drw_column(t_data *data, int col, int color, double dist)
+void	drw_column(t_data *data, int y, double dist)
 {
 	// draw line from top to bottom aligned to center of WIN_HEIGHT
-	int y = 0;
+	int x = 0;
 
-	while (y < WIN_HEIGHT /2)
+	while (x < WIN_HEIGHT /2)
 	{
-		my_mlx_pixel_put(data->img_game, col, y, data->game->color_ceiling);
-		y++;
+		my_mlx_pixel_put(data->img_game, y, x, data->game->color_ceiling);
+		x++;
 	}
-	y = WIN_HEIGHT - 1;
-	while (y > WIN_HEIGHT / 2)
+	x = WIN_HEIGHT - 1;
+	while (x > WIN_HEIGHT / 2)
 	{
-		my_mlx_pixel_put(data->img_game, col, y, data->game->color_floor);
-		y--;
+		my_mlx_pixel_put(data->img_game, y, x, data->game->color_floor);
+		x--;
 	}
 	//printf("floor_color: %d\n", data->game->color_floor);
-	y = ((WIN_HEIGHT - dist) / 2);
-	while (y <  (WIN_HEIGHT + ((int)(dist + .5))) / 2)
+	x = ((WIN_HEIGHT - dist) / 2);
+	while (x <  (WIN_HEIGHT + ((int)(dist + .5))) / 2)
 	{
-		my_mlx_pixel_put(data->img_game, col, y, color);
-		y++;
+		my_mlx_pixel_put(data->img_game, y, x, 0x878787);
+		x++;
 	}
 }
 
@@ -40,7 +40,7 @@ void	draw_game(t_data *data)
 		if (dist >= WIN_HEIGHT)
 			dist = WIN_HEIGHT - 1;
 		//unsigned transparency = (dist * 0xFF / (WIN_HEIGHT));
-		drw_column(data, col++, 0x878787, dist);
+		drw_column(data, col++, dist);
 		i--;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img_game->img, 0, 0);
