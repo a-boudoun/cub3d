@@ -27,6 +27,14 @@ int open_map(int ac, char **av)
 	return (fd);
 }
 
+int next_frame(t_data *data)
+{
+	draw_map(data);
+	draw_game(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+	return 0;
+}
+
 int	key_press(int key,t_data *data)
 {
 	if (key == ESC)
@@ -35,15 +43,19 @@ int	key_press(int key,t_data *data)
 		ft_clear(data -> game);
 		exit(EXIT_SUCCESS);
 	}
-	key_handler(key, data);
+	keys_handler(key, data);
+	next_frame(data);
 	return 0;
 }
 
-int next_frame(t_data *data)
+int	key_release(int key, t_data *data)
 {
-	draw_map(data);
-	draw_game(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+	if (key == W || key == S)
+		data->player->walk_direction = 0;
+	if (key == A || key == D)
+		data->player->turn_direction = 0;
+	if (key == LEFT || key == RIGHT)
+		data->player->rotation_direction = 0;
 	return 0;
 }
 
@@ -73,11 +85,12 @@ int main(int ac, char **av)
 	data.rays_y = malloc(sizeof(double) * WIN_WIDTH);
 	ft_bzero(data.rays_x, sizeof(double) * WIN_WIDTH);
 	ft_bzero(data.rays_y, sizeof(double) * WIN_WIDTH);
-	data.player->dx = cos(data.player->angle);
-	data.player->dy = sin(data.player->angle);
-	mlx_loop_hook(data.mlx, next_frame, &data);
-	mlx_key_hook(data.win, &key_press, &data);
-	mlx_hook(data.win, 2, 1L<<0, &key_press, &data);
+	next_frame(&data);
+	data.player->walk_direction = 0;
+	data.player->turn_direction = 0;
+	data.player->rotation_direction = 0;
+	mlx_hook(data.win, 2, 0, &key_press, &data);
+	mlx_hook(data.win, 3, 0, &key_release, &data);
 	mlx_loop(data.mlx);
 	ft_clear(data.game);
 	return (0);

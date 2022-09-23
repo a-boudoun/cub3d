@@ -68,11 +68,12 @@ typedef struct minimap{
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
+	int		x;
+	int		y;
+	int		turn_direction;
+	int		walk_direction;
+	int		rotation_direction;
 	double	angle;
-	double	dx;
-	double	dy;
 
 }				t_player;
 
