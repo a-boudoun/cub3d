@@ -43,7 +43,7 @@ int	key_press(int key,t_data *data)
 		ft_clear(data -> game);
 		exit(EXIT_SUCCESS);
 	}
-	keys_handler(key, data);
+	key_handler(key, data);
 	next_frame(data);
 	return 0;
 }

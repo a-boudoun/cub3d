@@ -36,7 +36,7 @@
 # define WIN_HEIGHT 700
 # define PI M_PI
 # define ROTATE_SPEED 0.07
-# define PLAYER_SPEED 2
+# define PLAYER_SPEED 3
 # define FOV (PI / 3)
 # define BOX_SIZE 6
 

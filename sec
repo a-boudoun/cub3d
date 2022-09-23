@@ -1,0 +1,38 @@
+int render_frame(t_data *data)
+{
+	data->angl += (2 * DEGRE) * data->rotation;
+	if (data->angl > 2 * PI)
+		data->angl -= 2 * PI;
+	else if (data->angl < 0)
+		data->angl += 2 * PI;
+    if (distance(data->px, data->py, data->angl - (PI * (data->move == -1)), data).dist > 10)
+    {
+        data->px += cos(data->angl) * 10 * data->move;
+        data->py -= sin(data->angl) * 10 * data->move;
+    }
+   	if (distance(data->px, data->py, data->angl + (PI /2) * (-data->strafe), data).dist > 10)
+    {
+        data->px += cos((PI / 2) - data->angl) * 10 * data->strafe;
+	    data->py += sin((PI / 2) - data->angl) * 10 * data->strafe;
+    }
+	render_game(data);
+    return(0);
+}
+
+int	key_handler(int key, t_data *data)
+{
+	if (key == KEY_RIGHT)
+		data->rotation = 1;
+	if (key == KEY_LEFT)
+		data->rotation = -1;
+	if (key == KEY_W)
+		data->move = 1;
+	if (key == KEY_S)
+		data->move = -1;
+	if (key == KEY_A)
+		data->strafe = 1;
+	if (key == KEY_D)
+		data->strafe = -1;
+	render_frame(data);
+	return (0);
+}
