@@ -6,6 +6,9 @@ void	change_position(t_data *data)
 	int move_y;
 	int turn_x;
 	int turn_y;
+
+	if (!data->player->walk_direction && !data->player->turn_direction && !data->player->rotation_direction)
+		return ;
 	data->player->angle += data->player->rotation_direction * ROTATE_SPEED;
 	if (data->player->angle < 0)
 		data->player->angle = 2 * PI + data->player->angle;
@@ -41,5 +44,4 @@ void	key_handler(int key, t_data *data)
 		data->player->rotation_direction = 1;
 	if (key == RIGHT)
 		data->player->rotation_direction = -1;
-	change_position(data);
 }

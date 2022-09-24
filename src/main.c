@@ -29,6 +29,7 @@ int open_map(int ac, char **av)
 
 int next_frame(t_data *data)
 {
+	change_position(data);
 	draw_map(data);
 	draw_game(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
@@ -44,7 +45,6 @@ int	key_press(int key,t_data *data)
 		exit(EXIT_SUCCESS);
 	}
 	key_handler(key, data);
-	next_frame(data);
 	return 0;
 }
 
@@ -88,6 +88,7 @@ int main(int ac, char **av)
 	data.player->walk_direction = 0;
 	data.player->turn_direction = 0;
 	data.player->rotation_direction = 0;
+	mlx_loop_hook(data.mlx, next_frame, &data);
 	mlx_hook(data.win, 2, 0, &key_press, &data);
 	mlx_hook(data.win, 3, 0, &key_release, &data);
 	mlx_loop(data.mlx);

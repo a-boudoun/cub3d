@@ -122,6 +122,7 @@ void			draw_game(t_data *data);
 double			move_dist(t_data *data, double angle);
 void			my_mlx_pixel_put(t_img *data, int x, int y, unsigned int color);
 unsigned int	get_pixel(t_img *img, int x, int y, double dist);
+void			change_position(t_data *data);
 
 #endif
 
