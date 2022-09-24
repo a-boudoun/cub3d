@@ -4,7 +4,8 @@ unsigned int get_pixel(t_img *img, int x, int y, double wall_height)
 {
 	unsigned int color;
 	img += 0;
-	x+= 0;
+	x += 0;
+	y += 0;
 
 
 	// the brightness of the color is proportional to the wall_height / WIN_HEIGHT from the player
