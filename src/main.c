@@ -71,6 +71,7 @@ int main(int ac, char **av)
 	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	data.sprite = check_elements_path(&data);
 	data.player = malloc(sizeof(t_player));
+	ft_bzero(data.player, sizeof(t_player));
 	data.img = malloc(sizeof(t_img));
 	data.img_game = malloc(sizeof(t_img));
 	get_player_pos(&data);
@@ -85,9 +86,6 @@ int main(int ac, char **av)
 	ft_bzero(data.rays_x, sizeof(double) * WIN_WIDTH);
 	ft_bzero(data.rays_y, sizeof(double) * WIN_WIDTH);
 	next_frame(&data);
-	data.player->walk_direction = 0;
-	data.player->turn_direction = 0;
-	data.player->rotation_direction = 0;
 	mlx_loop_hook(data.mlx, next_frame, &data);
 	mlx_hook(data.win, 2, 0, &key_press, &data);
 	mlx_hook(data.win, 3, 0, &key_release, &data);
