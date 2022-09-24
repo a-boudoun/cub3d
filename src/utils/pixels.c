@@ -1,16 +1,14 @@
 #include "cub.h"
 
-unsigned int get_pixel(t_img *img, int x, int y, double dist)
+unsigned int get_pixel(t_img *img, int x, int y, double wall_height)
 {
-	char	*dst;
-	int		color;
+	unsigned int color;
+	img += 0;
+	x+= 0;
 
-	dst = img->addr + ((y * img->line_length + x * (img->bits_per_pixel / 8)));
-	color = *(unsigned int*)dst;
-	if (dist < 0)
-		dist = 0;
-	if (dist > 255)
-		dist = 255;
-	color = (color & 0x00FFFFFF) | ((255 - (int)dist) << 24);
+
+	// the brightness of the color is proportional to the wall_height / WIN_HEIGHT from the player
+	int brightness = 0xFF -(int)(0xFF * (1 - wall_height / WIN_HEIGHT));
+	color = (brightness << 16) | (brightness << 8) | brightness;
 	return (color);
 }
