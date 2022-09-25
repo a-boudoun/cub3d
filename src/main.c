@@ -71,6 +71,7 @@ int main(int ac, char **av)
 	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	data.sprite = check_elements_path(&data);
 	data.player = malloc(sizeof(t_player));
+
 	ft_bzero(data.player, sizeof(t_player));
 	data.img = malloc(sizeof(t_img));
 	data.img_game = malloc(sizeof(t_img));
@@ -83,6 +84,7 @@ int main(int ac, char **av)
 	data.player->angle = 60 * PI / 180;
 	data.rays_x = malloc(sizeof(double) * WIN_WIDTH);
 	data.rays_y = malloc(sizeof(double) * WIN_WIDTH);
+	data.is_horizontal = malloc(sizeof(int) * WIN_WIDTH);
 	ft_bzero(data.rays_x, sizeof(double) * WIN_WIDTH);
 	ft_bzero(data.rays_y, sizeof(double) * WIN_WIDTH);
 	next_frame(&data);

@@ -104,6 +104,7 @@ typedef struct s_data
 	double		*rays_dist;
 	double		*rays_x;
 	double		*rays_y;
+	bool		*is_horizontal;
 }				t_data;
 
 

@@ -15,6 +15,7 @@ void	get_player_pos(t_data *data)
 	int y;
 
 	y = 0;
+	init_minimap(data);
 	while (data->game->map[y])
 	{
 		x = 0;
@@ -31,5 +32,4 @@ void	get_player_pos(t_data *data)
 	}
 	data->game->map_height = y;
 	data->game->map_width = x;
-	init_minimap(data);
 }

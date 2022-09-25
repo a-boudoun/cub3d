@@ -108,6 +108,7 @@ double	get_vertical(t_data *data, double angle, int count)
 	{
 		data->rays_x[count] = rx;
 		data->rays_y[count] = ry;
+		data->is_horizontal[count] = false;
 	}
 	return(hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)));
 }
@@ -157,6 +158,7 @@ double	get_horizontal(t_data *data, double angle, int count)
 	{
 		data->rays_x[count] = rx;
 		data->rays_y[count] = ry;
+		data->is_horizontal[count] = true;
 		data->rays_dist[count] = hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle));
 	}
 	return (hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)));
