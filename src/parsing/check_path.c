@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:21:02 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/23 17:38:55 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/26 16:15:44 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,22 @@ t_sprite	*check_elements_path(t_data *data)
 	if (is_valid(data->game->north))
 	{
 		north->img = mlx_xpm_file_to_image(data->mlx, data->game->north, &(north->width), &(north->height));
-		north->addr = mlx_get_data_addr(north->img, &(north->bits_per_pixel), &(north->line_length), &(north->endian));
+		north->addr = (int*)mlx_get_data_addr(north->img, &(north->bits_per_pixel), &(north->line_length), &(north->endian));
 	}
 	if (is_valid(data->game->south))
 	{
 		south->img = mlx_xpm_file_to_image(data->mlx, data->game->south, &(south->width), &(south->height));
-		south->addr = mlx_get_data_addr(south->img, &(south->bits_per_pixel), &(south->line_length), &(south->endian));
+		south->addr = (int*)mlx_get_data_addr(south->img, &(south->bits_per_pixel), &(south->line_length), &(south->endian));
 	}
 	if (is_valid(data->game->west))
 	{
 		west->img = mlx_xpm_file_to_image(data->mlx, data->game->west, &(west->width), &(west->height));
-		west->addr = mlx_get_data_addr(west->img, &(west->bits_per_pixel), &(west->line_length), &(west->endian));
+		west->addr = (int*)mlx_get_data_addr(west->img, &(west->bits_per_pixel), &(west->line_length), &(west->endian));
 	}
 	if (is_valid(data->game->east))
 	{
 		east->img = mlx_xpm_file_to_image(data->mlx, data->game->east, &(east->width), &(east->height));
-		east->addr = mlx_get_data_addr(east->img, &(east->bits_per_pixel), &(east->line_length), &(east->endian));
+		east->addr = (int*)mlx_get_data_addr(east->img, &(east->bits_per_pixel), &(east->line_length), &(east->endian));
 	}
 	sprite->north = north;
 	sprite->south = south;

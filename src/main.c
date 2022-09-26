@@ -77,9 +77,9 @@ int main(int ac, char **av)
 	data.img_game = malloc(sizeof(t_img));
 	get_player_pos(&data);
 	data.img_game->img = mlx_new_image(data.mlx, WIN_WIDTH, WIN_HEIGHT);
-	data.img_game->addr = mlx_get_data_addr(data.img_game->img, &data.img_game->bits_per_pixel, &data.img_game->line_length, &data.img_game->endian);
+	data.img_game->addr = (int*)mlx_get_data_addr(data.img_game->img, &data.img_game->bits_per_pixel, &data.img_game->line_length, &data.img_game->endian);
 	data.img->img = mlx_new_image(data.mlx, (6 *(data.game->map_width)), data.game->map_height * 6);
-	data.img->addr = mlx_get_data_addr(data.img->img, &data.img->bits_per_pixel, \
+	data.img->addr = (int*)mlx_get_data_addr(data.img->img, &data.img->bits_per_pixel, \
 		&data.img->line_length, &data.img->endian);
 	data.player->angle = 60 * PI / 180;
 	data.rays_x = malloc(sizeof(double) * WIN_WIDTH);

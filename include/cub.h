@@ -43,7 +43,7 @@
 
 typedef struct	s_img{
 	unsigned int	*img;
-	char			*addr;
+	int				*addr;
 	int				bits_per_pixel;
 	int				line_length;
 	int				height;

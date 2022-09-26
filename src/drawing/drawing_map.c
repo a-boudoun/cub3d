@@ -4,7 +4,7 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, unsigned int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = (char *)data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -202,7 +202,6 @@ void	draw_map(t_data *data)
 		y++;
 	}
 	drw_player(data, data->player->x / BOX_SIZE * 6 ,data->player->y / BOX_SIZE * 6, 0x000ED5);
-	// printf("player x: %d, player y: %d\n", data->player->x / BOX_SIZE, data->player->y / BOX_SIZE);
 	get_distance(data);
 	draw_line(data, 450);
 }

@@ -23,8 +23,8 @@ void	get_player_pos(t_data *data)
 		{
 			if (data->game->map[y][x] == INIT_POS)
 			{
-				data->player->x = x * BOX_SIZE + BOX_SIZE / 2;
-				data->player->y = y * BOX_SIZE + BOX_SIZE / 2;
+				data->player->x = x * BOX_SIZE;
+				data->player->y = y * BOX_SIZE;
 			}
 			x++;
 		}
