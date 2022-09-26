@@ -76,16 +76,16 @@ double	get_vertical(t_data *data, double angle, int count)
 	aTan= tan(angle);
 	if (cos(angle) > 0.001)
 	{
-		rx = ((px / data->minimap->box)* data->minimap->box)  + data->minimap->box;
+		rx = ((px / BOX_SIZE)* BOX_SIZE)  + BOX_SIZE;
 		ry = (px - rx)*aTan + py;
-		x_move = data->minimap->box;
+		x_move = BOX_SIZE;
 		y_move = -x_move*aTan;
 	}
 	else if (cos(angle) < -0.001)
 	{
-		rx = ((px / data->minimap->box)* data->minimap->box) - 0.0001;
+		rx = ((px / BOX_SIZE)* BOX_SIZE) - 0.0001;
 		ry = (px - rx)*aTan + py;
-		x_move = -data->minimap->box;
+		x_move = -BOX_SIZE;
 		y_move = -x_move*aTan;
 	}
 	else
@@ -94,8 +94,8 @@ double	get_vertical(t_data *data, double angle, int count)
 	}
 	while (dof < data->game->map_width)
 	{
-		mx = (int)(rx) / data->minimap->box;
-		my = (int)(ry) / data->minimap->box;
+		mx = (int)(rx) / BOX_SIZE;
+		my = (int)(ry) / BOX_SIZE;
 		if (mx >= 0 && mx < data->game->map_width && my < data->game->map_height && my >= 0 && data->game->map[my][mx] == '1')
 			dof = data->game->map_width;
 		else
@@ -105,12 +105,9 @@ double	get_vertical(t_data *data, double angle, int count)
 			dof++;
 		}
 	}
-	if (count != -1)
-	{
-		data->rays_x[count] = rx;
-		data->rays_y[count] = ry;
-		data->is_horizontal[count] = false;
-	}
+	data->rays_x[count] = rx;
+	data->rays_y[count] = ry;
+	data->is_horizontal[count] = false;
 	return(hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)));
 }
 
@@ -124,18 +121,18 @@ double	get_horizontal(t_data *data, double angle, int count)
 
 	dof = 0;
 	aTan= 1.0/tan(angle);
-	if (sin(angle) > 0.001)
+	if (sin(angle) > 0.00001)
 	{
-		ry = ((py / data->minimap->box)* data->minimap->box)  - 0.0001;
+		ry = ((py / BOX_SIZE)* BOX_SIZE)  - 0.0001;
 		rx = (py - ry)*aTan + px;
-		y_move = -data->minimap->box;
+		y_move = -BOX_SIZE;
 		x_move = -y_move*aTan;
 	}
-	else if (sin(angle) < -0.001)
+	else if (sin(angle) < -0.00001)
 	{
-		ry = ((py / data->minimap->box)* data->minimap->box) + data->minimap->box;
+		ry = ((py / BOX_SIZE)* BOX_SIZE) + BOX_SIZE;
 		rx = (py - ry)*aTan + px;
-		y_move = data->minimap->box;
+		y_move = BOX_SIZE;
 		x_move = -y_move*aTan;
 	}
 	else
@@ -144,8 +141,8 @@ double	get_horizontal(t_data *data, double angle, int count)
 	}
 	while (dof < data->game->map_height)
 	{
-		mx = (int)(rx) / data->minimap->box;
-		my = (int)(ry) / data->minimap->box;
+		mx = (int)(rx) / BOX_SIZE;
+		my = (int)(ry) / BOX_SIZE;
 		if (mx >= 0 && mx < data->game->map_width && my < data->game->map_height && my >= 0 && data->game->map[my][mx] == '1')
 			dof = data->game->map_height;
 		else
@@ -155,7 +152,7 @@ double	get_horizontal(t_data *data, double angle, int count)
 			dof++;
 		}
 	}
-	if (count != -1 && data->rays_dist[count] > hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)))
+	if (data->rays_dist[count] > hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)))
 	{
 		data->rays_x[count] = rx;
 		data->rays_y[count] = ry;
@@ -171,7 +168,7 @@ static void	get_distance(t_data *data)
 	int		count = -1;
 	double	angle = data->player->angle - (FOV / 2);
 
-	while (++count < 900)
+	while (++count < WIN_WIDTH)
 	{
 		vr_hit = get_vertical(data, angle, count); // returns vertical wall hit distance
 		set_rays(data, vr_hit, count);	// setrays() adds the lowest distance to data->rays

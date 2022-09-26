@@ -9,7 +9,6 @@ void	change_position(t_data *data)
 
 	if (!data->player->walk_direction && !data->player->turn_direction && !data->player->rotation_direction)
 		return ;
-	printf("player angle: %f\n", data->player->angle * 180 / M_PI);
 	data->player->angle += data->player->rotation_direction * ROTATE_SPEED;
 	if (data->player->angle < 0)
 		data->player->angle = 2 * PI + data->player->angle;
