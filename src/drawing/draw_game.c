@@ -23,11 +23,11 @@ void	drw_column(t_data *data, int x, int dist, bool is_horizontal)
 		my_mlx_pixel_put(data->img_game, x, y, data->game->color_floor);
 		y--;
 	}
-	//printf("floor_color: %d\n", data->game->color_floor);
 	y = ((WIN_HEIGHT - dist) / 2);
 	while (y <  (WIN_HEIGHT + ((int)(dist + .5))) / 2)
 	{
-		my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->north, offsetX, y, dist));
+		// my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->north, offsetX, y, dist));
+		my_mlx_pixel_put(data->img_game, x, y, 0X0D8E12);
 		y++;
 	}
 }
@@ -41,7 +41,9 @@ void	draw_game(t_data *data)
 	data->img_game->addr = mlx_get_data_addr(data->img_game->img, &data->img_game->bits_per_pixel, &data->img_game->line_length, &data->img_game->endian);
 	while(i >= 0)
 	{
+		//printf("rays_dist[%d]: %f -- ", i, data->rays_dist[i]);
 		int dist = WIN_HEIGHT *  BOX_SIZE / (data->rays_dist[i] + 0.0001);
+		//printf("dist: %d\n", dist);
 		if (dist >= WIN_HEIGHT)
 			dist = WIN_HEIGHT - 1;
 		if (dist <= 0)

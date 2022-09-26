@@ -35,10 +35,10 @@
 # define WIN_WIDTH 900
 # define WIN_HEIGHT 700
 # define PI M_PI
-# define ROTATE_SPEED 0.07
-# define PLAYER_SPEED 3
+# define ROTATE_SPEED 0.03
+# define PLAYER_SPEED 10
 # define FOV (PI / 3)
-# define BOX_SIZE 6
+# define BOX_SIZE 64
 
 
 typedef struct	s_img{
