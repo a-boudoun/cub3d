@@ -30,7 +30,6 @@
 # define EXIT 69
 # define EMPTY '0'
 # define WALL '1'
-# define INIT_POS 'N'
 # define NAME "cub3d"
 # define WIN_WIDTH 900
 # define WIN_HEIGHT 700
@@ -75,6 +74,7 @@ typedef struct s_player
 	int		walk_direction;
 	int		rotation_direction;
 	double	angle;
+	char	view;
 
 }				t_player;
 

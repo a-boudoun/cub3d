@@ -81,7 +81,6 @@ int main(int ac, char **av)
 	data.img->img = mlx_new_image(data.mlx, (6 *(data.game->map_width)), data.game->map_height * 6);
 	data.img->addr = (int*)mlx_get_data_addr(data.img->img, &data.img->bits_per_pixel, \
 		&data.img->line_length, &data.img->endian);
-	data.player->angle = 60 * PI / 180;
 	data.rays_x = malloc(sizeof(double) * WIN_WIDTH);
 	data.rays_y = malloc(sizeof(double) * WIN_WIDTH);
 	data.game->ray_angle = malloc(sizeof(double) * WIN_WIDTH);
