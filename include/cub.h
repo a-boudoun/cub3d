@@ -34,7 +34,7 @@
 # define WIN_WIDTH 900
 # define WIN_HEIGHT 700
 # define PI M_PI
-# define ROTATE_SPEED 0.03
+# define ROTATE_SPEED 0.07
 # define PLAYER_SPEED 10
 # define FOV (PI / 3)
 # define BOX_SIZE 64
@@ -125,6 +125,7 @@ double			move_dist(t_data *data, double angle);
 void			my_mlx_pixel_put(t_img *data, int x, int y, unsigned int color);
 unsigned int	get_pixel(t_img *img, int x, int y, double dist);
 void			change_position(t_data *data);
+void			get_distance(t_data *data);
 
 #endif
 
