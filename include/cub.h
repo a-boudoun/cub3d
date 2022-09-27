@@ -89,6 +89,7 @@ typedef struct s_game {
 	t_sprite		*sprite;
 	int				color_floor;
 	int				color_ceiling;
+	double			*ray_angle;
 }				t_game;
 
 typedef struct s_data

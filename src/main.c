@@ -84,8 +84,10 @@ int main(int ac, char **av)
 	data.player->angle = 60 * PI / 180;
 	data.rays_x = malloc(sizeof(double) * WIN_WIDTH);
 	data.rays_y = malloc(sizeof(double) * WIN_WIDTH);
+	data.game->ray_angle = malloc(sizeof(double) * WIN_WIDTH);
 	data.is_horizontal = malloc(sizeof(int) * WIN_WIDTH);
 	ft_bzero(data.rays_x, sizeof(double) * WIN_WIDTH);
+	ft_bzero(data.game->ray_angle, sizeof(double) * WIN_WIDTH);
 	ft_bzero(data.rays_y, sizeof(double) * WIN_WIDTH);
 	next_frame(&data);
 	mlx_loop_hook(data.mlx, next_frame, &data);

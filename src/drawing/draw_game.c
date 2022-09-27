@@ -26,8 +26,14 @@ void	drw_column(t_data *data, int x, int wall_height, bool is_horizontal)
 	y = ((WIN_HEIGHT - wall_height) / 2);
 	while (y <  (WIN_HEIGHT + wall_height) / 2)
 	{
-		my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->north, offsetX, y, wall_height));
-		// my_mlx_pixel_put(data->img_game, x, y, 0X0D8E12);
+		if (is_horizontal && sin(data->game->ray_angle[WIN_WIDTH - x]) > 0)
+			my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->north, offsetX, y, wall_height));
+		else if (is_horizontal && sin(data->game->ray_angle[WIN_WIDTH - x]) < 0)
+			my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->south, offsetX, y, wall_height));
+		else if (!is_horizontal && cos(data->game->ray_angle[WIN_WIDTH - x]) > 0)
+			my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->east, offsetX, y, wall_height));
+		else if (!is_horizontal && cos(data->game->ray_angle[WIN_WIDTH - x]) < 0)
+			my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->west, offsetX, y, wall_height));
 		y++;
 	}
 }
