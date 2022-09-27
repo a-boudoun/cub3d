@@ -19,14 +19,17 @@ void	drw_column(t_data *data, int x, int wall_height, bool is_horizontal)
 	}
 	while (y <  (WIN_HEIGHT + wall_height) / 2)
 	{
-		if (is_horizontal && sin(data->game->ray_angle[WIN_WIDTH - x]) > 0)
-			my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->north, offsetX, y, wall_height));
-		else if (is_horizontal && sin(data->game->ray_angle[WIN_WIDTH - x]) < 0)
-			my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->south, offsetX, y, wall_height));
-		else if (!is_horizontal && cos(data->game->ray_angle[WIN_WIDTH - x]) > 0)
-			my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->east, offsetX, y, wall_height));
-		else if (!is_horizontal && cos(data->game->ray_angle[WIN_WIDTH - x]) < 0)
-			my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->west, offsetX, y, wall_height));
+		if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
+		{
+			if (is_horizontal && sin(data->game->ray_angle[WIN_WIDTH - x]) > 0)
+				my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->north, offsetX, y, wall_height));
+			else if (is_horizontal && sin(data->game->ray_angle[WIN_WIDTH - x]) < 0)
+				my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->south, offsetX, y, wall_height));
+			else if (!is_horizontal && cos(data->game->ray_angle[WIN_WIDTH - x]) > 0)
+				my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->east, offsetX, y, wall_height));
+			else if (!is_horizontal && cos(data->game->ray_angle[WIN_WIDTH - x]) < 0)
+				my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->west, offsetX, y, wall_height));
+		}
 		y++;
 	}
 	while (y < WIN_HEIGHT)
@@ -47,11 +50,6 @@ void	draw_game(t_data *data)
 	{
 		//printf("rays_dist[%d]: %f -- ", i, data->rays_dist[i]);
 		int wall_height = WIN_HEIGHT *  BOX_SIZE / (data->rays_dist[i] + 0.0001);
-		//printf("dist: %d\n", dist);
-		if (wall_height >= WIN_HEIGHT)
-			wall_height = WIN_HEIGHT;
-		if (wall_height <= 0)
-			wall_height = 0;
 		//unsigned transparency = (dist * 0xFF / (WIN_HEIGHT));
 		drw_column(data, col++, wall_height, data->is_horizontal[i]);
 		i--;

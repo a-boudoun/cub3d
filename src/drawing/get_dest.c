@@ -9,14 +9,14 @@ static double	get_vertical(t_data *data, double angle, int count)
 	int py = data->player->y;
 	dof = 0;
 	aTan= tan(angle);
-	if (cos(angle) > 0.001)
+	if (cos(angle) > 0)
 	{
 		rx = ((px / BOX_SIZE)* BOX_SIZE)  + BOX_SIZE;
 		ry = (px - rx)*aTan + py;
 		x_move = BOX_SIZE;
 		y_move = -x_move*aTan;
 	}
-	else if (cos(angle) < -0.001)
+	else if (cos(angle) < 0)
 	{
 		rx = ((px / BOX_SIZE)* BOX_SIZE) - 0.0001;
 		ry = (px - rx)*aTan + py;
@@ -57,14 +57,14 @@ static double	get_horizontal(t_data *data, double angle, int count)
 
 	dof = 0;
 	aTan= 1.0/tan(angle);
-	if (sin(angle) > 0.00001)
+	if (sin(angle) > 0)
 	{
 		ry = ((py / BOX_SIZE)* BOX_SIZE)  - 0.0001;
 		rx = (py - ry)*aTan + px;
 		y_move = -BOX_SIZE;
 		x_move = -y_move*aTan;
 	}
-	else if (sin(angle) < -0.00001)
+	else if (sin(angle) < 0)
 	{
 		ry = ((py / BOX_SIZE)* BOX_SIZE) + BOX_SIZE;
 		rx = (py - ry)*aTan + px;
