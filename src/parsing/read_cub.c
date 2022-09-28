@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 14:55:13 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/28 15:48:51 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/28 16:39:37 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,12 @@ void	check_missing(char *line, t_game *game)
 		error_handler("missing COLORS");
 }
 
-t_game	*get_map(int fd)
+void	get_map(int fd, t_game *game, char *line)
 {
-	t_game	*game;
-	char	*line;
 	char	**tmp;
 
 	tmp = malloc(sizeof(char *) * 2);
-	game = (t_game *) malloc(sizeof(t_game));
-	ft_bzero(game, sizeof(t_game));
-	game -> color_ceiling = -1;
-	game -> color_floor = -1;
+	game -> color_ceiling = --game->color_floor;
 	while (true)
 	{
 		line = get_next_line(fd);
@@ -116,5 +111,6 @@ t_game	*get_map(int fd)
 		free(line);
 	}
 	check_missing(line, game);
-	return (free(tmp), game -> map = gen_map(fd, line), game);
+	free(tmp);
+	game -> map = gen_map(fd, line);
 }

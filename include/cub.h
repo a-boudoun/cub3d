@@ -110,7 +110,7 @@ typedef struct s_data
 
 
 void			error_handler(char *message);
-t_game			*get_map(int fd);
+void			get_map(int fd, t_game *game, char*line);
 bool			ft_strcmp(char *s1, char *s2);
 char			**gen_map(int fd, char *line);
 t_sprite		*check_elements_path(t_data *data);
