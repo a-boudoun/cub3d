@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:43:41 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/07 16:00:16 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:40:43 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_gnl_strjoin(char const *s1, char const *s2)
 
 	i = 0;
 	j = 0;
-	str = (char *)malloc(sizeof(char) * (ft_gnl_strlen(s1) + ft_gnl_strlen(s2) + 1));
+	str = malloc(sizeof(char) * (ft_gnl_strlen(s1) + ft_gnl_strlen(s2) + 1));
 	if (str == NULL)
 		return (NULL);
 	while (s1[i] != '\0')

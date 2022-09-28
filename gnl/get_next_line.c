@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:43:22 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/10 18:49:29 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:36:50 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	if (ft_gnl_strchr(line, '\n'))
-		* (ft_gnl_strchr(line, '\n')) = 0;
+		*(ft_gnl_strchr(line, '\n')) = 0;
 	return (line);
 }
