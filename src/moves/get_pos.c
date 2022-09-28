@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_pos.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/28 17:04:37 by aboudoun          #+#    #+#             */
+/*   Updated: 2022/09/28 17:07:26 by aboudoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 static void	init_minimap(t_data *data)
@@ -6,7 +18,8 @@ static void	init_minimap(t_data *data)
 	ft_bzero(data->minimap, sizeof(t_minimap));
 	data->minimap->p_box_height = BOX_SIZE / 2;
 	data->minimap->p_box_width = BOX_SIZE / 2;
-	data->minimap->box = BOX_SIZE / (1 + (bool) (data->game->map_height * BOX_SIZE > WIN_HEIGHT));
+	data->minimap->box = BOX_SIZE / (1
+			+ (bool)(data->game->map_height * BOX_SIZE > WIN_HEIGHT));
 }
 
 static void	init_angle(t_data *data)
@@ -19,12 +32,12 @@ static void	init_angle(t_data *data)
 		data->player->angle = (M_PI);
 	else if (data->player->view == 'E')
 		data->player->angle = (2 * M_PI);
-
 }
+
 void	get_player_pos(t_data *data)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	init_minimap(data);
