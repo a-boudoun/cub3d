@@ -40,7 +40,7 @@ double	get_vertical(t_data *data, double angle, int count)
 		}
 	}
 	if (count == -1)
-		return(sqrt(pow((rx - px), 2) + pow((ry - py), 2)));
+		return(hypot((rx-px), (ry-py)));
 	data->rays_x[count] = rx;
 	data->rays_y[count] = ry;
 	data->is_horizontal[count] = false;
@@ -87,7 +87,9 @@ double	get_horizontal(t_data *data, double angle, int count)
 			dof++;
 		}
 	}
-	if (count != -1 && data->rays_dist[count] > hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)))
+	if (count == -1)
+		return(hypot((rx-px), (ry-py)));
+	if (data->rays_dist[count] > hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)))
 	{
 		data->rays_x[count] = rx;
 		data->rays_y[count] = ry;
