@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gen_map_table.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/28 15:24:33 by majjig            #+#    #+#             */
+/*   Updated: 2022/09/28 15:24:34 by majjig           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
-static void map_checker(char **map, int x, int y)
+static void	map_checker(char **map, int x, int y)
 {
 	if (x == 0 || y == 0)
 		error_handler("Invalid map");
@@ -14,22 +26,22 @@ static void map_checker(char **map, int x, int y)
 		error_handler("Invalid map");
 }
 
-static void map_loop(char **map, int x, int y)
+static void	map_loop(char **map, int x, int y)
 {
 	int	player_count;
 
 	player_count = 0;
-	while(map[y])
+	while (map[y])
 	{
 		x = 0;
-		while(map[y][x])
+		while (map[y][x])
 		{
 			if (ft_strchr("NSWE", map[y][x]))
 				if (++player_count > 1)
 					error_handler("More than one player starting position");
 			if (!ft_strchr("01 NWSE", map[y][x]))
 				error_handler("Unknown item in map");
-			if (map[y][x] == '0' || map[y][x] == 'N')
+			if (map[y][x] == '0' || ft_strchr("NSWE", map[y][x]))
 				map_checker(map, x, y);
 			x++;
 		}
@@ -61,12 +73,30 @@ static void	map_fix(size_t len, char **map)
 	map_loop(map, 0, 0);
 }
 
+char	**list_to_table(t_list *list)
+{
+	char	**map;
+	int		size;
+
+	size = ft_lstsize(list);
+	map = (char **) malloc(sizeof(char *) * (size + 1));
+	ft_bzero(map, sizeof(char *) * (size + 1));
+	size = 0;
+	while (list)
+	{
+		map[size++] = ft_strdup(list->content);
+		free(list->content);
+		free(list);
+		list = list->next;
+	}
+	return (map);
+}
+
 char	**gen_map(int fd, char *line)
 {
 	t_list	*list;
 	char	**map;
 	size_t	len;
-	int		size;
 
 	list = NULL;
 	len = ft_strlen(line);
@@ -80,24 +110,13 @@ char	**gen_map(int fd, char *line)
 			len = ft_strlen(line);
 		ft_lstadd_back(&list, ft_lstnew(line));
 	}
-	while(line)
+	while (line)
 	{
 		if (is_empty(line))
 			line = get_next_line(fd);
 		else
 			error_handler("Empty rows");
 	}
-	size = ft_lstsize(list);
-	map = (char **) malloc(sizeof(char *) * (size + 1));
-	ft_bzero(map, sizeof(char *) * (size + 1));
-	size = 0;
-	while (list)
-	{
-		map[size++] = ft_strdup(list->content);
-		free(list->content);
-		free(list);
-		list = list->next;
-	}
-	map_fix(len, map);
-	return (map);
+	map = list_to_table(list);
+	return (map_fix(len, map), map);
 }

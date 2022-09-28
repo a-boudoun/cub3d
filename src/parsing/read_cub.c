@@ -3,57 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   read_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 14:55:13 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/11 16:13:10 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:48:51 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-static bool	ft_isnumber(char *str)
-{
-	while (*str)
-	{
-		if (!ft_isdigit(*str))
-			return (false);
-		str++;
-	}
-	return (true);
-}
-
-int	get_RGB(char *num)
-{
-	char	**tmp;
-	int		len;
-	int		r;
-	int		g;
-	int		b;
-
-	if (count(num, ',') != 2)
-		error_handler("Invalid color format");
-	tmp = ft_split(num, ',');
-	len = -1;
-	while (tmp[++len])
-	{
-		if (!ft_isnumber(tmp[len]))
-			error_handler("invalid color");
-	}
-	if (len != 3)
-		error_handler("invalid color");
-	r = ft_atoi(tmp[0]);
-	g = ft_atoi(tmp[1]);
-	b = ft_atoi(tmp[2]);
-
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		error_handler("invalid color");
-	free(tmp[0]);
-	free(tmp[1]);
-	free(tmp[2]);
-	free(tmp);
-	return ((r << 16) | (g << 8) | b);
-}
 
 static void	add_to_game(t_game *game, int index, char **line)
 {
@@ -83,8 +40,7 @@ static void	add_to_game(t_game *game, int index, char **line)
 		game -> color_ceiling = get_RGB(line[1]);
 }
 
-
-static	void add_type(char **line, t_game *game)
+static void	add_type(char **line, t_game *game)
 {
 	static char	*valid_types[] = {"NO", "SO", "WE", "EA", "F", "C"};
 	int			i;
@@ -92,7 +48,7 @@ static	void add_type(char **line, t_game *game)
 
 	element = ft_strtrim(line[0], WHITE_SPACES);
 	i = 0;
-	while(i < 6)
+	while (i < 6)
 	{
 		if (ft_strcmp(element, valid_types[i]))
 		{
@@ -108,15 +64,26 @@ static	void add_type(char **line, t_game *game)
 
 char	find_non_space(char *str)
 {
-	while(ft_strchr(WHITE_SPACES , *str))
+	while (ft_strchr(WHITE_SPACES, *str))
 		str++;
 	if (*str == 'N')
 	{
 		if (*(str + 1) == 'O' && *(str + 2) == ' ')
-			return *str;
+			return (*str);
 		return (-1);
 	}
 	return (*(str));
+}
+
+void	check_missing(char *line, t_game *game)
+{
+	if (!line)
+		error_handler("Missing Map");
+	if (game -> north == NULL || game -> south == NULL
+		|| game -> east == NULL || game -> west == NULL)
+		error_handler("missing TEXTURE");
+	if (game -> color_ceiling == -1 || game -> color_floor == -1)
+		error_handler("missing COLORS");
 }
 
 t_game	*get_map(int fd)
@@ -138,7 +105,7 @@ t_game	*get_map(int fd)
 		if (line && is_empty(line))
 			continue ;
 		if (line == NULL || !ft_strchr("NSWEFC", find_non_space(line)))
-				break;
+			break ;
 		free(line);
 		line = ft_strtrim(line, WHITE_SPACES);
 		tmp[0] = ft_substr(line, 0, (bool)(ft_strchr("SWEN", *line)) + 2);
@@ -148,13 +115,6 @@ t_game	*get_map(int fd)
 		free(tmp[1]);
 		free(line);
 	}
-	free(tmp);
-	if (!line)
-		error_handler("Missing Map");
-	if (game -> north == NULL || game -> south == NULL || game -> east == NULL || game -> west == NULL)
-		error_handler("missing TEXTURE");
-	if (game -> color_ceiling == -1 || game -> color_floor == -1)
-		error_handler("missing COLORS");
-	return (game -> map = gen_map(fd, line), game);
+	check_missing(line, game);
+	return (free(tmp), game -> map = gen_map(fd, line), game);
 }
-
