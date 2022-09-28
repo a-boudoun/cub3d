@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:08:28 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/28 17:26:23 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:33:05 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,13 @@ turn_direction && !data->player->rotation_direction)
 	walk(data, move_x, move_y);
 }
 
-void	key_handler(int key, t_data *data)
+int	key_handler(int key, t_data *data)
 {
+	if (key == ESC)
+	{
+		mlx_destroy_window(data->mlx, data->win);
+		exit(EXIT_SUCCESS);
+	}
 	if (key == W)
 		data->player->walk_direction = 1;
 	if (key == S)
@@ -87,4 +92,5 @@ void	key_handler(int key, t_data *data)
 		data->player->rotation_direction = 1;
 	if (key == RIGHT)
 		data->player->rotation_direction = -1;
+	return (0);
 }

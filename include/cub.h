@@ -121,12 +121,12 @@ void			error_handler(char *message);
 void			get_map(int fd, t_game *game, char*line);
 bool			ft_strcmp(char *s1, char *s2);
 char			**gen_map(int fd, char *line);
-t_sprite		*check_elements_path(t_data *data);
+void			check_elements_path(t_data *data);
 int				count(char *str, char c);
 void			set_rays(t_data *data, double dist, int index);
 bool			is_empty(char *line);
 void			draw_map(t_data *data);
-void			key_handler(int key, t_data *data);
+int				key_handler(int key, t_data *data);
 void			get_player_pos(t_data *data);
 void			draw_game(t_data *data);
 double			move_dist(t_data *data, double angle);
@@ -137,6 +137,9 @@ void			get_distance(t_data *data);
 double			get_horizontal(t_data *data, double angle, int count);
 double			get_vertical(t_data *data, double angle, int count);
 int				get_rgb(char *num);
+void			init_data(t_data *data);
+void			init_images(t_data *data);
+
 
 #endif
 

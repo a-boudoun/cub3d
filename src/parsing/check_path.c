@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:21:02 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/28 16:55:30 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/28 17:43:45 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,19 @@ void	load_xpm(t_data *data, t_img *img, char *path)
 		error_handler("Invalid texture");
 }
 
-t_sprite	*check_elements_path(t_data *data)
+void	check_elements_path(t_data *data)
 {
-	t_sprite	*sprite;
 	t_img		*north;
 	t_img		*south;
 	t_img		*west;
 	t_img		*east;
 
-	sprite = (t_sprite *) malloc(sizeof(t_sprite));
+	data->sprite = (t_sprite *) malloc(sizeof(t_sprite));
 	north = (t_img *) malloc(sizeof(t_img));
 	south = (t_img *) malloc(sizeof(t_img));
 	west = (t_img *) malloc(sizeof(t_img));
 	east = (t_img *) malloc(sizeof(t_img));
-	ft_bzero(sprite, sizeof(t_sprite));
+	ft_bzero(data->sprite, sizeof(t_sprite));
 	if (is_valid(data->game->north))
 		load_xpm(data, north, data->game->north);
 	if (is_valid(data->game->south))
@@ -56,9 +55,8 @@ t_sprite	*check_elements_path(t_data *data)
 		load_xpm(data, west, data->game->west);
 	if (is_valid(data->game->east))
 		load_xpm(data, east, data->game->east);
-	sprite->north = north;
-	sprite->south = south;
-	sprite->west = west;
-	sprite->east = east;
-	return (sprite);
+	data->sprite->north = north;
+	data->sprite->south = south;
+	data->sprite->west = west;
+	data->sprite->east = east;
 }
