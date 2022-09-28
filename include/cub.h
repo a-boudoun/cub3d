@@ -128,7 +128,7 @@ void			change_position(t_data *data);
 void			get_distance(t_data *data);
 double			get_horizontal(t_data *data, double angle, int count);
 double			get_vertical(t_data *data, double angle, int count);
-int				get_RGB(char *num);
+int				get_rgb(char *num);
 
 #endif
 

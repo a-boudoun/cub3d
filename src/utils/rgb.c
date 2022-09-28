@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rgb.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/28 16:41:53 by majjig            #+#    #+#             */
+/*   Updated: 2022/09/28 16:45:01 by majjig           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 static bool	ft_isnumber(char *str)
@@ -11,7 +23,7 @@ static bool	ft_isnumber(char *str)
 	return (true);
 }
 
-int	get_RGB(char *num)
+int	get_rgb(char *num)
 {
 	char	**tmp;
 	int		len;

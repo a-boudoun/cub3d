@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 14:55:13 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/28 16:39:37 by majjig           ###   ########.fr       */
+/*   Updated: 2022/09/28 16:44:43 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	add_to_game(t_game *game, int index, char **line)
 	else if (index == 3)
 		game -> east = ft_strdup(line[1]);
 	else if (index == 4)
-		game -> color_floor = get_RGB(line[1]);
+		game -> color_floor = get_rgb(line[1]);
 	else if (index == 5)
-		game -> color_ceiling = get_RGB(line[1]);
+		game -> color_ceiling = get_rgb(line[1]);
 }
 
 static void	add_type(char **line, t_game *game)
