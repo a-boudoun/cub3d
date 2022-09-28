@@ -91,6 +91,14 @@ typedef struct s_game {
 	int				color_ceiling;
 }				t_game;
 
+typedef struct s_distance{
+	double rx;
+	double ry;
+	double x_move;
+	double y_move;
+	int		dof;
+}				t_distance;
+
 typedef struct s_data
 {
 	void		*mlx;
