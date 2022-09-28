@@ -30,6 +30,8 @@ void	drw_column(t_data *data, int x, int wall_height, bool is_horizontal)
 			else if (!is_horizontal && cos(data->game->ray_angle[WIN_WIDTH - x]) < 0)
 				my_mlx_pixel_put(data->img_game, x, y, get_pixel(data->sprite->west, offsetX, y, wall_height));
 		}
+		else
+			break;
 		y++;
 	}
 	while (y < WIN_HEIGHT)
