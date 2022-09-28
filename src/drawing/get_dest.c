@@ -1,27 +1,26 @@
 #include"cub.h"
 
-static double	get_vertical(t_data *data, double angle, int count)
+double	get_vertical(t_data *data, double angle, int count)
 {
 	int	dof, mx, my;
 	double rx,ry,x_move,y_move;
-	double aTan;
 	int px = data->player->x;
 	int py = data->player->y;
+
 	dof = 0;
-	aTan= tan(angle);
 	if (cos(angle) > 0)
 	{
 		rx = ((px / BOX_SIZE)* BOX_SIZE)  + BOX_SIZE;
-		ry = (px - rx)*aTan + py;
+		ry = (px - rx)*(tan(angle)) + py;
 		x_move = BOX_SIZE;
-		y_move = -x_move*aTan;
+		y_move = -x_move*(tan(angle));
 	}
 	else if (cos(angle) < 0)
 	{
 		rx = ((px / BOX_SIZE)* BOX_SIZE) - 0.0001;
-		ry = (px - rx)*aTan + py;
+		ry = (px - rx)*(tan(angle)) + py;
 		x_move = -BOX_SIZE;
-		y_move = -x_move*aTan;
+		y_move = -x_move*(tan(angle));
 	}
 	else
 	{
@@ -40,6 +39,8 @@ static double	get_vertical(t_data *data, double angle, int count)
 			dof++;
 		}
 	}
+	if (count == -1)
+		return(sqrt(pow((rx - px), 2) + pow((ry - py), 2)));
 	data->rays_x[count] = rx;
 	data->rays_y[count] = ry;
 	data->is_horizontal[count] = false;
@@ -47,29 +48,27 @@ static double	get_vertical(t_data *data, double angle, int count)
 	return(hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)));
 }
 
-static double	get_horizontal(t_data *data, double angle, int count)
+double	get_horizontal(t_data *data, double angle, int count)
 {
 	int	dof, mx, my;
 	double rx,ry,x_move,y_move;
-	double aTan;
 	int px = data->player->x;
 	int py = data->player->y;
 
 	dof = 0;
-	aTan= 1.0/tan(angle);
 	if (sin(angle) > 0)
 	{
 		ry = ((py / BOX_SIZE)* BOX_SIZE)  - 0.0001;
-		rx = (py - ry)*aTan + px;
+		rx = (py - ry)*(1/tan(angle)) + px;
 		y_move = -BOX_SIZE;
-		x_move = -y_move*aTan;
+		x_move = -y_move*(1/tan(angle));
 	}
 	else if (sin(angle) < 0)
 	{
 		ry = ((py / BOX_SIZE)* BOX_SIZE) + BOX_SIZE;
-		rx = (py - ry)*aTan + px;
+		rx = (py - ry)*(1/tan(angle)) + px;
 		y_move = BOX_SIZE;
-		x_move = -y_move*aTan;
+		x_move = -y_move*(1/tan(angle));
 	}
 	else
 	{
@@ -88,7 +87,7 @@ static double	get_horizontal(t_data *data, double angle, int count)
 			dof++;
 		}
 	}
-	if (data->rays_dist[count] > hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)))
+	if (count != -1 && data->rays_dist[count] > hypot((rx-px), (ry-py)) * fabs(cos(data->player->angle - angle)))
 	{
 		data->rays_x[count] = rx;
 		data->rays_y[count] = ry;

@@ -1,7 +1,7 @@
-SO  /Users/majjig/Desktop/cub3d/textures/S.xpm
-WE  /Users/majjig/Desktop/cub3d/textures/W.xpm
-EA  /Users/majjig/Desktop/cub3d/textures/E.xpm
-NO  /Users/majjig/Desktop/cub3d/textures/N.xpm
+SO  textures/S.xpm
+WE  textures/W.xpm
+EA  textures/E.xpm
+NO  textures/N.xpm
 
 
 F 210,180,140

@@ -126,6 +126,8 @@ void			my_mlx_pixel_put(t_img *data, int x, int y, unsigned int color);
 unsigned int	get_pixel(t_img *img, int x, int y, double dist);
 void			change_position(t_data *data);
 void			get_distance(t_data *data);
+double			get_horizontal(t_data *data, double angle, int count);
+double			get_vertical(t_data *data, double angle, int count);
 
 #endif
 
