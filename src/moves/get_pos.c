@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:04:37 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/28 17:07:26 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:21:31 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ static void	init_minimap(t_data *data)
 {
 	data->minimap = malloc(sizeof(t_minimap));
 	ft_bzero(data->minimap, sizeof(t_minimap));
-	data->minimap->p_box_height = BOX_SIZE / 2;
-	data->minimap->p_box_width = BOX_SIZE / 2;
-	data->minimap->box = BOX_SIZE / (1
-			+ (bool)(data->game->map_height * BOX_SIZE > WIN_HEIGHT));
+	data->minimap->p_box = 3;
+	data->minimap->box = 6;
 }
 
 static void	init_angle(t_data *data)

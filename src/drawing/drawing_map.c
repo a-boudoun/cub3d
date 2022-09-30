@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:49:44 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/28 16:44:14 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:39:59 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	drw_box(t_data *data, int x_b, int y_b, int color)
 	int	y;
 
 	y = 0;
-	while (y < 6)
+	while (y < data->minimap->box)
 	{
 		x = 0;
-		while (x < 6)
+		while (x < data->minimap->box)
 		{
 			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
@@ -62,16 +62,16 @@ void	drw_box(t_data *data, int x_b, int y_b, int color)
 	}
 }
 
-void	drw_player(t_data *data, int x_b, int y_b, int color)
+void	drw_player(t_data *data, double x_b, double y_b, int color)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	while (y < 3)
+	while (y < data->minimap->p_box)
 	{
 		x = 0;
-		while (x < 3)
+		while (x < data->minimap->p_box)
 		{
 			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
 			x++;
@@ -80,10 +80,10 @@ void	drw_player(t_data *data, int x_b, int y_b, int color)
 	}
 }
 
-void	draw_map(t_data *data)
+void	draw_map(t_data *data, double mini_p_x, double mini_p_y)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	y = 0;
 	while (data->game->map[y])
@@ -92,17 +92,19 @@ void	draw_map(t_data *data)
 		while (data->game->map[y][x])
 		{
 			if (data->game->map[y][x] == WALL)
-				drw_box(data, x * 6, y * 6, 0x8758FF);
+				drw_box(data, x * data->minimap->box,
+					y * data->minimap->box, 0x8758FF);
 			else if (data->game->map[y][x] == EMPTY || \
 					ft_strchr("NSWE", data->game->map[y][x]))
-				drw_box(data, x * 6, y * 6, 0xD2DAFF);
+				drw_box(data, x * data->minimap->box,
+					y * data->minimap->box, 0xD2DAFF);
 			else
-				drw_box(data, x * 6, y * 6, 0xFF000000);
+				drw_box(data, x * data->minimap->box,
+					y * data->minimap->box, 0xFF000000);
 			x++;
 		}
 		y++;
 	}
-	drw_player(data, data->player->x / BOX_SIZE * 6, \
-data->player->y / BOX_SIZE * 6, 0x000ED5);
+	drw_player(data, mini_p_x, mini_p_y, 0x000ED5);
 	get_distance(data);
 }

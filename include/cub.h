@@ -31,8 +31,8 @@
 # define EMPTY '0'
 # define WALL '1'
 # define NAME "cub3d"
-# define WIN_WIDTH 900
-# define WIN_HEIGHT 700
+# define WIN_WIDTH 1080
+# define WIN_HEIGHT 900
 # define PI M_PI
 # define ROTATE_SPEED 0.07
 # define PLAYER_SPEED 10
@@ -61,15 +61,14 @@ typedef struct s_sprite{
 }				t_sprite;
 
 typedef struct minimap{
-	int		p_box_height;
-	int		p_box_width;
+	int		p_box;
 	int		box;
 }				t_minimap;
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
+	double	x;
+	double	y;
 	int		turn_direction;
 	int		walk_direction;
 	int		rotation_direction;
@@ -112,7 +111,7 @@ typedef struct s_data
 	double		*rays_dist;
 	double		*rays_x;
 	double		*rays_y;
-	double			*ray_angle;
+	double		*ray_angle;
 	bool		*is_horizontal;
 }				t_data;
 
@@ -125,7 +124,7 @@ void			check_elements_path(t_data *data);
 int				count(char *str, char c);
 void			set_rays(t_data *data, double dist, int index);
 bool			is_empty(char *line);
-void			draw_map(t_data *data);
+void			draw_map(t_data *data, double mini_p_x, double mini_p_y);
 int				key_handler(int key, t_data *data);
 void			get_player_pos(t_data *data);
 void			draw_game(t_data *data);
