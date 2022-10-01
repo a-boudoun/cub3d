@@ -1,80 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/28 17:08:28 by aboudoun          #+#    #+#             */
+/*   Updated: 2022/09/30 15:02:27 by aboudoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
-void	move_up(t_data *data)
+static int	init_steps(t_data *data, int *mx, int *my, int *tx)
 {
-	int px = (int)((data->player->x + data->player->dx * PLAYER_SPEED) / BOX_SIZE);
-	int py = (int)((data->player->y - data->player->dy * PLAYER_SPEED) / BOX_SIZE);
-	if (data->game->map[py][px] != WALL)
+	int	ty;
+
+	*mx = data->player->walk_direction
+		* cos(data->player->angle) * PLAYER_SPEED;
+	*my = data->player->walk_direction
+		* sin(data->player->angle) * PLAYER_SPEED;
+	*tx = data->player->turn_direction
+		* cos(data->player->angle + (PI / 2)) * PLAYER_SPEED;
+	ty = data->player->turn_direction
+		* sin(data->player->angle + (PI / 2)) * PLAYER_SPEED;
+	return (ty);
+}
+
+static void	turn(t_data *data, int turn_x, int turn_y)
+{
+	double	wall_dist;
+
+	wall_dist = hypot(turn_x, turn_y);
+	if (move_dist(data, (data->player->angle + (PI / 2) * (data->player->\
+turn_direction))) - 1 > wall_dist && data->player->turn_direction)
 	{
-		data->player->y -= (data->player->dy * PLAYER_SPEED) * BOX_SIZE;
-		data->player->x += (data->player->dx * PLAYER_SPEED) * BOX_SIZE;
+		data->player->x += turn_x;
+		data->player->y -= turn_y;
 	}
 }
 
-void	move_down(t_data *data)
+static void	walk(t_data *data, int move_x, int move_y)
 {
-	int px = (int)((data->player->x - data->player->dx * PLAYER_SPEED) / BOX_SIZE);
-	int py = (int)((data->player->y + data->player->dy * PLAYER_SPEED) / BOX_SIZE);
-	if (data->game->map[py][px] != WALL)
+	double	wall_dist;
+
+	wall_dist = hypot(move_x, move_y);
+	if (move_dist(data, data->player->angle - (PI * (data->player->\
+walk_direction == -1))) - 1 > wall_dist && data->player->walk_direction)
 	{
-		data->player->y += (data->player->dy * PLAYER_SPEED) * BOX_SIZE;
-		data->player->x -= (data->player->dx * PLAYER_SPEED) * BOX_SIZE;
+		data->player->x += move_x;
+		data->player->y -= move_y;
 	}
 }
 
-void	move_left(t_data *data)
+void	change_position(t_data *data)
 {
-	int px = (int)((data->player->x - data->player->dy * PLAYER_SPEED) / BOX_SIZE);
-	int py = (int)(((data->player->y - data->player->dx * PLAYER_SPEED)) / BOX_SIZE);
-	if (data->game->map[py][px] != WALL)
-	{
-		data->player->y -= (data->player->dx * PLAYER_SPEED) * BOX_SIZE;
-		data->player->x -= (data->player->dy * PLAYER_SPEED) * BOX_SIZE;
-	}
-}
+	int	move_x;
+	int	move_y;
+	int	turn_x;
+	int	turn_y;
 
-void	move_right(t_data *data)
-{
-	int px = (int)((data->player->x + data->player->dy * PLAYER_SPEED) / BOX_SIZE);
-	int py = (int)(((data->player->y + data->player->dx * PLAYER_SPEED)) / BOX_SIZE);
-	if (data->game->map[py][px] != WALL)
-	{
-		data->player->x += (data->player->dy * PLAYER_SPEED) * BOX_SIZE;
-		data->player->y += (data->player->dx * PLAYER_SPEED) * BOX_SIZE;
-	}
-
-}
-
-void	rotate_left(t_data *data)
-{
-	data->player->angle += ROTATE_SPEED;
+	if (!data->player->walk_direction && !data->player->\
+turn_direction && !data->player->rotation_direction)
+		return ;
+	data->player->angle += data->player->rotation_direction * ROTATE_SPEED;
 	if (data->player->angle < 0)
 		data->player->angle = 2 * PI + data->player->angle;
-	data->player->dx = cos(data->player->angle);
-	data->player->dy = sin(data->player->angle);
-}
-
-void	rotate_right(t_data *data)
-{
-	data->player->angle -= ROTATE_SPEED;
-	if (data->player->angle > 2 * PI)
+	else if (data->player->angle > 2 * PI)
 		data->player->angle -= 2 * PI;
-	data->player->dx = cos(data->player->angle);
-	data->player->dy = sin(data->player->angle);
+	turn_y = init_steps(data, &move_x, &move_y, &turn_x);
+	turn(data, turn_x, turn_y);
+	walk(data, move_x, move_y);
 }
 
-void	key_handler(int key, t_data *data)
+int	key_handler(int key, t_data *data)
 {
+	if (key == ESC)
+	{
+		mlx_destroy_window(data->mlx, data->win);
+		exit(EXIT_SUCCESS);
+	}
 	if (key == W)
-		move_up(data);
-	else if (key == S)
-		move_down(data);
-	else if (key == A)
-		move_left(data);
-	else if (key == D)
-		move_right(data);
-	else if (key == RIGHT)
-		rotate_right(data);
-	else if (key == LEFT)
-		rotate_left(data);
+		data->player->walk_direction = 1;
+	if (key == S)
+		data->player->walk_direction = -1;
+	if (key == A)
+		data->player->turn_direction = 1;
+	if (key == D)
+		data->player->turn_direction = -1;
+	if (key == LEFT)
+		data->player->rotation_direction = 1;
+	if (key == RIGHT)
+		data->player->rotation_direction = -1;
+	return (0);
 }
