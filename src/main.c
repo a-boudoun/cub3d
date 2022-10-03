@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:45:00 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/30 15:38:39 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/01 19:21:07 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	open_map(int ac, char **av)
 
 int	next_frame(t_data *data)
 {
-	double	mini_p_x;
-	double	mini_p_y;
+	static double	mini_p_x;
+	static double	mini_p_y;
 
 	mini_p_x = data->player->x / BOX_SIZE * data->minimap->box;
 	mini_p_y = data->player->y / BOX_SIZE * data->minimap->box;

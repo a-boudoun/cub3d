@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_vertical.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:07:43 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/28 16:59:38 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/01 19:33:12 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ data->game->map_height && my >= 0 && data->game->map[my][mx] == '1')
 
 double	get_vertical(t_data *data, double angle, int count)
 {
-	t_distance	*dist;
+	static t_distance	*dist = NULL;
 	int			px;
 	int			py;
 
 	px = data->player->x;
 	py = data->player->y;
-	dist = malloc(sizeof(t_distance));
-	ft_bzero(dist, sizeof(t_distance));
+	if (!dist)
+		dist = ft_calloc(1, sizeof(t_distance));
 	dist->dof = 0;
 	init_get_vertical(dist, data, angle);
 	check_map(data, dist);

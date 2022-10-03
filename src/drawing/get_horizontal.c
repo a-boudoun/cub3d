@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_horizontal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:15:07 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/28 16:55:02 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/01 19:26:57 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ data->game->map_height && my >= 0 && data->game->map[my][mx] == '1')
 
 double	get_horizontal(t_data *data, double angle, int count)
 {
-	t_distance	*dist;
+	static t_distance	*dist = NULL;
 	int			px;
 	int			py;
 
-	dist = malloc(sizeof(t_distance));
-	ft_bzero(dist, sizeof(t_distance));
+	if (!dist)
+		dist = ft_calloc(1, sizeof(t_distance));
 	px = data->player->x;
 	py = data->player->y;
 	dist->dof = 0;
