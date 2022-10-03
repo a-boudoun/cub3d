@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:49:44 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/30 15:59:19 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/03 18:07:34 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,29 +82,34 @@ void	drw_player(t_data *data, double x_b, double y_b, int color)
 
 void	draw_map(t_data *data, double mini_p_x, double mini_p_y)
 {
-	int		x;
-	int		y;
+	int 	map_y;
+	int 	map_x;
+	int 	i;
+	int		j;
+	int		k;
 
-	y = 0;
-	while (data->game->map[y])
+	map_y = mini_p_y / data->minimap->box - MINI/2;
+	map_x = mini_p_x / data->minimap->box - MINI/2;
+	k = map_x;
+	j = 0;
+	while (j < MINI)
 	{
-		x = 0;
-		while (data->game->map[y][x])
+		i = 0;
+		map_x = k;
+		while (i < MINI)
 		{
-			if (data->game->map[y][x] == WALL)
-				drw_box(data, x * data->minimap->box,
-					y * data->minimap->box, 0x8758FF);
-			else if (data->game->map[y][x] == EMPTY || \
-					ft_strchr("NSWE", data->game->map[y][x]))
-				drw_box(data, x * data->minimap->box,
-					y * data->minimap->box, 0xD2DAFF);
-			else
-				drw_box(data, x * data->minimap->box,
-					y * data->minimap->box, 0xFF000000);
-			x++;
+			if (map_y < 0 || map_x < 0 || map_y > data->game->map_height - 1 || map_x > data->game->map_width - 1 || data->game->map[map_y][map_x] == ' ')
+				drw_box(data, i * data->minimap->box, j * data->minimap->box, 0x8758FF);
+			else if (data->game->map[map_y][map_x] == WALL)
+				drw_box(data, i * data->minimap->box, j * data->minimap->box, 0x8758FF);
+			else if (data->game->map[map_y][map_x] == EMPTY || ft_strchr("NSWE", data->game->map[map_y][map_x]))
+				drw_box(data, i * data->minimap->box, j * data->minimap->box, 0xD2DAFF);
+			i++;
+			map_x++;
 		}
-		y++;
+		j++;
+		map_y++;
 	}
-	drw_player(data, mini_p_x, mini_p_y, 0x000ED5);
+	drw_player(data, MINI / 2 * 6, MINI / 2 * 6, 0x000ED5);
 	get_distance(data);
 }

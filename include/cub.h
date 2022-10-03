@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:22:17 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/30 16:26:11 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/03 18:10:52 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@
 # define EMPTY '0'
 # define WALL '1'
 # define NAME "cub3d"
-# define WIN_WIDTH 1080
-# define WIN_HEIGHT 900
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
 # define PI M_PI
 # define ROTATE_SPEED 0.07
 # define PLAYER_SPEED 10
 # define FOV 1.0471975512
 # define BOX_SIZE 64
+# define MINI 20
 
 typedef struct s_img{
 	unsigned int	*img;
