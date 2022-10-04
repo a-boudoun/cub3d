@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:45:00 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/01 19:21:07 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/04 19:05:26 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,36 @@ int	open_map(int ac, char **av)
 	return (fd);
 }
 
+unsigned int	*map_img_fix(t_data*data, t_img *img)
+{
+	int ix;
+	int iy = data->player->y / BOX_SIZE * data->minimap->box - 40;
+	static t_img	*new = NULL;
+	int x;
+	int y = 0;
+
+	if (!new)
+	{
+		new = malloc(sizeof(t_img));
+		new->img = mlx_new_image(data->mlx, 80, 80);
+		new->addr = (int *) mlx_get_data_addr(new->img, &new->bits_per_pixel, &new->line_length, &new->endian);
+	}
+	while (y < 80 * (new->line_length / 4))
+	{
+		x = 0;
+		ix = data->player->x / BOX_SIZE * data->minimap->box - 40;
+		while (x < 80)
+		{
+			new->addr[y + x] = img->addr[iy + ix];
+			x++;
+			ix++;
+		}
+		y += new->line_length / 4;
+		iy += img->line_length / 4;
+	}
+	return (new->img);
+}
+
 int	next_frame(t_data *data)
 {
 	static double	mini_p_x;
@@ -49,7 +79,7 @@ int	next_frame(t_data *data)
 	change_position(data);
 	draw_map(data, mini_p_x, mini_p_y);
 	draw_game(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, map_img_fix(data, data->img), 10, 10);
 	return (0);
 }
 
