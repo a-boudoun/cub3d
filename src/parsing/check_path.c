@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:21:02 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/05 15:01:28 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/05 19:13:42 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	check_elements_path(t_data *data)
 		load_xpm(data, west, data->game->west);
 	if (is_valid(data->game->east))
 		load_xpm(data, east, data->game->east);
-	data->player->p_img = mlx_xpm_file_to_image(data->mlx, "/Users/aboudoun/Desktop/cub3d/textures/player.xpm", &data->player->width, &data->player->height);
+	data->player->p_img = mlx_xpm_file_to_image(data->mlx, "./textures/player.xpm", &data->player->width, &data->player->height);
 	data->sprite->north = north;
 	data->sprite->south = south;
 	data->sprite->west = west;
