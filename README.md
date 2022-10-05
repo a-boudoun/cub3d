@@ -5,4 +5,4 @@ The goal of cub3d is to make something using raycasting (like Wolfenstein 3D).
 
 [playfuljs.com](http://www.playfuljs.com/a-first-person-engine-in-265-lines/)
 
-[Course (videos)]()
+[Course (videos)](drive.google.com/drive/folders/1HRowramI3x8R06pPBE2limnAULyTAlJR)
