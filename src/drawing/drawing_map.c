@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:49:44 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/03 18:07:34 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:22:04 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	draw_line(t_data *data, double b_x, double b_y)
 	double	deltay;
 	int		pixels;
 
-	deltay = (b_y - sin(data->player->angle) * 6) - b_y;
-	deltax = (b_x + cos(data->player->angle) * 6) - b_x;
+	deltay = (b_y - sin(data->player->angle) * 9) - b_y;
+	deltax = (b_x + cos(data->player->angle) * 9) - b_x;
 	pixels = data->rays_dist[WIN_WIDTH / 2];
 	deltax /= pixels;
 	deltay /= pixels;
@@ -59,25 +59,6 @@ void	drw_box(t_data *data, int x_b, int y_b, int color)
 		}
 		y++;
 	}
-}
-
-void	drw_player(t_data *data, double x_b, double y_b, int color)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < data->minimap->p_box)
-	{
-		x = 0;
-		while (x < data->minimap->p_box)
-		{
-			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
-			x++;
-		}
-		y++;
-	}
-	draw_line(data, x_b, y_b);
 }
 
 void	draw_map(t_data *data, double mini_p_x, double mini_p_y)
@@ -110,6 +91,6 @@ void	draw_map(t_data *data, double mini_p_x, double mini_p_y)
 		j++;
 		map_y++;
 	}
-	drw_player(data, MINI / 2 * 6, MINI / 2 * 6, 0x000ED5);
+	draw_line(data, MINI / 2 * 6, MINI / 2 * 6);
 	get_distance(data);
 }

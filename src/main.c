@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:45:00 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/04 19:05:26 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:06:04 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ int	next_frame(t_data *data)
 	change_position(data);
 	draw_map(data, mini_p_x, mini_p_y);
 	draw_game(data);
-	mlx_put_image_to_window(data->mlx, data->win, map_img_fix(data, data->img), 10, 10);
+	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 10, 10);
+	mlx_put_image_to_window(data->mlx, data->win, data->player->p_img, MINI / 2 * 6 + 5
+	, MINI / 2 * 6 + 5);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:22:17 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/03 18:10:52 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:56:07 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ typedef struct minimap{
 
 typedef struct s_player
 {
+	void	*p_img;
+	int		width;
+	int		height;
 	double	x;
 	double	y;
 	int		turn_direction;

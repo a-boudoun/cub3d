@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:04:37 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/30 15:56:42 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:29:10 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	init_minimap(t_data *data)
 {
 	data->minimap = malloc(sizeof(t_minimap));
 	ft_bzero(data->minimap, sizeof(t_minimap));
-	data->minimap->p_box = 4;
+	data->minimap->p_box = 8;
 	data->minimap->box = 6;
 }
 
