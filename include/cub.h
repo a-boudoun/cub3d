@@ -1,23 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/30 16:22:17 by aboudoun          #+#    #+#             */
+/*   Updated: 2022/10/03 18:10:52 by aboudoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB_H
-#define CUB_H
+# define CUB_H
 
-#define WHITE_SPACES " \t\r\f\v"
+# define WHITE_SPACES " \t\r\f\v"
 
-#include "../libft/libft.h"
-#include "../gnl/get_next_line.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdbool.h>
-#include <math.h>
-#include <fcntl.h>
-#include <math.h>
-#include "../mlx/mlx.h"
+# include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdbool.h>
+# include <math.h>
+# include <fcntl.h>
+# include <math.h>
+# include "../mlx/mlx.h"
 
-
-// KEYS
-
+// KEYS //
 # define W 13
 # define S 1
 # define A 0
@@ -28,19 +37,20 @@
 # define LEFT 123
 # define RIGHT 124
 # define EXIT 69
+////////////////////
 # define EMPTY '0'
 # define WALL '1'
 # define NAME "cub3d"
-# define WIN_WIDTH 1080
-# define WIN_HEIGHT 900
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
 # define PI M_PI
 # define ROTATE_SPEED 0.07
 # define PLAYER_SPEED 10
-# define FOV (PI / 3)
+# define FOV 1.0471975512
 # define BOX_SIZE 64
+# define MINI 20
 
-
-typedef struct	s_img{
+typedef struct s_img{
 	unsigned int	*img;
 	int				*addr;
 	int				bits_per_pixel;
@@ -91,10 +101,10 @@ typedef struct s_game {
 }				t_game;
 
 typedef struct s_distance{
-	double rx;
-	double ry;
-	double x_move;
-	double y_move;
+	double	rx;
+	double	ry;
+	double	x_move;
+	double	y_move;
 	int		dof;
 }				t_distance;
 
@@ -114,7 +124,6 @@ typedef struct s_data
 	double		*ray_angle;
 	bool		*is_horizontal;
 }				t_data;
-
 
 void			error_handler(char *message);
 void			get_map(int fd, t_game *game, char*line);
@@ -139,6 +148,4 @@ int				get_rgb(char *num);
 void			init_data(t_data *data);
 void			init_images(t_data *data);
 
-
 #endif
-
