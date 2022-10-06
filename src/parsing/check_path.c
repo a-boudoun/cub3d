@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   check_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:21:02 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/09 22:16:56 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/05 19:13:42 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub.h"
 
 static int	is_valid(char *path)
 {
-	int fd;
+	int	fd;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
@@ -23,21 +22,42 @@ static int	is_valid(char *path)
 	return (fd);
 }
 
-t_sprite	*check_elements_path(t_data *data)
+void	load_xpm(t_data *data, t_img *img, char *path)
 {
-	int img_width = 40;
-	int img_height = 40;
-	t_sprite	*sprite;
+	img->img = mlx_xpm_file_to_image(data->mlx, path,
+			&(img->width), &(img->height));
+	if (img->img == NULL)
+		error_handler("Invalid texture");
+	img->addr = (int *) mlx_get_data_addr(img->img, &(img->bits_per_pixel),
+			&(img->line_length), &(img->endian));
+	if (img->addr == NULL)
+		error_handler("Invalid texture");
+}
 
-	sprite = (t_sprite *) malloc(sizeof(t_sprite));
-	ft_bzero(sprite, sizeof(t_sprite));
+void	check_elements_path(t_data *data)
+{
+	t_img		*north;
+	t_img		*south;
+	t_img		*west;
+	t_img		*east;
+
+	data->sprite = (t_sprite *) malloc(sizeof(t_sprite));
+	north = (t_img *) malloc(sizeof(t_img));
+	south = (t_img *) malloc(sizeof(t_img));
+	west = (t_img *) malloc(sizeof(t_img));
+	east = (t_img *) malloc(sizeof(t_img));
+	ft_bzero(data->sprite, sizeof(t_sprite));
 	if (is_valid(data->game->north))
-		sprite->north_tex = mlx_xpm_file_to_image(data->mlx, data->game->north, &img_width, &img_height);
+		load_xpm(data, north, data->game->north);
 	if (is_valid(data->game->south))
-		sprite->south_tex = mlx_xpm_file_to_image(data->mlx, data->game->south, &img_width, &img_height);
+		load_xpm(data, south, data->game->south);
 	if (is_valid(data->game->west))
-		sprite->west_tex = mlx_xpm_file_to_image(data->mlx, data->game->west, &img_width, &img_height);
+		load_xpm(data, west, data->game->west);
 	if (is_valid(data->game->east))
-		sprite->east_tex = mlx_xpm_file_to_image(data->mlx, data->game->east, &img_width, &img_height);
-	return (sprite);
+		load_xpm(data, east, data->game->east);
+	data->player->p_img = mlx_xpm_file_to_image(data->mlx, "./textures/player.xpm", &data->player->width, &data->player->height);
+	data->sprite->north = north;
+	data->sprite->south = south;
+	data->sprite->west = west;
+	data->sprite->east = east;
 }

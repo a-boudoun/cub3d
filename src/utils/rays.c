@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rays.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/28 16:41:46 by majjig            #+#    #+#             */
+/*   Updated: 2022/09/28 16:41:47 by majjig           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
-// void	rays(t_data *data, double angle)
-// {
-// 	//TODO: casting rays to the walls
-// }
+void	set_rays(t_data *data, double dist, int index)
+{
+	data->rays_dist[index] = (dist);
+}
