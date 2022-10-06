@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:45:00 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/06 14:00:15 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:01:24 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,6 @@ int	open_map(int ac, char **av)
 	if (fd < 0 || !ft_strcmp(".cub", &av[1][ft_strlen(av[1]) - 4]))
 		error_handler("invalid file");
 	return (fd);
-}
-
-void	circlular_minimap(int *img)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < MINI * 6)
-	{
-		x = 0;
-		while (x < MINI * 6)
-		{
-			if ((hypot(x - MINI / 2 * 6, y - MINI / 2 * 6) > MINI / 2 * 6))
-				img[y * MINI * 6 + x] = 0xFF000000;
-			else if ((hypot(x - MINI / 2 * 6, y - MINI / 2 * 6) >= MINI / 2 * 6 - 1))
-				img[y * MINI * 6 + x] = 0xFFFFFF;
-			x++;
-		}
-		y++;
-	}
 }
 
 int	next_frame(t_data *data)
