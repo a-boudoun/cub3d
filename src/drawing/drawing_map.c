@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:49:44 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/30 15:59:19 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:19:08 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	draw_line(t_data *data, double b_x, double b_y)
 	double	deltay;
 	int		pixels;
 
-	deltay = (b_y - sin(data->player->angle) * 6) - b_y;
-	deltax = (b_x + cos(data->player->angle) * 6) - b_x;
+	deltay = (b_y - sin(data->player->angle) * 9) - b_y;
+	deltax = (b_x + cos(data->player->angle) * 9) - b_x;
 	pixels = data->rays_dist[WIN_WIDTH / 2];
 	deltax /= pixels;
 	deltay /= pixels;
@@ -48,6 +48,8 @@ void	drw_box(t_data *data, int x_b, int y_b, int color)
 	int	x;
 	int	y;
 
+	x_b *= data->minimap->box;
+	y_b *= data->minimap->box;
 	y = 0;
 	while (y < data->minimap->box)
 	{
@@ -61,50 +63,37 @@ void	drw_box(t_data *data, int x_b, int y_b, int color)
 	}
 }
 
-void	drw_player(t_data *data, double x_b, double y_b, int color)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < data->minimap->p_box)
-	{
-		x = 0;
-		while (x < data->minimap->p_box)
-		{
-			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
-			x++;
-		}
-		y++;
-	}
-	draw_line(data, x_b, y_b);
-}
-
 void	draw_map(t_data *data, double mini_p_x, double mini_p_y)
 {
-	int		x;
-	int		y;
+	int	my;
+	int	mx;
+	int	i;
+	int	j;
+	int	k;
 
-	y = 0;
-	while (data->game->map[y])
+	my = mini_p_y / data->minimap->box - MINI / 2;
+	mx = mini_p_x / data->minimap->box - MINI / 2;
+	k = mx;
+	j = 0;
+	while (j < MINI)
 	{
-		x = 0;
-		while (data->game->map[y][x])
+		i = 0;
+		mx = k;
+		while (i < MINI)
 		{
-			if (data->game->map[y][x] == WALL)
-				drw_box(data, x * data->minimap->box,
-					y * data->minimap->box, 0x8758FF);
-			else if (data->game->map[y][x] == EMPTY || \
-					ft_strchr("NSWE", data->game->map[y][x]))
-				drw_box(data, x * data->minimap->box,
-					y * data->minimap->box, 0xD2DAFF);
+			if (my < 0 || mx < 0 || my > data->game->map_height - 1 || mx
+				> data->game->map_width - 1 || data->game->map[my][mx] == ' ')
+				drw_box(data, i, j, 0x8758FF);
+			else if (data->game->map[my][mx] == WALL)
+				drw_box(data, i, j, 0x8758FF);
 			else
-				drw_box(data, x * data->minimap->box,
-					y * data->minimap->box, 0xFF000000);
-			x++;
+				drw_box(data, i, j, 0xD2DAFF);
+			i++;
+			mx++;
 		}
-		y++;
+		j++;
+		my++;
 	}
-	drw_player(data, mini_p_x, mini_p_y, 0x000ED5);
+	draw_line(data, MINI / 2 * 6, MINI / 2 * 6);
 	get_distance(data);
 }

@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:35:09 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/28 17:46:58 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:36:43 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ void	init_images(t_data *data)
 	data->img_game->addr = (int *)mlx_get_data_addr(data->img_game->\
 img, &data->img_game->bits_per_pixel, &data->img_game->\
 line_length, &data->img_game->endian);
-	data->img->img = mlx_new_image(data->mlx,
-			(6 *(data->game->map_width)), data->game->map_height * 6);
+	data->img->img = mlx_new_image(data->mlx, 6 * MINI, MINI * 6);
 	data->img->addr = (int *)mlx_get_data_addr(data->img->img, &data->img->\
 bits_per_pixel, &data->img->line_length, &data->img->endian);
 }
