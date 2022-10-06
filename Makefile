@@ -23,7 +23,7 @@ LIBFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 DRAW = $(addprefix drawing/, drawing_map draw_game get_dest get_horizontal get_vertical)
 MOVES = $(addprefix moves/, keys get_pos)
 PARSING = $(addprefix parsing/, error_handler gen_map_table read_cub check_path)
-UTILS = $(addprefix utils/, count ft_strcmp is_empty rays pixels rgb init_data)
+UTILS = $(addprefix utils/, count ft_strcmp is_empty rays pixels rgb init_data minimap)
 FILES =  $(addprefix src/, main $(PARSING) $(UTILS) $(DRAW) $(MOVES))
 
 OBJ = $(addprefix $(OFILES)/, $(FILES:=.o))

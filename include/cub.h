@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:22:17 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/05 14:56:07 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:31:29 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 # define FOV 1.0471975512
 # define BOX_SIZE 64
 # define MINI 20
+# define VIEW_RANGE 2
 
 typedef struct s_img{
 	unsigned int	*img;
@@ -150,5 +151,6 @@ double			get_vertical(t_data *data, double angle, int count);
 int				get_rgb(char *num);
 void			init_data(t_data *data);
 void			init_images(t_data *data);
+void			circlular_minimap(int *img);
 
 #endif

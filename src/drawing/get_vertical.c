@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:07:43 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/01 19:33:12 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:05:45 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ data->game->map_height && my >= 0 && data->game->map[my][mx] == '1')
 double	get_vertical(t_data *data, double angle, int count)
 {
 	static t_distance	*dist = NULL;
-	int			px;
-	int			py;
+	int					px;
+	int					py;
 
 	px = data->player->x;
 	py = data->player->y;
