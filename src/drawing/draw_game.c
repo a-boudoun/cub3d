@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:46:13 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/06 14:09:55 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/06 16:41:32 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	drwa_wall_floor(t_data *data, int x, int wall_height)
 {
 	int	y;
 
-	y = 0;
-	while (y++ < (WIN_HEIGHT - wall_height) / 2)
+	y = -1;
+	while (++y < (WIN_HEIGHT - wall_height) / 2)
 		my_mlx_pixel_put(data->img_game, x, y, data->game->color_ceiling);
 	y = (WIN_HEIGHT + wall_height) / 2;
 	while (y++ < WIN_HEIGHT)
