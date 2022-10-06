@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:49:44 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/06 17:00:31 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/06 17:14:34 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,6 @@ void	draw_line(t_data *data, double b_x, double b_y)
 	}
 }
 
-void	drw_box(t_data *data, int x_b, int y_b, int color)
-{
-	// int	x;
-	// int	y;
-
-	// y = 0;
-	// while (y < data->minimap->box)
-	// {
-	// 	x = 0;
-	// 	while (x < data->minimap->box)
-	// 	{
-			my_mlx_pixel_put(data->img, x_b, y_b, color);
-		// 	x++;
-		// }
-		// y++;
-}
-
 void	draw_map(t_data *data, double mini_p_x, double mini_p_y)
 {
 	int	my;
@@ -79,11 +62,11 @@ void	draw_map(t_data *data, double mini_p_x, double mini_p_y)
 		while (i < MINI * data->minimap->box)
 		{
 			if (my < 0 || mx < 0 || my / data->minimap->box > data->game->map_height - 1 || mx / data->minimap->box  > data->game->map_width - 1 || data->game->map[my/ data->minimap->box ][mx/ data->minimap->box ] == ' ')
-				drw_box(data, i, j, 0x8758FF);
+				my_mlx_pixel_put(data->img, i, j, 0x8758FF);
 			else if (data->game->map[my / data->minimap->box ][mx / data->minimap->box ] == WALL)
-				drw_box(data, i, j, 0x8758FF);
+				my_mlx_pixel_put(data->img, i, j, 0x8758FF);
 			else if (data->game->map[my / data->minimap->box ][mx / data->minimap->box ] == EMPTY || ft_strchr("NSWE", data->game->map[my / data->minimap->box ][mx / data->minimap->box ]))
-				drw_box(data, i, j, 0xD2DAFF);
+				my_mlx_pixel_put(data->img, i, j, 0xD2DAFF);
 			i++;
 			mx++;
 		}
