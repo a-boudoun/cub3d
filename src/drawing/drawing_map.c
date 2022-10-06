@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:49:44 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/05 15:22:04 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:19:08 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	drw_box(t_data *data, int x_b, int y_b, int color)
 	int	x;
 	int	y;
 
+	x_b *= data->minimap->box;
+	y_b *= data->minimap->box;
 	y = 0;
 	while (y < data->minimap->box)
 	{
@@ -63,33 +65,34 @@ void	drw_box(t_data *data, int x_b, int y_b, int color)
 
 void	draw_map(t_data *data, double mini_p_x, double mini_p_y)
 {
-	int 	map_y;
-	int 	map_x;
-	int 	i;
-	int		j;
-	int		k;
+	int	my;
+	int	mx;
+	int	i;
+	int	j;
+	int	k;
 
-	map_y = mini_p_y / data->minimap->box - MINI/2;
-	map_x = mini_p_x / data->minimap->box - MINI/2;
-	k = map_x;
+	my = mini_p_y / data->minimap->box - MINI / 2;
+	mx = mini_p_x / data->minimap->box - MINI / 2;
+	k = mx;
 	j = 0;
 	while (j < MINI)
 	{
 		i = 0;
-		map_x = k;
+		mx = k;
 		while (i < MINI)
 		{
-			if (map_y < 0 || map_x < 0 || map_y > data->game->map_height - 1 || map_x > data->game->map_width - 1 || data->game->map[map_y][map_x] == ' ')
-				drw_box(data, i * data->minimap->box, j * data->minimap->box, 0x8758FF);
-			else if (data->game->map[map_y][map_x] == WALL)
-				drw_box(data, i * data->minimap->box, j * data->minimap->box, 0x8758FF);
-			else if (data->game->map[map_y][map_x] == EMPTY || ft_strchr("NSWE", data->game->map[map_y][map_x]))
-				drw_box(data, i * data->minimap->box, j * data->minimap->box, 0xD2DAFF);
+			if (my < 0 || mx < 0 || my > data->game->map_height - 1 || mx
+				> data->game->map_width - 1 || data->game->map[my][mx] == ' ')
+				drw_box(data, i, j, 0x8758FF);
+			else if (data->game->map[my][mx] == WALL)
+				drw_box(data, i, j, 0x8758FF);
+			else
+				drw_box(data, i, j, 0xD2DAFF);
 			i++;
-			map_x++;
+			mx++;
 		}
 		j++;
-		map_y++;
+		my++;
 	}
 	draw_line(data, MINI / 2 * 6, MINI / 2 * 6);
 	get_distance(data);

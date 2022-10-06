@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:46:13 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/05 15:04:33 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:09:55 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,22 @@ void	drw_column(t_data *data, int x, int wall_height, int offsetx)
 	y = (WIN_HEIGHT - wall_height) / 2;
 	while (y++ < (WIN_HEIGHT + wall_height) / 2)
 	{
-		if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
-		{
-			if (is_horizontal && sin(data->ray_angle[WIN_WIDTH - x]) > 0)
-				my_mlx_pixel_put(data->img_game, x, y, \
-get_pixel(data->sprite->north, offsetx, y, wall_height));
-			else if (is_horizontal && sin(data->ray_angle[WIN_WIDTH - x]) < 0)
-				my_mlx_pixel_put(data->img_game, x, y, \
-get_pixel(data->sprite->south, offsetx, y, wall_height));
-			else if (!is_horizontal && cos(data->ray_angle[WIN_WIDTH - x]) > 0)
-				my_mlx_pixel_put(data->img_game, x, y, \
-get_pixel(data->sprite->east, offsetx, y, wall_height));
-			else if (!is_horizontal && cos(data->ray_angle[WIN_WIDTH - x]) < 0)
-				my_mlx_pixel_put(data->img_game, x, y, \
-get_pixel(data->sprite->west, offsetx, y, wall_height));
-		}
-		else if (y >= WIN_HEIGHT)
-			break;
+		if (y >= WIN_HEIGHT)
+			break ;
 		else if (y < 0)
 			y = 0;
+		if (is_horizontal && sin(data->ray_angle[WIN_WIDTH - x]) > 0)
+			my_mlx_pixel_put(data->img_game, x, y, \
+get_pixel(data->sprite->north, offsetx, y, wall_height));
+		else if (is_horizontal && sin(data->ray_angle[WIN_WIDTH - x]) < 0)
+			my_mlx_pixel_put(data->img_game, x, y, \
+get_pixel(data->sprite->south, offsetx, y, wall_height));
+		else if (!is_horizontal && cos(data->ray_angle[WIN_WIDTH - x]) > 0)
+			my_mlx_pixel_put(data->img_game, x, y, \
+get_pixel(data->sprite->east, offsetx, y, wall_height));
+		else if (!is_horizontal && cos(data->ray_angle[WIN_WIDTH - x]) < 0)
+			my_mlx_pixel_put(data->img_game, x, y, \
+get_pixel(data->sprite->west, offsetx, y, wall_height));
 	}
 }
 
