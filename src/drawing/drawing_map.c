@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:49:44 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/06 14:19:08 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/06 17:00:31 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,19 @@ void	draw_line(t_data *data, double b_x, double b_y)
 
 void	drw_box(t_data *data, int x_b, int y_b, int color)
 {
-	int	x;
-	int	y;
+	// int	x;
+	// int	y;
 
-	x_b *= data->minimap->box;
-	y_b *= data->minimap->box;
-	y = 0;
-	while (y < data->minimap->box)
-	{
-		x = 0;
-		while (x < data->minimap->box)
-		{
-			my_mlx_pixel_put(data->img, x + x_b, y + y_b, color);
-			x++;
-		}
-		y++;
-	}
+	// y = 0;
+	// while (y < data->minimap->box)
+	// {
+	// 	x = 0;
+	// 	while (x < data->minimap->box)
+	// 	{
+			my_mlx_pixel_put(data->img, x_b, y_b, color);
+		// 	x++;
+		// }
+		// y++;
 }
 
 void	draw_map(t_data *data, double mini_p_x, double mini_p_y)
@@ -71,22 +68,21 @@ void	draw_map(t_data *data, double mini_p_x, double mini_p_y)
 	int	j;
 	int	k;
 
-	my = mini_p_y / data->minimap->box - MINI / 2;
-	mx = mini_p_x / data->minimap->box - MINI / 2;
+	my = mini_p_y - MINI/2 * data->minimap->box;
+	mx = mini_p_x - MINI/2 * data->minimap->box;
 	k = mx;
 	j = 0;
-	while (j < MINI)
+	while (j < MINI * data->minimap->box)
 	{
 		i = 0;
 		mx = k;
-		while (i < MINI)
+		while (i < MINI * data->minimap->box)
 		{
-			if (my < 0 || mx < 0 || my > data->game->map_height - 1 || mx
-				> data->game->map_width - 1 || data->game->map[my][mx] == ' ')
+			if (my < 0 || mx < 0 || my / data->minimap->box > data->game->map_height - 1 || mx / data->minimap->box  > data->game->map_width - 1 || data->game->map[my/ data->minimap->box ][mx/ data->minimap->box ] == ' ')
 				drw_box(data, i, j, 0x8758FF);
-			else if (data->game->map[my][mx] == WALL)
+			else if (data->game->map[my / data->minimap->box ][mx / data->minimap->box ] == WALL)
 				drw_box(data, i, j, 0x8758FF);
-			else
+			else if (data->game->map[my / data->minimap->box ][mx / data->minimap->box ] == EMPTY || ft_strchr("NSWE", data->game->map[my / data->minimap->box ][mx / data->minimap->box ]))
 				drw_box(data, i, j, 0xD2DAFF);
 			i++;
 			mx++;
