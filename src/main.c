@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:45:00 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/05 19:35:24 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:00:15 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ void	circlular_minimap(int *img)
 		x = 0;
 		while (x < MINI * 6)
 		{
-			if (!(hypot(x - MINI / 2 * 6, y - MINI / 2 * 6) < MINI / 2 * 6))
+			if ((hypot(x - MINI / 2 * 6, y - MINI / 2 * 6) > MINI / 2 * 6))
 				img[y * MINI * 6 + x] = 0xFF000000;
+			else if ((hypot(x - MINI / 2 * 6, y - MINI / 2 * 6) >= MINI / 2 * 6 - 1))
+				img[y * MINI * 6 + x] = 0xFFFFFF;
 			x++;
 		}
 		y++;
