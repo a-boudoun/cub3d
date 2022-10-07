@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:08:28 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/05 18:57:50 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/07 15:00:48 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,36 +40,12 @@ turn_direction))) - 20 > wall_dist && data->player->turn_direction)
 	}
 }
 
-void	wall_collegion(t_data *data)
-{
-	double angle;
-	double dist;
-
-	angle = data->player->angle;
-	dist = move_dist(data, angle);
-	if (dist < 30)
-	{
-		if (data->is_horizontal[WIN_WIDTH / 2])
-		{
-			if ((angle > PI / 2 || angle < 3 * PI / 2) && move_dist(data, PI) - 20 > cos(angle) * PLAYER_SPEED)
-				data->player->x = data->player->x + cos(angle) * PLAYER_SPEED;
-			else if ((angle < PI / 2 || angle > 3 * PI / 2) && move_dist(data, 0) - 20 > cos(angle) * PLAYER_SPEED)
-				data->player->x = data->player->x + cos(angle) * PLAYER_SPEED;
-		}
-		else if (!data->is_horizontal[WIN_WIDTH / 2])
-		{
-			if ((angle > 0 && angle <= PI) && move_dist(data, PI / 2) - 20 > sin(angle) * PLAYER_SPEED)
-				data->player->y = data->player->y - sin(angle) * PLAYER_SPEED;
-			else if ((angle < 0 || angle > PI) && move_dist(data, 3 * PI / 2) - 20 > sin(angle) * PLAYER_SPEED)
-				data->player->y = data->player->y - sin(angle) * PLAYER_SPEED;
-		}
-	}
-}
-
 static void	walk(t_data *data, int move_x, int move_y)
 {
 	double	wall_dist;
+	double	dist;
 
+	dist = move_dist(data, data->player->angle);
 	wall_dist = hypot(move_x, move_y);
 	if (move_dist(data, data->player->angle - (PI * (data->player->\
 walk_direction == -1))) - 20 > wall_dist && data->player->walk_direction)
@@ -77,11 +53,9 @@ walk_direction == -1))) - 20 > wall_dist && data->player->walk_direction)
 		data->player->x += move_x;
 		data->player->y -= move_y;
 	}
-	else if (data->player->walk_direction)
-		wall_collegion(data);
-
+	else if (data->player->walk_direction && dist < 30)
+		wall_collegion(data, data->player->angle);
 }
-
 
 void	change_position(t_data *data)
 {

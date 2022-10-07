@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:22:17 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/06 15:31:29 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/07 15:01:53 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,6 @@ int				get_rgb(char *num);
 void			init_data(t_data *data);
 void			init_images(t_data *data);
 void			circlular_minimap(int *img);
+void			wall_collegion(t_data *data, double angle);
 
 #endif

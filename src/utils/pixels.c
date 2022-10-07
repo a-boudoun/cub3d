@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixels.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:41:42 by majjig            #+#    #+#             */
-/*   Updated: 2022/10/06 15:32:07 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/07 14:48:28 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ unsigned int	get_pixel(t_img *img, int x, int y, double wall_height)
 	r = (color & 0xFF0000) >> 16;
 	g = (color & 0xFF00) >> 8;
 	b = (color & 0xFF);
-
 	brightness = 0xFF * (wall_height * VIEW_RANGE) / WIN_HEIGHT;
 	r = r * brightness / 0xFF;
 	g = g * brightness / 0xFF;

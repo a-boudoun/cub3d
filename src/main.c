@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:45:00 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/06 14:01:24 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/07 15:04:25 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	next_frame(t_data *data)
 	draw_game(data);
 	circlular_minimap(data->img->addr);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 10, 10);
-	mlx_put_image_to_window(data->mlx, data->win, data->player->p_img, MINI / 2 * 6 + 5
-	, MINI / 2 * 6 + 5);
+	mlx_put_image_to_window(data->mlx, data->win, data->player->p_img,
+		MINI / 2 * 6 + 5, MINI / 2 * 6 + 5);
 	return (0);
 }
 

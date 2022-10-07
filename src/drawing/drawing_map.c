@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:49:44 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/06 17:00:31 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/07 15:14:08 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,50 +43,40 @@ void	draw_line(t_data *data, double b_x, double b_y)
 	}
 }
 
-void	drw_box(t_data *data, int x_b, int y_b, int color)
+static void	draw_pixels(t_data *data, int j, int mx, int my)
 {
-	// int	x;
-	// int	y;
+	int	i;
+	int	x;
 
-	// y = 0;
-	// while (y < data->minimap->box)
-	// {
-	// 	x = 0;
-	// 	while (x < data->minimap->box)
-	// 	{
-			my_mlx_pixel_put(data->img, x_b, y_b, color);
-		// 	x++;
-		// }
-		// y++;
+	x = data->minimap->box;
+	i = 0;
+	while (i < MINI * data->minimap->box)
+	{
+		if (my < 0 || mx < 0 || my / x > data->game->map_height - 1 || mx / \
+		x > data->game->map_width - 1 || data->game->map[my / x][mx / x] == ' ')
+			my_mlx_pixel_put(data->img, i, j, 0x8758FF);
+		else if (data->game->map[my / x][mx / x] == WALL)
+			my_mlx_pixel_put(data->img, i, j, 0x8758FF);
+		else if (data->game->map[my / x][mx / x] == EMPTY || \
+		ft_strchr("NSWE", data->game->map[my / x][mx / x]))
+			my_mlx_pixel_put(data->img, i, j, 0xD2DAFF);
+		i++;
+		mx++;
+	}
 }
 
 void	draw_map(t_data *data, double mini_p_x, double mini_p_y)
 {
 	int	my;
 	int	mx;
-	int	i;
 	int	j;
-	int	k;
 
-	my = mini_p_y - MINI/2 * data->minimap->box;
-	mx = mini_p_x - MINI/2 * data->minimap->box;
-	k = mx;
+	my = mini_p_y - MINI / 2 * data->minimap->box;
+	mx = mini_p_x - MINI / 2 * data->minimap->box;
 	j = 0;
 	while (j < MINI * data->minimap->box)
 	{
-		i = 0;
-		mx = k;
-		while (i < MINI * data->minimap->box)
-		{
-			if (my < 0 || mx < 0 || my / data->minimap->box > data->game->map_height - 1 || mx / data->minimap->box  > data->game->map_width - 1 || data->game->map[my/ data->minimap->box ][mx/ data->minimap->box ] == ' ')
-				drw_box(data, i, j, 0x8758FF);
-			else if (data->game->map[my / data->minimap->box ][mx / data->minimap->box ] == WALL)
-				drw_box(data, i, j, 0x8758FF);
-			else if (data->game->map[my / data->minimap->box ][mx / data->minimap->box ] == EMPTY || ft_strchr("NSWE", data->game->map[my / data->minimap->box ][mx / data->minimap->box ]))
-				drw_box(data, i, j, 0xD2DAFF);
-			i++;
-			mx++;
-		}
+		draw_pixels(data, j, mx, my);
 		j++;
 		my++;
 	}
