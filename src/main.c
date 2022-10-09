@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:45:00 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/07 15:04:25 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:58:25 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	next_frame(t_data *data)
 	static double	mini_p_x;
 	static double	mini_p_y;
 
-	mini_p_x = data->player->x / BOX_SIZE * data->minimap->box;
-	mini_p_y = data->player->y / BOX_SIZE * data->minimap->box;
+	mini_p_x = data->player->x / data->box_size * data->minimap->box;
+	mini_p_y = data->player->y / data->box_size * data->minimap->box;
 	change_position(data);
 	draw_map(data, mini_p_x, mini_p_y);
 	draw_game(data);

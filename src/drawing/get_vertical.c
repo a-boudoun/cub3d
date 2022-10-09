@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_vertical.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:07:43 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/06 14:05:45 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/09 20:58:26 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ static void	init_get_vertical(t_distance *dist, t_data *data, double angle)
 	px = data->player->x;
 	if (cos(angle) > 0)
 	{
-		dist->rx = ((px / BOX_SIZE) * BOX_SIZE) + BOX_SIZE;
+		dist->rx = ((px / data->box_size) * data->box_size) + data->box_size;
 		dist->ry = (px - dist->rx) * (tan(angle)) + py;
-		dist->x_move = BOX_SIZE;
+		dist->x_move = data->box_size;
 		dist->y_move = -(dist->x_move) * tan(angle);
 	}
 	else if (cos(angle) < 0)
 	{
-		dist->rx = ((px / BOX_SIZE) * BOX_SIZE) - 0.0001;
+		dist->rx = ((px / data->box_size) * data->box_size) - 0.0001;
 		dist->ry = (px - dist->rx) * (tan(angle)) + py;
-		dist->x_move = BOX_SIZE * (-1);
+		dist->x_move = data->box_size * (-1);
 		dist->y_move = -(dist->x_move) * (tan(angle));
 	}
 	else
@@ -44,8 +44,8 @@ static void	check_map(t_data *data, t_distance *dist)
 
 	while (dist->dof < data->game->map_width)
 	{
-		mx = (int)(dist->rx) / BOX_SIZE;
-		my = (int)(dist->ry) / BOX_SIZE;
+		mx = (int)(dist->rx) / data->box_size;
+		my = (int)(dist->ry) / data->box_size;
 		if (mx >= 0 && mx < data->game->map_width && my < \
 data->game->map_height && my >= 0 && data->game->map[my][mx] == '1')
 			dist->dof = data->game->map_width;

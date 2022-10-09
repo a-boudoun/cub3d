@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:41:42 by majjig            #+#    #+#             */
-/*   Updated: 2022/10/07 14:48:28 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:59:32 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ unsigned int	get_pixel(t_img *img, int x, int y, double wall_height)
 	unsigned int	b;
 	unsigned int	brightness;
 
-	y = ((y - (((WIN_HEIGHT - wall_height) / 2))) * BOX_SIZE) / wall_height;
+	y = ((y - (((WIN_HEIGHT - wall_height) / 2))) * img->height) / wall_height;
 	color = img->addr[y * (img->line_length / 4) + x];
 	r = (color & 0xFF0000) >> 16;
 	g = (color & 0xFF00) >> 8;

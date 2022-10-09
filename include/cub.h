@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:22:17 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/07 15:01:53 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:59:06 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@
 # define ROTATE_SPEED 0.07
 # define PLAYER_SPEED 10
 # define FOV 1.0471975512
-# define BOX_SIZE 64
 # define MINI 20
 # define VIEW_RANGE 2
 
@@ -114,6 +113,7 @@ typedef struct s_distance{
 
 typedef struct s_data
 {
+	int			box_size;
 	void		*mlx;
 	void		*win;
 	t_game		*game;

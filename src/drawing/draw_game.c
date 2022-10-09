@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:46:13 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/06 16:41:32 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/09 20:58:25 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ void	draw_game(t_data *data)
 &data->img_game->endian);
 	while (i >= 0)
 	{
-		wall_height = WIN_HEIGHT * BOX_SIZE / data->rays_dist[i];
+		wall_height = WIN_HEIGHT * data->box_size / data->rays_dist[i];
 		drwa_wall_floor(data, col, wall_height);
 		if (data->is_horizontal[i])
-			offsetx = (int)data->rays_x[WIN_WIDTH - col - 2] % BOX_SIZE;
+			offsetx = (int)data->rays_x[WIN_WIDTH - col - 2] % data->box_size;
 		else
-			offsetx = (int)data->rays_y[WIN_WIDTH - col - 2] % BOX_SIZE;
+			offsetx = (int)data->rays_y[WIN_WIDTH - col - 2] % data->box_size;
 		drw_column(data, col, wall_height, offsetx);
 		i--;
 		col++;

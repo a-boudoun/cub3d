@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:04:37 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/05 14:29:10 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:58:26 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	get_player_pos(t_data *data)
 			if (ft_strchr("NSEW", data->game->map[y][x]))
 			{
 				data->player->view = data->game->map[y][x];
-				data->player->x = x * BOX_SIZE + BOX_SIZE / 2;
-				data->player->y = y * BOX_SIZE + BOX_SIZE / 2;
+				data->player->x = x * data->box_size + data->box_size / 2;
+				data->player->y = y * data->box_size + data->box_size / 2;
 			}
 			x++;
 		}

@@ -6,12 +6,24 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:21:02 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/07 14:48:44 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:09:59 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
+static void	check_size(int height, int width)
+{
+	static int	h;
+	static int	w;
+
+	if (!h)
+		h = height;
+	if (!w)
+		w = width;
+	if (!w || !h || width != w || height != h || w != h)
+		error_handler("texture should be square");
+}
 static int	is_valid(char *path)
 {
 	int	fd;
@@ -32,6 +44,7 @@ void	load_xpm(t_data *data, t_img *img, char *path)
 			&(img->line_length), &(img->endian));
 	if (img->addr == NULL)
 		error_handler("Invalid texture");
+	check_size(img->height, img->width);
 }
 
 void	check_elements_path(t_data *data)
@@ -55,6 +68,7 @@ void	check_elements_path(t_data *data)
 		load_xpm(data, west, data->game->west);
 	if (is_valid(data->game->east))
 		load_xpm(data, east, data->game->east);
+	data->box_size = north->height;
 	data->player->p_img = mlx_xpm_file_to_image(data->mlx, "./textures/player.xpm\
 ", &data->player->width, &data->player->height);
 	data->sprite->north = north;
