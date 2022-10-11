@@ -6,25 +6,27 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:45:00 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/06 14:01:24 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/11 19:41:02 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	ft_clear(t_game *game)
+int	ft_clear(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	free(game -> west);
-	free(game -> north);
-	free(game -> south);
-	free(game -> east);
-	while (game -> map[i])
-		free(game -> map[i++]);
-	free(game -> map);
-	free(game -> sprite);
+	while (data -> game -> map[i])
+		free(data-> game -> map[i++]);
+	free(data -> sprite -> west);
+	free(data -> sprite -> north);
+	free(data -> sprite -> south);
+	free(data -> sprite -> east);
+	free(data -> game -> map);
+	free(data -> game -> sprite);
+	exit(EXIT_SUCCESS);
+	return (0);
 }
 
 int	open_map(int ac, char **av)
@@ -83,7 +85,8 @@ int	main(int ac, char **av)
 	mlx_loop_hook(data.mlx, next_frame, &data);
 	mlx_hook(data.win, 2, 0, &key_handler, &data);
 	mlx_hook(data.win, 3, 0, &key_release, &data);
+	mlx_hook(data.win, 17, 0, &ft_clear, &data);
 	mlx_loop(data.mlx);
-	ft_clear(data.game);
+	ft_clear(&data);
 	return (0);
 }
