@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:21:02 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/09 21:09:59 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:48:22 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	load_xpm(t_data *data, t_img *img, char *path)
 	if (img->addr == NULL)
 		error_handler("Invalid texture");
 	check_size(img->height, img->width);
+	free(path);
 }
 
 void	check_elements_path(t_data *data)

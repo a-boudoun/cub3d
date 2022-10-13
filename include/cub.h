@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:22:17 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/09 20:59:06 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:47:20 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ typedef struct s_game {
 	char			*south;
 	char			*west;
 	char			*east;
-	t_sprite		*sprite;
 	int				color_floor;
 	int				color_ceiling;
 }				t_game;
@@ -153,5 +152,6 @@ void			init_data(t_data *data);
 void			init_images(t_data *data);
 void			circlular_minimap(int *img);
 void			wall_collegion(t_data *data, double angle);
+int				ft_clear(t_data *);
 
 #endif

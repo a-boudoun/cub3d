@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:24:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/09/28 15:24:34 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/13 14:20:52 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 static void	map_checker(char **map, int x, int y)
 {
-	if (x == 0 || y == 0)
+	if ((x == 0 || y == 0) || (map[y][x + 1] == ' ' || map[y][x + 1] == 0)
+		|| (map[y - 1][x] == ' ' || map[y - 1][x] == 0) || (map[y + 1][x] == ' '
+		|| map[y + 1][x] == 0) || (map[y][x - 1] == ' ' || map[y][x - 1] == 0))
+	{
+		x = 0;
+		while (map[x])
+			free(map[x++]);
 		error_handler("Invalid map");
-	if (map[y][x + 1] == ' ' || map[y][x + 1] == 0)
-		error_handler("Invalid map");
-	if (map[y - 1][x] == ' ' || map[y - 1][x] == 0)
-		error_handler("Invalid map");
-	if (map[y + 1][x] == ' ' || map[y + 1][x] == 0)
-		error_handler("Invalid map");
-	if (map[y][x - 1] == ' ' || map[y][x - 1] == 0)
-		error_handler("Invalid map");
+	}
 }
 
 static void	map_loop(char **map, int x, int y)

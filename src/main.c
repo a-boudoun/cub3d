@@ -6,25 +6,39 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:45:00 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/11 22:37:02 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/13 14:44:20 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	ft_clear(t_data *data)
+int	ft_clear(t_data *d)
 {
-	int	i;
+	static	t_data *data = NULL;
 
-	i = 0;
-	while (data -> game -> map[i])
-		free(data-> game -> map[i++]);
-	free(data -> sprite -> west);
-	free(data -> sprite -> north);
-	free(data -> sprite -> south);
-	free(data -> sprite -> east);
-	free(data -> game -> map);
-	free(data -> game -> sprite);
+	if (data == NULL)
+		return (data = d, 0);
+	if (data -> sprite)
+	{
+		mlx_destroy_image(data->mlx, data -> sprite -> west -> img);
+		mlx_destroy_image(data->mlx, data -> sprite -> north -> img);
+		mlx_destroy_image(data->mlx, data -> sprite -> south -> img);
+		mlx_destroy_image(data->mlx, data -> sprite -> east -> img);
+		free(data -> sprite);
+	}
+	free(data -> game);
+	free(data->rays_dist);
+	free(data->ray_angle);
+	free(data->rays_x);
+	free(data->rays_y);
+	free(data->is_horizontal);
+	free(data->player);
+	if (data -> win)
+	{
+		mlx_destroy_image(data->mlx, data->img);
+		mlx_destroy_window(data->mlx, data->win);
+		free(data->mlx);
+	}
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -74,6 +88,8 @@ int	main(int ac, char **av)
 	int		fd;
 	t_data	data;
 
+	ft_bzero(&data, sizeof(t_data));
+	ft_clear(&data);
 	fd = open_map(ac, av);
 	init_data(&data);
 	get_map(fd, data.game, NULL);
