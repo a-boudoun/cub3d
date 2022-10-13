@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:45:00 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/13 15:55:11 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/13 16:51:39 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	next_frame(t_data *data)
 
 int	key_release(int key, t_data *data)
 {
-	if (key == W || key == S)
+	if (key == W || key == S || key == UP || key == DOWN)
 		data->player->walk_direction = 0;
 	if (key == A || key == D)
 		data->player->turn_direction = 0;
