@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:46:13 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/09 20:58:25 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:47:16 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,6 @@ void	draw_game(t_data *data)
 
 	i = WIN_WIDTH - 1;
 	col = 0;
-	data->img_game->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
-	data->img_game->addr = (int *)mlx_get_data_addr(data->img_game->img, \
-&data->img_game->bits_per_pixel, &data->img_game->line_length, \
-&data->img_game->endian);
 	while (i >= 0)
 	{
 		wall_height = WIN_HEIGHT * data->box_size / data->rays_dist[i];
@@ -78,5 +74,4 @@ void	draw_game(t_data *data)
 		col++;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img_game->img, 0, 0);
-	mlx_destroy_image(data->mlx, data->img_game->img);
 }

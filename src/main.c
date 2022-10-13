@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:45:00 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/13 14:44:20 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/13 15:55:11 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int	ft_clear(t_data *d)
 		mlx_destroy_image(data->mlx, data -> sprite -> north -> img);
 		mlx_destroy_image(data->mlx, data -> sprite -> south -> img);
 		mlx_destroy_image(data->mlx, data -> sprite -> east -> img);
+		mlx_destroy_image(data->mlx, data -> player -> p_img);
+		// mlx_destroy_image(data->mlx, data -> img -> img);
+		mlx_destroy_image(data->mlx, data -> img_game -> img);
 		free(data -> sprite);
 	}
 	free(data -> game);

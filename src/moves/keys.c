@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:08:28 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/07 15:00:48 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:32:05 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,7 @@ turn_direction && !data->player->rotation_direction)
 int	key_handler(int key, t_data *data)
 {
 	if (key == ESC)
-	{
-		mlx_destroy_window(data->mlx, data->win);
-		exit(EXIT_SUCCESS);
-	}
+		ft_clear(NULL);
 	if (key == W)
 		data->player->walk_direction = 1;
 	if (key == S)

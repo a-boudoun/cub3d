@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:22:17 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/13 14:47:20 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/13 16:14:17 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define PLAYER_SPEED 10
 # define FOV 1.0471975512
 # define MINI 20
-# define VIEW_RANGE 2
+# define VIEW_RANGE 1
 
 typedef struct s_img{
 	unsigned int	*img;
