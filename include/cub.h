@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:22:17 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/13 16:14:17 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/16 19:02:02 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,6 @@ void			init_data(t_data *data);
 void			init_images(t_data *data);
 void			circlular_minimap(int *img);
 void			wall_collegion(t_data *data, double angle);
-int				ft_clear(t_data *);
+int				ft_clear(t_data *data);
 
 #endif
