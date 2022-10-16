@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:21:02 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/16 19:06:06 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/16 22:06:51 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	is_valid(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		error_handler("Invalid texture");
+	close(fd);
 	return (fd);
 }
 
@@ -46,6 +47,7 @@ void	load_xpm(t_data *data, t_img *img, char *path)
 	if (img->addr == NULL)
 		error_handler("Invalid texture");
 	check_size(img->height, img->width);
+	img->is_loaded = true;
 	free(path);
 }
 
@@ -56,11 +58,11 @@ void	check_elements_path(t_data *data)
 	t_img		*west;
 	t_img		*east;
 
-	data->sprite = (t_sprite *) malloc(sizeof(t_sprite));
-	north = (t_img *) malloc(sizeof(t_img));
-	south = (t_img *) malloc(sizeof(t_img));
-	west = (t_img *) malloc(sizeof(t_img));
-	east = (t_img *) malloc(sizeof(t_img));
+	data->sprite = (t_sprite *) ft_calloc(1, sizeof(t_sprite));
+	north = (t_img *) ft_calloc(1, sizeof(t_img));
+	south = (t_img *) ft_calloc(1, sizeof(t_img));
+	west = (t_img *) ft_calloc(1, sizeof(t_img));
+	east = (t_img *) ft_calloc(1, sizeof(t_img));
 	ft_bzero(data->sprite, sizeof(t_sprite));
 	if (is_valid(data->game->north))
 		load_xpm(data, north, data->game->north);

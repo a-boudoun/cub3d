@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 14:55:13 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/09/28 16:44:43 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/16 21:19:00 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	get_map(int fd, t_game *game, char *line)
 {
 	char	**tmp;
 
-	tmp = malloc(sizeof(char *) * 2);
+	tmp = ft_calloc(1, sizeof(char *) * 2);
 	game -> color_ceiling = --game->color_floor;
 	while (true)
 	{
