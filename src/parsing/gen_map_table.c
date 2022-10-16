@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:24:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/10/16 21:18:59 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/16 22:30:54 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ char	**list_to_table(t_list *list)
 	int		size;
 
 	size = ft_lstsize(list);
-	map = (char **) ft_calloc(1, sizeof(char *) * (size + 1));
-	ft_bzero(map, sizeof(char *) * (size + 1));
+	map = ft_calloc(1, sizeof(char *) * (size + 1));
 	size = 0;
 	while (list)
 	{
