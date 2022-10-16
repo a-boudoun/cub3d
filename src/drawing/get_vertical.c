@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:07:43 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/09 20:58:26 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/16 20:04:38 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	check_map(t_data *data, t_distance *dist)
 		mx = (int)(dist->rx) / data->box_size;
 		my = (int)(dist->ry) / data->box_size;
 		if (mx >= 0 && mx < data->game->map_width && my < \
-data->game->map_height && my >= 0 && data->game->map[my][mx] == '1')
+data->game->map_height && my >= 0 && data->game->map[my][mx] == WALL)
 			dist->dof = data->game->map_width;
 		else
 		{

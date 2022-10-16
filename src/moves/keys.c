@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:08:28 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/13 16:49:16 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/16 20:08:15 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	turn(t_data *data, int turn_x, int turn_y)
 
 	wall_dist = hypot(turn_x, turn_y);
 	if (move_dist(data, (data->player->angle + (PI / 2) * (data->player->\
-turn_direction))) - 20 > wall_dist && data->player->turn_direction)
+turn_direction))) - 50 > wall_dist && data->player->turn_direction)
 	{
 		data->player->x += turn_x;
 		data->player->y -= turn_y;
@@ -48,12 +48,12 @@ static void	walk(t_data *data, int move_x, int move_y)
 	dist = move_dist(data, data->player->angle);
 	wall_dist = hypot(move_x, move_y);
 	if (move_dist(data, data->player->angle - (PI * (data->player->\
-walk_direction == -1))) - 20 > wall_dist && data->player->walk_direction)
+walk_direction == -1))) - 50 > wall_dist && data->player->walk_direction)
 	{
 		data->player->x += move_x;
 		data->player->y -= move_y;
 	}
-	else if (data->player->walk_direction && dist < 30)
+	else if (data->player->walk_direction && dist < 60)
 		wall_collegion(data, data->player->angle);
 }
 
