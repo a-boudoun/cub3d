@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:41:53 by majjig            #+#    #+#             */
-/*   Updated: 2022/09/28 16:45:01 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/17 18:18:03 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	get_rgb(char *num)
 	int		g;
 	int		b;
 
+	if (count(num, ',') != 2)
+		error_handler("Invalid color format");
 	tmp = ft_split(num, ',');
 	len = -1;
 	while (tmp[++len])
 		if (!ft_isnumber(tmp[len]))
 			error_handler("invalid color");
-	if (len != 3)
-		error_handler("invalid color");
 	r = ft_atoi(tmp[0]);
 	g = ft_atoi(tmp[1]);
 	b = ft_atoi(tmp[2]);
