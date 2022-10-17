@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:22:17 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/16 19:02:02 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/16 22:06:19 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_img{
 	int				height;
 	int				width;
 	int				endian;
+	bool			is_loaded;
 }				t_img;
 
 typedef struct s_sprite{

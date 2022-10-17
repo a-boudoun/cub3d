@@ -6,7 +6,7 @@
 /*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:46:13 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/10/13 15:47:16 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:10:53 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ void	draw_game(t_data *data)
 	col = 0;
 	while (i >= 0)
 	{
-		wall_height = WIN_HEIGHT * data->box_size / data->rays_dist[i];
+		wall_height = WIN_HEIGHT / (data->rays_dist[i] / data->box_size);
 		drwa_wall_floor(data, col, wall_height);
 		if (data->is_horizontal[i])
-			offsetx = (int)data->rays_x[WIN_WIDTH - col - 2] % data->box_size;
+			offsetx = (int)data->rays_x[WIN_WIDTH - col] % data->box_size;
 		else
-			offsetx = (int)data->rays_y[WIN_WIDTH - col - 2] % data->box_size;
+			offsetx = (int)data->rays_y[WIN_WIDTH - col] % data->box_size;
 		drw_column(data, col, wall_height, offsetx);
 		i--;
 		col++;

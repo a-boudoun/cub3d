@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gen_map_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:24:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/10/13 14:20:52 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/16 22:30:54 by aboudoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	map_fix(size_t len, char **map)
 	{
 		if (ft_strlen(map[i]) < len)
 		{
-			tmp = malloc(sizeof(char) * (1 + len - ft_strlen(map[i])));
+			tmp = ft_calloc(1, sizeof(char) * (1 + len - ft_strlen(map[i])));
 			ft_memset(tmp, ' ', len - ft_strlen(map[i]));
 			tmp[len - ft_strlen(map[i])] = 0;
 			free(map[i]);
@@ -78,8 +78,7 @@ char	**list_to_table(t_list *list)
 	int		size;
 
 	size = ft_lstsize(list);
-	map = (char **) malloc(sizeof(char *) * (size + 1));
-	ft_bzero(map, sizeof(char *) * (size + 1));
+	map = ft_calloc(1, sizeof(char *) * (size + 1));
 	size = 0;
 	while (list)
 	{
