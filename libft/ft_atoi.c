@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudoun <aboudoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 12:21:31 by aboudoun          #+#    #+#             */
-/*   Updated: 2022/08/31 18:27:59 by aboudoun         ###   ########.fr       */
+/*   Updated: 2022/10/17 20:01:12 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ int	ft_atoi(const char *str)
 		n = n * 10 + ((int)str[i] - '0');
 		i++;
 	}
+	if (!ft_strchr(" \t\v\f\r", str[i]) && str[i] != '\0')
+		return (-1);
 	return (n * s);
 }
