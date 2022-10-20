@@ -2,7 +2,7 @@ RED=$'\x1b[31m
 GREEN=$'\x1b[32m
 PURPLE=$'\x1b[35m
 
-NAME = cub3d
+NAME = cub3D
 
 INCLUDE = include
 HEADER = $(INCLUDE)/cub.h
